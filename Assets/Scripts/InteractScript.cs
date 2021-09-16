@@ -13,6 +13,7 @@ public class InteractScript : MonoBehaviour
     public bool colliding;
     public GameObject Player;
     public bool interacting_needs_continuation;
+    public bool Collision_Not_Needed_To_Disable;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +31,7 @@ public class InteractScript : MonoBehaviour
         {
             Player.GetComponent<MovementReworked>().interacting = interacted;
         }
-        if (InteractSubject.gameObject.GetComponent<MoveObjScript>() != null)
+       /* if (InteractSubject.gameObject.GetComponent<MoveObjScript>() != null)
         {
             if (interacted)
             {
@@ -40,8 +41,8 @@ public class InteractScript : MonoBehaviour
 
                 }
             }
-        }
-        if (colliding)
+        }*/
+        if (colliding||interacted)
         {
             
 
