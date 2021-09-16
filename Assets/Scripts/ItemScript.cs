@@ -46,6 +46,11 @@ public class ItemScript : MonoBehaviour
             gameObject.transform.position = startpos;
             gameObject.GetComponent<Animator>().Play("New State");
         }
+        if(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State") && Hammer)
+        {
+            gameObject.transform.rotation = startrot;
+            gameObject.transform.position = startpos;
+        }
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             AwaitingAction1 = true;
@@ -83,6 +88,7 @@ public class ItemScript : MonoBehaviour
     void HammerFunction()
     {
         ScaffPref.gameObject.active = true;
+        
         if (AwaitingAction1)
         {
             gameObject.transform.rotation = startrot;
