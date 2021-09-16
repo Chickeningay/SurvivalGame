@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 319541730494378153}
   - component: {fileID: 2561363786906141795}
   - component: {fileID: 7840649815874772443}
+  - component: {fileID: 2837966178151296035}
   m_Layer: 8
   m_Name: ScaffholdingSpawn
   m_TagString: Untagged
@@ -96,6 +97,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 1.9999998, z: 2.014505}
   m_Center: {x: 0, y: 0, z: 0.0072525144}
+--- !u!114 &2837966178151296035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4074410465037952438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb37fbf1dbf10524d88275eb9ba79aa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentMat: 
+  WoodMat: {fileID: 2100000, guid: 438bbdfcac32f6c408a1f7b173039f89, type: 2}
+  GlassMat: {fileID: 2100000, guid: 1aa8f7077399260418e59457b95db821, type: 2}
 --- !u!1 &5361204890495252585
 GameObject:
   m_ObjectHideFlags: 0
