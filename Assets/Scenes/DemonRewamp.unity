@@ -1755,7 +1755,7 @@ PrefabInstance:
     - target: {fileID: 6274137046644493775, guid: db09d20f2d4f5da479f292bf0c9b59c4,
         type: 3}
       propertyPath: interactOption
-      value: Speak
+      value: Interact
       objectReference: {fileID: 0}
     - target: {fileID: 6274137046644493775, guid: db09d20f2d4f5da479f292bf0c9b59c4,
         type: 3}
@@ -3895,7 +3895,7 @@ NavMeshAgent:
   m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 360
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
