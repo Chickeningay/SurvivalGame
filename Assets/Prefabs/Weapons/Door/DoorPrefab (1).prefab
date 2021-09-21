@@ -133,6 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openclip: {fileID: 7400000, guid: 4aa76829889cb3143b87f50ebf85103d, type: 2}
   closeclip: {fileID: 7400000, guid: 494f390d52c958242a11ac3066f0adf6, type: 2}
+  changerot: 1
 --- !u!1001 &7546468039724864365
 PrefabInstance:
   m_ObjectHideFlags: 0

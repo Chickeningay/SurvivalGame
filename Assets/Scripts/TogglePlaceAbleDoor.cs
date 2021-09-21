@@ -7,6 +7,7 @@ public class TogglePlaceAbleDoor : MonoBehaviour
     public AnimationClip openclip;
     public AnimationClip closeclip;
     Vector3 startpos;
+    public bool changerot;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +27,20 @@ public class TogglePlaceAbleDoor : MonoBehaviour
         }
         if(gameObject.GetComponent<InteractDetector>().Interacted && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(openclip.name))
         {
-            gameObject.transform.position = new Vector3(startpos.x-0.5f, startpos.y, startpos.z-1);
+            if (changerot)
+            {
+                gameObject.transform.position = new Vector3(startpos.x - 0.6f, startpos.y, startpos.z );
+            }
+            else
+            {
+                gameObject.transform.position = new Vector3(startpos.x, startpos.y, startpos.z - 0.6f);
+            }
+            
+        }
+        else if (!gameObject.GetComponent<InteractDetector>().Interacted && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(closeclip.name))
+        {
+
+            gameObject.transform.position = new Vector3(startpos.x, startpos.y, startpos.z);
         }
     }
 }
