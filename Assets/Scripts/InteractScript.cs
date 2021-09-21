@@ -32,8 +32,8 @@ public class InteractScript : MonoBehaviour
         {
             Player.GetComponent<MovementReworked>().interacting = interacted;
         }
-      
-        if (colliding||interacted)
+        
+        if (colliding||interacted&&gameObject.transform.parent.gameObject.GetComponent<MoveObjScript>()!=null)
         {
             
 
