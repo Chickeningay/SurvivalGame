@@ -191,6 +191,8 @@ public class ItemScript : MonoBehaviour
         }
         else if (Door)
         {
+            gameObject.transform.rotation = startrot;
+            gameObject.transform.position = startpos;
             ScaffPref.gameObject.active = false;
         }
     }
