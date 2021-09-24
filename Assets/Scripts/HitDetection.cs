@@ -16,4 +16,16 @@ public class HitDetection : MonoBehaviour
     {
         
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Explosion")
+        {
+            hit = true;
+        }
+        if (other.gameObject.tag == "Melee")
+        {
+            hit = true;
+        }
+    }
+   
 }

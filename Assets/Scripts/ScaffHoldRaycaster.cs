@@ -42,7 +42,7 @@ public class ScaffHoldRaycaster : MonoBehaviour
        Rollx();
        Rolly();
        Rollz();
-        print(Hit.point);
+       
         if (!overridePos)
         {
             if (!onground)
@@ -142,10 +142,7 @@ public class ScaffHoldRaycaster : MonoBehaviour
             if (numberofdown > numberofup)
             {
                newx =(int)hit_transform.x + numberofup/2 ;
-                print("newx:" + newx);
-                print("hit_transform_x:" + (int)hit_transform.x);
-                print("numberofup:" + numberofup);
-                print((int)hit_transform.x + numberofup / 2);
+
             }
             else
             {
