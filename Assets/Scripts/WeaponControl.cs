@@ -60,9 +60,16 @@ public class WeaponControl : MonoBehaviour
         {
             BulletFlash.active = false;
         }
-        
+        Inventory = GameObject.Find("Inventory");
     }
 
+    private void OnEnable()
+    {
+        
+            CurrentAmmo = Inventory.GetComponent<InventorySelecter>().CurrentSelected.gameObject.GetComponent<IDHolder>().currentAmmo;
+        
+       
+    }
     // Update is called once per frame
     void Update()
     {

@@ -1233,7 +1233,7 @@ MonoBehaviour:
   ChildList: []
   RenewAmmo: 0
   Grounded: 0
-  currentWeapon: 1
+  currentWeapon: 0
   Holster1: {fileID: 1716818718}
   Holster2: {fileID: 1761415906}
   Holster3: {fileID: 1156473787}
@@ -1246,6 +1246,7 @@ MonoBehaviour:
   Inventory: {fileID: 546084169}
   InventoryExtended: 0
   CurrentWeaponObject: {fileID: 0}
+  CurrentSlot: {fileID: 0}
 --- !u!1 &898977838 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8926937934681458054, guid: ef033577d86b9fd4a8e22a0fd2c67269,
@@ -5406,6 +5407,11 @@ PrefabInstance:
       objectReference: {fileID: 387027514}
     - target: {fileID: 1507443187239069127, guid: ef033577d86b9fd4a8e22a0fd2c67269,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507443187239069127, guid: ef033577d86b9fd4a8e22a0fd2c67269,
+        type: 3}
       propertyPath: DoorHolder
       value: 
       objectReference: {fileID: 1293468515}
@@ -5419,6 +5425,11 @@ PrefabInstance:
       propertyPath: ScaffPref
       value: 
       objectReference: {fileID: 1605952542}
+    - target: {fileID: 1523538602909105299, guid: ef033577d86b9fd4a8e22a0fd2c67269,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1623008275912530033, guid: ef033577d86b9fd4a8e22a0fd2c67269,
         type: 3}
       propertyPath: m_Layer
@@ -5761,13 +5772,18 @@ PrefabInstance:
       objectReference: {fileID: 2049080340}
     - target: {fileID: 2187103895647898424, guid: ef033577d86b9fd4a8e22a0fd2c67269,
         type: 3}
+      propertyPath: Inventory
+      value: 
+      objectReference: {fileID: 546084169}
+    - target: {fileID: 2187103895647898424, guid: ef033577d86b9fd4a8e22a0fd2c67269,
+        type: 3}
       propertyPath: MeleeIcon
       value: 
       objectReference: {fileID: 938713238}
     - target: {fileID: 2187103895647898424, guid: ef033577d86b9fd4a8e22a0fd2c67269,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2187103895647898424, guid: ef033577d86b9fd4a8e22a0fd2c67269,
         type: 3}
@@ -6221,6 +6237,11 @@ PrefabInstance:
       objectReference: {fileID: 387027514}
     - target: {fileID: 3903558259643077981, guid: ef033577d86b9fd4a8e22a0fd2c67269,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3903558259643077981, guid: ef033577d86b9fd4a8e22a0fd2c67269,
+        type: 3}
       propertyPath: HammerHolder
       value: 
       objectReference: {fileID: 1605952542}
@@ -6669,6 +6690,11 @@ PrefabInstance:
       propertyPath: ScaffPref
       value: 
       objectReference: {fileID: 3960648291150549915}
+    - target: {fileID: 4877934523670914111, guid: ef033577d86b9fd4a8e22a0fd2c67269,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4907973071627323218, guid: ef033577d86b9fd4a8e22a0fd2c67269,
         type: 3}
       propertyPath: m_Layer
@@ -7861,6 +7887,11 @@ PrefabInstance:
       objectReference: {fileID: 3960648291150549915}
     - target: {fileID: 7914305722923755204, guid: ef033577d86b9fd4a8e22a0fd2c67269,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914305722923755204, guid: ef033577d86b9fd4a8e22a0fd2c67269,
+        type: 3}
       propertyPath: MainCamera
       value: 
       objectReference: {fileID: 963194225}
@@ -8009,6 +8040,11 @@ PrefabInstance:
       propertyPath: ScaffPref
       value: 
       objectReference: {fileID: 1293468515}
+    - target: {fileID: 8168096491570403320, guid: ef033577d86b9fd4a8e22a0fd2c67269,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8249868052154064702, guid: ef033577d86b9fd4a8e22a0fd2c67269,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8346,6 +8382,11 @@ PrefabInstance:
       objectReference: {fileID: 2049080340}
     - target: {fileID: 8584902199541943831, guid: ef033577d86b9fd4a8e22a0fd2c67269,
         type: 3}
+      propertyPath: Inventory
+      value: 
+      objectReference: {fileID: 546084169}
+    - target: {fileID: 8584902199541943831, guid: ef033577d86b9fd4a8e22a0fd2c67269,
+        type: 3}
       propertyPath: MeleeIcon
       value: 
       objectReference: {fileID: 938713238}
@@ -8536,6 +8577,11 @@ PrefabInstance:
       objectReference: {fileID: 2049080340}
     - target: {fileID: 8584902199961324713, guid: ef033577d86b9fd4a8e22a0fd2c67269,
         type: 3}
+      propertyPath: Inventory
+      value: 
+      objectReference: {fileID: 546084169}
+    - target: {fileID: 8584902199961324713, guid: ef033577d86b9fd4a8e22a0fd2c67269,
+        type: 3}
       propertyPath: MeleeIcon
       value: 
       objectReference: {fileID: 938713238}
@@ -8604,6 +8650,11 @@ PrefabInstance:
       propertyPath: AmmoImage
       value: 
       objectReference: {fileID: 2049080340}
+    - target: {fileID: 8584902200205077448, guid: ef033577d86b9fd4a8e22a0fd2c67269,
+        type: 3}
+      propertyPath: Inventory
+      value: 
+      objectReference: {fileID: 546084169}
     - target: {fileID: 8584902200205077448, guid: ef033577d86b9fd4a8e22a0fd2c67269,
         type: 3}
       propertyPath: MeleeIcon
@@ -8764,6 +8815,11 @@ PrefabInstance:
       propertyPath: AmmoImage
       value: 
       objectReference: {fileID: 2049080340}
+    - target: {fileID: 8926937934461928921, guid: ef033577d86b9fd4a8e22a0fd2c67269,
+        type: 3}
+      propertyPath: Inventory
+      value: 
+      objectReference: {fileID: 546084169}
     - target: {fileID: 8926937934461928921, guid: ef033577d86b9fd4a8e22a0fd2c67269,
         type: 3}
       propertyPath: MeleeIcon

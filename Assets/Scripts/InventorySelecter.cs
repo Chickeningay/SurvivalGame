@@ -533,8 +533,12 @@ public class InventorySelecter : MonoBehaviour
         {
            
                 int old_id;
+            int old_ammo;
                 old_id = CurrentSelected.GetComponent<IDHolder>().id;
-                CurrentSelected.GetComponent<IDHolder>().id = Selected.GetComponent<IDHolder>().id;
+            old_ammo = CurrentSelected.GetComponent<IDHolder>().currentAmmo;
+            CurrentSelected.GetComponent<IDHolder>().id = Selected.GetComponent<IDHolder>().id;
+            CurrentSelected.GetComponent<IDHolder>().currentAmmo = Selected.GetComponent<IDHolder>().currentAmmo;
+            Selected.GetComponent<IDHolder>().currentAmmo = old_ammo;
                 Selected.GetComponent<IDHolder>().id = old_id;
                 CurrentSelected = null;
           

@@ -24,6 +24,7 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
     public GameObject Inventory;
     public bool InventoryExtended;
     public GameObject CurrentWeaponObject;
+    public GameObject CurrentSlot;
    
     void Start()
     {
@@ -145,9 +146,10 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
         {
 
        
-        if (currentID == 0 && currentWeapon != currentID)
+        if (currentID == 0 && currentWeapon != currentID || currentID == 0 && CurrentSlot != Inventory.GetComponent<InventorySelecter>().CurrentSelected)
         {
-            for (int i = 0; i < childCount; i++)
+                CurrentSlot = Inventory.GetComponent<InventorySelecter>().CurrentSelected;
+                for (int i = 0; i < childCount; i++)
             {
 
                 if (ChildList[i].GetComponent<WeaponControl>() != null) { ChildList[i].GetComponent<WeaponControl>().enabled = false; }
@@ -171,10 +173,10 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
             currentWeapon = 0;
             MainCamera.GetComponent<Camera>().fieldOfView = 60;
         }
-        else if (currentID==1&&currentWeapon!=currentID)
+        else if (currentID==1&&currentWeapon!=currentID || currentID == 1 && CurrentSlot != Inventory.GetComponent<InventorySelecter>().CurrentSelected)
          {
-               
-             for(int i = 0; i < childCount; i++)
+                CurrentSlot = Inventory.GetComponent<InventorySelecter>().CurrentSelected;
+                for (int i = 0; i < childCount; i++)
              {
                 
                 if (ChildList[i].GetComponent<WeaponControl>() != null) { ChildList[i].GetComponent<WeaponControl>().enabled = false; }
@@ -232,7 +234,7 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
             currentWeapon = 1;
             MainCamera.GetComponent<Camera>().fieldOfView = 60;
         }
-        else if (currentID == 2 && currentWeapon != currentID)
+        else if (currentID == 2 && currentWeapon != currentID|| currentID == 2 && CurrentSlot != Inventory.GetComponent<InventorySelecter>().CurrentSelected)
          {
              for (int i = 0; i < childCount; i++)
              {
@@ -290,10 +292,12 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
              Player.GetComponent<AudioSource>().PlayOneShot(Switch_Audio);
             currentWeapon = 2;
             MainCamera.GetComponent<Camera>().fieldOfView = 60;
+                CurrentSlot = Inventory.GetComponent<InventorySelecter>().CurrentSelected;
         }
-        else if (currentID == 3 && currentWeapon != currentID)
+        else if (currentID == 3 && currentWeapon != currentID || currentID == 3 && CurrentSlot != Inventory.GetComponent<InventorySelecter>().CurrentSelected)
         {
-            if (ChildList[2].GetComponent<WeaponControl>() != null)
+                CurrentSlot = Inventory.GetComponent<InventorySelecter>().CurrentSelected;
+                if (ChildList[2].GetComponent<WeaponControl>() != null)
             {
                 ChildList[2].GetComponent<Animator>().Play(ChildList[2].GetComponent<WeaponControl>().Switch_Clip.name);
             }
@@ -349,9 +353,10 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
             currentWeapon = 3;
             MainCamera.GetComponent<Camera>().fieldOfView = 60;
         }
-        else if (currentID == 4 && currentWeapon != currentID)
+        else if (currentID == 4 && currentWeapon != currentID || currentID == 4 && CurrentSlot != Inventory.GetComponent<InventorySelecter>().CurrentSelected)
         {
-            if (ChildList[3].GetComponent<WeaponControl>() != null)
+                CurrentSlot = Inventory.GetComponent<InventorySelecter>().CurrentSelected;
+                if (ChildList[3].GetComponent<WeaponControl>() != null)
             {
                 ChildList[3].GetComponent<Animator>().Play(ChildList[3].GetComponent<WeaponControl>().Switch_Clip.name);
             }
@@ -407,9 +412,10 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
             currentWeapon = 4;
             MainCamera.GetComponent<Camera>().fieldOfView = 60;
         }
-        else if (currentID == 5 && currentWeapon != currentID)
+        else if (currentID == 5 && currentWeapon != currentID || currentID == 5 && CurrentSlot != Inventory.GetComponent<InventorySelecter>().CurrentSelected)
         {
-            if(ChildList[4].GetComponent<WeaponControl>() != null)
+                CurrentSlot = Inventory.GetComponent<InventorySelecter>().CurrentSelected;
+                if (ChildList[4].GetComponent<WeaponControl>() != null)
             {
                 ChildList[4].GetComponent<Animator>().Play(ChildList[4].GetComponent<WeaponControl>().Switch_Clip.name);
             }
@@ -466,9 +472,10 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
             currentWeapon = 5;
             MainCamera.GetComponent<Camera>().fieldOfView = 60;
         }
-        else if (currentID == 6 && currentWeapon != currentID)
+        else if (currentID == 6 && currentWeapon != currentID || currentID == 6 && CurrentSlot != Inventory.GetComponent<InventorySelecter>().CurrentSelected)
         {
-            if(ChildList[5].GetComponent<WeaponControl>() != null)
+                CurrentSlot = Inventory.GetComponent<InventorySelecter>().CurrentSelected;
+                if (ChildList[5].GetComponent<WeaponControl>() != null)
             {
                 ChildList[5].GetComponent<Animator>().Play(ChildList[5].GetComponent<WeaponControl>().Switch_Clip.name);
             }
@@ -524,9 +531,10 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
             currentWeapon = 6;
             MainCamera.GetComponent<Camera>().fieldOfView = 60;
         }
-        else if (currentID == 7 && currentWeapon != currentID)
+        else if (currentID == 7 && currentWeapon != currentID || currentID == 7 && CurrentSlot != Inventory.GetComponent<InventorySelecter>().CurrentSelected)
         {
-            if (ChildList[6].GetComponent<WeaponControl>() != null)
+                CurrentSlot = Inventory.GetComponent<InventorySelecter>().CurrentSelected;
+                if (ChildList[6].GetComponent<WeaponControl>() != null)
             {
                 ChildList[6].GetComponent<Animator>().Play(ChildList[6].GetComponent<WeaponControl>().Switch_Clip.name);
             }
@@ -582,9 +590,10 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
             currentWeapon = 7;
             MainCamera.GetComponent<Camera>().fieldOfView = 60;
         }
-        else if (currentID == 8 && currentWeapon != currentID)
+        else if (currentID == 8 && currentWeapon != currentID || currentID == 8 && CurrentSlot != Inventory.GetComponent<InventorySelecter>().CurrentSelected)
         {
-            if (ChildList[7].GetComponent<WeaponControl>() != null)
+                CurrentSlot = Inventory.GetComponent<InventorySelecter>().CurrentSelected;
+                if (ChildList[7].GetComponent<WeaponControl>() != null)
             {
                 ChildList[7].GetComponent<Animator>().Play(ChildList[7].GetComponent<WeaponControl>().Switch_Clip.name);
             }
@@ -640,9 +649,10 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
             currentWeapon = 8;
             MainCamera.GetComponent<Camera>().fieldOfView = 60;
         }
-        else if (currentID == 9 && currentWeapon != currentID)
+        else if (currentID == 9 && currentWeapon != currentID || currentID == 9 && CurrentSlot != Inventory.GetComponent<InventorySelecter>().CurrentSelected)
         {
-            if (ChildList[8].GetComponent<WeaponControl>() != null)
+                CurrentSlot = Inventory.GetComponent<InventorySelecter>().CurrentSelected;
+                if (ChildList[8].GetComponent<WeaponControl>() != null)
             {
                 ChildList[8].GetComponent<Animator>().Play(ChildList[8].GetComponent<WeaponControl>().Switch_Clip.name);
             }
@@ -699,8 +709,9 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
             currentWeapon = 9;
             MainCamera.GetComponent<Camera>().fieldOfView = 60;
         }
-            else if (currentID == 10 && currentWeapon != currentID)
+        else if (currentID == 10 && currentWeapon != currentID || currentID == 10 && CurrentSlot != Inventory.GetComponent<InventorySelecter>().CurrentSelected)
             {
+                CurrentSlot = Inventory.GetComponent<InventorySelecter>().CurrentSelected;
                 if (ChildList[9].GetComponent<WeaponControl>() != null)
                 {
                     ChildList[9].GetComponent<Animator>().Play(ChildList[9].GetComponent<WeaponControl>().Switch_Clip.name);

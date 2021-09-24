@@ -28,6 +28,21 @@ public class ItemScript : MonoBehaviour
     }
 
     // Update is called once per frame
+    private void OnEnable()
+    {
+        if (Door)
+        {
+            gameObject.GetComponent<DoorRaycast>().enabled = true;
+        }
+        else if (Hammer)
+        {
+            gameObject.GetComponent<HammerRaycaster>().enabled = true;
+        }
+        else if(ScaffHolding)
+        {
+            gameObject.GetComponent<ScaffHoldRaycaster>().enabled = true;
+        }
+    }
     void Update()
     {
         if (Player.GetComponent<MovementReworked>().moving)
