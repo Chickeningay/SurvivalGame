@@ -83,6 +83,8 @@ public class MovementReworked : MonoBehaviour
 	public bool interacting;
 	public bool Inventory;
 	public bool moving;
+	bool receivedcommand;
+	Vector3 commandmovepos;
 	private void Start()
 	{
 		Cursor.visible = false;
@@ -268,14 +270,27 @@ public class MovementReworked : MonoBehaviour
 		else if (!controller.isGrounded)
 			AirMove();
 
-		// Move the controller
-		controller.Move(playerVelocity * Time.deltaTime);
+       
+        if (!receivedcommand)
+        {
+			controller.Move(playerVelocity * Time.deltaTime);
 
-		// Calculate top velocity
-		udp = playerVelocity;
-		udp.y = 0;
-		if (udp.magnitude > playerTopVelocity)
-			playerTopVelocity = udp.magnitude;
+			
+			udp = playerVelocity;
+			udp.y = 0;
+			if (udp.magnitude > playerTopVelocity)
+				playerTopVelocity = udp.magnitude;
+		}
+        else if(receivedcommand)
+        {
+			gameObject.GetComponent<CharacterController>().enabled = false;
+			PlayerVel = new Vector3(0, 0, 0);
+			gameObject.transform.position = commandmovepos;
+			receivedcommand = false;
+			commandmovepos= new Vector3(0, 0, 0);
+			gameObject.GetComponent<CharacterController>().enabled = true;
+			print("damn");
+		}
 		
 	}
 	public void Crouch()
@@ -499,6 +514,12 @@ public class MovementReworked : MonoBehaviour
 			playerVelocity.z *= newspeed;
 		}
 	}
+	
+	public void MoveIntoPosition(Vector3 DesiredPos)
+    {
+		receivedcommand = true;
+		commandmovepos = DesiredPos;
+    }
 	IEnumerator FlashEffect()
     {
 		

@@ -11,6 +11,7 @@ public class InventorySelecter : MonoBehaviour
     public GameObject LastSelectedHolster;
     public GameObject Player;
     public GameObject Crosshair;
+    public GameObject CommandTaker;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,10 @@ public class InventorySelecter : MonoBehaviour
     void Update()
     {
         Crosshair.gameObject.GetComponent<RawImage>().enabled = !InventoryExtended;
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            CommandTaker.active = !CommandTaker.active;
+        }
         if (!Player.GetComponent<MovementReworked>().flashed) {
             if (Player.GetComponent<MovementReworked>().SecondaryCam.GetComponent<BetterWeaponSwitchForInventory>().CurrentWeaponObject != null)
             {
