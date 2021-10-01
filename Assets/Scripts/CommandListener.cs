@@ -21,7 +21,7 @@ public class CommandListener : MonoBehaviour
     void Update()
     {
         string Command = textholder.GetComponent<Text>().text;
-        player.GetComponent<MovementReworked>().enabled = false;
+        
         maincamera.GetComponent<Rotation>().enabled = false;
         player.GetComponent<Rotation>().enabled = false;
         Cursor.visible = true;

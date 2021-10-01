@@ -1074,7 +1074,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: asdasdas
+  m_Text: 
 --- !u!222 &657003690
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1097,7 +1097,7 @@ GameObject:
   - component: {fileID: 659549266}
   - component: {fileID: 659549269}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: CommandListener
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1183,7 +1183,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: asdasdas
+  m_Text: 
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -4084,6 +4084,11 @@ PrefabInstance:
       propertyPath: SecondaryCam
       value: 
       objectReference: {fileID: 886200052}
+    - target: {fileID: 1127373547955553648, guid: 597440310fadd4b49850960d6ad396c2,
+        type: 3}
+      propertyPath: CommandListener
+      value: 
+      objectReference: {fileID: 659549264}
     - target: {fileID: 1127373547955553649, guid: 597440310fadd4b49850960d6ad396c2,
         type: 3}
       propertyPath: m_Name

@@ -85,6 +85,7 @@ public class MovementReworked : MonoBehaviour
 	public bool moving;
 	bool receivedcommand;
 	Vector3 commandmovepos;
+	public GameObject CommandListener;
 	private void Start()
 	{
 		Cursor.visible = false;
@@ -265,8 +266,11 @@ public class MovementReworked : MonoBehaviour
 		QueueJump();
 
 		/* Movement, here's the important part */
-		if (controller.isGrounded)
-			GroundMove();
+		if (controller.isGrounded) { 
+            
+				GroundMove();
+			
+		}
 		else if (!controller.isGrounded)
 			AirMove();
 
@@ -289,7 +293,7 @@ public class MovementReworked : MonoBehaviour
 			receivedcommand = false;
 			commandmovepos= new Vector3(0, 0, 0);
 			gameObject.GetComponent<CharacterController>().enabled = true;
-			print("damn");
+			
 		}
 		
 	}
@@ -466,8 +470,15 @@ public class MovementReworked : MonoBehaviour
 
 		SetMovementDir();
 
-		wishdir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-		wishdir = transform.TransformDirection(wishdir);
+		if (!CommandListener.active)
+		{
+			wishdir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+		}
+		if (CommandListener.active)
+		{
+			wishdir = new Vector3(0, 0, 0);
+		}
+			wishdir = transform.TransformDirection(wishdir);
 		wishdir.Normalize();
 		moveDirectionNorm = wishdir;
 
