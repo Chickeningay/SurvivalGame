@@ -10,6 +10,8 @@ public class PickUpWeaponScript : MonoBehaviour
     GameObject Player;
     public bool ObeyInventory;
      GameObject Inventory;
+    public bool AddAmmo;
+    public int AddingAmmoCount;
     // Start is called before the first frame update
     void Start()
     {
@@ -63,7 +65,10 @@ public class PickUpWeaponScript : MonoBehaviour
                 if (g.gameObject.GetComponent<IDHolder>().id ==0)
                 {
                     g.gameObject.GetComponent<IDHolder>().id = id + 1;
-
+                    if (AddAmmo)
+                    {
+                        g.gameObject.GetComponent<IDHolder>().currentAmmo = AddingAmmoCount;
+                    }
                     break;
                 }
             }

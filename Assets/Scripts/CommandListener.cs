@@ -36,13 +36,40 @@ public class CommandListener : MonoBehaviour
                 {
                     print(x);
                 }
-                if (int.TryParse(sizes[1],out _))
+                if (int.TryParse(sizes[1],out _)||sizes[1]=="*")
                 {
-                    if (int.TryParse(sizes[2], out _))
+                    if (int.TryParse(sizes[2], out _) || sizes[2] == "*")
                     {
-                        if (int.TryParse(sizes[3], out _))
+                        if (int.TryParse(sizes[3], out _) || sizes[3] == "*")
                         {
-                            CommandPos = new Vector3(int.Parse(sizes[1]), int.Parse(sizes[2]), int.Parse(sizes[3]));
+                            float x;
+                            float y;
+                            float z;
+                            if (sizes[1] == "*")
+                            {
+                                x = player.transform.position.x;
+                            }
+                            else
+                            {
+                                x = int.Parse(sizes[1]);
+                            }
+                            if (sizes[2] == "*")
+                            {
+                               y = player.transform.position.y;
+                            }
+                            else
+                            {
+                                y = int.Parse(sizes[2]);
+                            }
+                            if (sizes[3] == "*")
+                            {
+                                z = player.transform.position.z;
+                            }
+                            else
+                            {
+                                z = int.Parse(sizes[3]);
+                            }
+                            CommandPos = new Vector3(x, y, z);
                             print(CommandPos);
                             player.GetComponent<MovementReworked>().MoveIntoPosition(CommandPos);
                             gameObject.active = false;

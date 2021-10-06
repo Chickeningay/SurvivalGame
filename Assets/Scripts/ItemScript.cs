@@ -11,13 +11,15 @@ public class ItemScript : MonoBehaviour
     public AnimationClip Switch_Clip;
     public GameObject SecondSpawnPrefab;
     public GameObject ScaffPref;
-    
+    public int Ammo;
     public bool AwaitingAction1;
     public bool AwaitingAction2;
     public GameObject ScaffSpawnPrefab;
     public AnimationClip Action1Anim;
     public AnimationClip WalkAnim;
     public GameObject Player;
+    public GameObject Inventory;
+    public GameObject Selected;
     public Vector3 startpos;
     public Quaternion startrot;
     // Start is called before the first frame update
@@ -25,6 +27,7 @@ public class ItemScript : MonoBehaviour
     {
         startpos = gameObject.transform.position;
         startrot = gameObject.transform.rotation;
+        
     }
 
     // Update is called once per frame
@@ -40,6 +43,9 @@ public class ItemScript : MonoBehaviour
         }
         else if(ScaffHolding)
         {
+
+            Selected = Inventory.GetComponent<InventorySelecter>().CurrentSelected;
+            Selected.GetComponent<IDHolder>().currentAmmo = Ammo;
             gameObject.GetComponent<ScaffHoldRaycaster>().enabled = true;
         }
     }
@@ -90,9 +96,13 @@ public class ItemScript : MonoBehaviour
     void ScaffHoldingFunction()
     {
         ScaffPref.gameObject.active=true;
-        
+        if (0 >= Ammo)
+        {
+            Selected.gameObject.GetComponent<IDHolder>().id = 0;
+        }
         if (AwaitingAction1)
         {
+            Ammo--;
             gameObject.transform.rotation = startrot;
             gameObject.transform.position = startpos;
             Instantiate(ScaffSpawnPrefab, ScaffPref.gameObject.transform.position, ScaffSpawnPrefab.gameObject.transform.rotation);

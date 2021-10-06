@@ -19,7 +19,7 @@ public class HammerRaycaster : MonoBehaviour
             }
             else
             {
-                //HammerHolder.GetComponent<MeshRenderer>().enabled = false;
+                HammerHolder.GetComponent<MeshRenderer>().enabled = false;
             }
         }
         

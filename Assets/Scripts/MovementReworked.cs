@@ -299,15 +299,26 @@ public class MovementReworked : MonoBehaviour
 	}
 	public void Crouch()
 	{
-		if (Input.GetKeyDown(KeyCode.LeftControl))
+		if (!CommandListener.active)
+		{
+			if (Input.GetKeyDown(KeyCode.LeftControl))
 		{
 			gameObject.GetComponent<CapsuleCollider>().height = 1f;
 			gameObject.GetComponent<CharacterController>().height = 1f;
 			gameObject.GetComponent<CharacterController>().radius = 0.8f;
 			gameObject.GetComponent<CapsuleCollider>().radius = 0.8f;
 		}
+		
 		else if (Input.GetKeyUp(KeyCode.LeftControl))
 		{
+			gameObject.GetComponent<CapsuleCollider>().height = 2f;
+			gameObject.GetComponent<CharacterController>().height = 2f;
+			gameObject.GetComponent<CharacterController>().radius = 0.5f;
+			gameObject.GetComponent<CapsuleCollider>().radius = 0.5f;
+		}
+		}
+        if (CommandListener.active)
+        {
 			gameObject.GetComponent<CapsuleCollider>().height = 2f;
 			gameObject.GetComponent<CharacterController>().height = 2f;
 			gameObject.GetComponent<CharacterController>().radius = 0.5f;
@@ -323,26 +334,27 @@ public class MovementReworked : MonoBehaviour
 	//Queues the next jump
 	void QueueJump()
 	{
-		if (!mwhlup)
-		{
-			if (!InWater&&!wishJump &&Input.GetButtonDown("Jump") && IsGrounded)
-			{
-				wishJump = true;
-			}
+        if (!CommandListener.active)
+        {
+			
+			
+				if (!InWater && !wishJump && Input.GetButtonDown("Jump") && IsGrounded)
+				{
+					wishJump = true;
+				}
 
-			/*if (!wishJump && !IsGrounded && Input.GetButtonDown("Jump"))
-			{
-				JumpQueue = true;
-			}
-			if (!wishJump && IsGrounded && JumpQueue)
-			{
-				wishJump = true;
-				JumpQueue = false;
-			}*/
-		}
-		else
-		{
-			if (!InWater && !wishJump && Input.GetAxisRaw("Mouse ScrollWheel") > 0 && IsGrounded)
+				/*if (!wishJump && !IsGrounded && Input.GetButtonDown("Jump"))
+				{
+					JumpQueue = true;
+				}
+				if (!wishJump && IsGrounded && JumpQueue)
+				{
+					wishJump = true;
+					JumpQueue = false;
+				}*/
+			
+			if (mwhlup) { 
+				if (!InWater && !wishJump && Input.GetAxisRaw("Mouse ScrollWheel") > 0 && IsGrounded)
 			{
 				wishJump = true;
 			}
@@ -356,7 +368,10 @@ public class MovementReworked : MonoBehaviour
 				JumpQueue = false;
 			}*/
 		}
-		
+		}
+
+
+
 	}
 
 	//Calculates wish acceleration

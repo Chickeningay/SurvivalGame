@@ -126,15 +126,6 @@ public class WeaponControl : MonoBehaviour
                 AxeHandler();
                 AmmoText.gameObject.GetComponent<Text>().text = "";
 
-
-
-
-
-
-
-
-
-
             }
 
             if (Player.GetComponent<MovementReworked>().InWater != true && !Melee)
