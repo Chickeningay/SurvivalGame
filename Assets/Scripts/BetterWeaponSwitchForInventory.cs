@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BetterWeaponSwitchForInventory : MonoBehaviour
 {
@@ -25,7 +26,12 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
     public bool InventoryExtended;
     public GameObject CurrentWeaponObject;
     public GameObject CurrentSlot;
-   
+    public GameObject AmmoIcon;
+    public GameObject RocketIcon;
+    public GameObject BombIcon;
+    public GameObject MeleeIcon;
+    public GameObject BuildIcon;
+    public GameObject AmmoCounter;
     void Start()
     {
         
@@ -41,18 +47,33 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (currentID == 0)
+        {
+            AmmoIcon.active = false;
+            BuildIcon.active = false;
+            MeleeIcon.active = false;
+            BombIcon.active = false;
+            RocketIcon.active = false;
+            AmmoCounter.GetComponent<Text>().text = "";
+        }
         InventoryExtended = Inventory.GetComponent<InventorySelecter>().InventoryExtended;
         if(Inventory.GetComponent<InventorySelecter>().CurrentSelected != null)
         {
 
         
         if (Inventory.GetComponent<InventorySelecter>().CurrentSelected.name == "Holder1" || Inventory.GetComponent<InventorySelecter>().CurrentSelected.name == "Holder2" || Inventory.GetComponent<InventorySelecter>().CurrentSelected.name == "Holder3" || Inventory.GetComponent<InventorySelecter>().CurrentSelected.name == "Holder4" || Inventory.GetComponent<InventorySelecter>().CurrentSelected.name == "Holder5" || Inventory.GetComponent<InventorySelecter>().CurrentSelected.name == "Holder6" || Inventory.GetComponent<InventorySelecter>().CurrentSelected.name == "Holder7" || Inventory.GetComponent<InventorySelecter>().CurrentSelected.name == "Holder8")
-        { currentID = Inventory.GetComponent<InventorySelecter>().CurrentSelected.GetComponent<IDHolder>().id; }
+        {
+                AmmoIcon.active = false;
+                BuildIcon.active = false;
+                MeleeIcon.active = false;
+                BombIcon.active = false;
+                RocketIcon.active = false; currentID = Inventory.GetComponent<InventorySelecter>().CurrentSelected.GetComponent<IDHolder>().id;  }
+      
+        }
         else
         {
-            currentID=0;
-        }
+            currentID = 0;
+            
         }
         if (RenewAmmo)
         {

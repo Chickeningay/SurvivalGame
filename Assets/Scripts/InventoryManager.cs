@@ -20,7 +20,7 @@ public class InventoryManager : MonoBehaviour
     public GameObject InventorySlot6;
     public GameObject InventorySlot7;
     public GameObject InventorySlot8;
-    public GameObject InventorySlot9;
+    
     public GameObject InventorySlot10;
     public GameObject InventorySlot11;
     public GameObject InventorySlot12;
@@ -28,7 +28,7 @@ public class InventoryManager : MonoBehaviour
     public GameObject InventorySlot14;
     public GameObject InventorySlot15;
     public GameObject InventorySlot16;
-    public GameObject InventorySlot17;
+    
     public GameObject InventorySlot18;
     public GameObject InventorySlot19;
     public GameObject InventorySlot20;
@@ -36,9 +36,9 @@ public class InventoryManager : MonoBehaviour
     public GameObject InventorySlot22;
     public GameObject InventorySlot23;
     public GameObject InventorySlot24;
-    public GameObject InventorySlot25;
+    
     public GameObject InventorySlot26;
-    public GameObject InventorySlot27;
+    
     public GameObject InventorySlot28;
     public GameObject InventorySlot29;
     public GameObject InventorySlot30;

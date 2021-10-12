@@ -527,7 +527,11 @@ public class InventorySelecter : MonoBehaviour
     }
     public void ChangeSelected(GameObject Selected)
     {
-        if (CurrentSelected == null)
+        if (CurrentSelected == Selected || Selected.name == "SelectBox")
+        {
+            CurrentSelected = null;
+        }
+        else if (CurrentSelected == null||CurrentSelected!=Selected&&!InventoryExtended)
         {
             if(Selected.GetComponent<IDHolder>().id != 0)
             {
@@ -541,6 +545,7 @@ public class InventorySelecter : MonoBehaviour
             int old_ammo;
                 old_id = CurrentSelected.GetComponent<IDHolder>().id;
             old_ammo = CurrentSelected.GetComponent<IDHolder>().currentAmmo;
+            
             CurrentSelected.GetComponent<IDHolder>().id = Selected.GetComponent<IDHolder>().id;
             CurrentSelected.GetComponent<IDHolder>().currentAmmo = Selected.GetComponent<IDHolder>().currentAmmo;
             Selected.GetComponent<IDHolder>().currentAmmo = old_ammo;
@@ -549,10 +554,7 @@ public class InventorySelecter : MonoBehaviour
           
             
         }
-        else if(CurrentSelected == Selected||Selected.name=="SelectBox")
-        {
-            CurrentSelected = null;
-        }
+       
         
         
     }

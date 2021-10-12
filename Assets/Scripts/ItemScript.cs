@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class ItemScript : MonoBehaviour
 {
    
@@ -22,6 +22,8 @@ public class ItemScript : MonoBehaviour
     public GameObject Selected;
     public Vector3 startpos;
     public Quaternion startrot;
+    public GameObject buildicon;
+    public GameObject AmmoCounter;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,18 +41,24 @@ public class ItemScript : MonoBehaviour
         }
         else if (Hammer)
         {
+            
             gameObject.GetComponent<HammerRaycaster>().enabled = true;
         }
         else if(ScaffHolding)
         {
-
+           
             Selected = Inventory.GetComponent<InventorySelecter>().CurrentSelected;
-            Selected.GetComponent<IDHolder>().currentAmmo = Ammo;
+            if (Selected.gameObject != null)
+            {
+                Selected.GetComponent<IDHolder>().currentAmmo = Ammo;
+            }
+            
             gameObject.GetComponent<ScaffHoldRaycaster>().enabled = true;
         }
     }
     void Update()
     {
+        buildicon.active = true;
         if (Player.GetComponent<MovementReworked>().moving)
         {
             if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State"))
@@ -72,11 +80,11 @@ public class ItemScript : MonoBehaviour
             gameObject.transform.rotation = startrot;
             gameObject.transform.position = startpos;
         }
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0)&&!Inventory.gameObject.GetComponent<InventorySelecter>().InventoryExtended)
         {
             AwaitingAction1 = true;
         }
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !Inventory.gameObject.GetComponent<InventorySelecter>().InventoryExtended)
         {
             AwaitingAction2 = true;
         }   
@@ -95,6 +103,7 @@ public class ItemScript : MonoBehaviour
     }
     void ScaffHoldingFunction()
     {
+        AmmoCounter.GetComponent<Text>().text = Ammo.ToString();
         ScaffPref.gameObject.active=true;
         if (0 >= Ammo)
         {
