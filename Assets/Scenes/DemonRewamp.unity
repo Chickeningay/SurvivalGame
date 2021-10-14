@@ -9182,7 +9182,7 @@ PrefabInstance:
     - target: {fileID: 8584902200205077448, guid: ef033577d86b9fd4a8e22a0fd2c67269,
         type: 3}
       propertyPath: BPM
-      value: 50
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8584902200205077448, guid: ef033577d86b9fd4a8e22a0fd2c67269,
         type: 3}

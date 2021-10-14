@@ -410,7 +410,7 @@ public class WeaponControl : MonoBehaviour
             
         if (Automatic)
         {
-            yield return new WaitForSeconds(7 * time/BPM);
+            yield return new WaitForSeconds(20 * Time.deltaTime/BPM);
         }
         else
         {
