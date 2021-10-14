@@ -22,6 +22,154 @@ public class InventorySelecter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetAxis("Mouse ScrollWheel") < 0f&&CurrentSelected!=null&&!InventoryExtended)
+        {
+            int current=0;
+            if (CurrentSelected.name == "Holder1")
+            {
+                current = 1;
+            }
+            else if (CurrentSelected.name == "Holder2")
+            {
+                current = 2;
+            }
+            else if (CurrentSelected.name == "Holder3")
+            {
+                current = 3;
+            }
+            else if(CurrentSelected.name == "Holder4")
+            {
+                current = 4;
+            }
+            else if(CurrentSelected.name == "Holder5")
+            {
+                current = 5;
+            }
+            else if(CurrentSelected.name == "Holder6")
+            {
+                current = 6;
+            }
+            else if(CurrentSelected.name == "Holder7")
+            {
+                current = 7;
+            }
+            else if(CurrentSelected.name == "Holder8")
+            {
+                current = 8;
+            }
+            if (current == 0)
+            {
+
+            }
+            else if (current == 1)
+            {
+                ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster2);
+            }
+            else if (current == 2)
+            {
+                ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster3);
+            }
+            else if (current == 3)
+            {
+                ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster4);
+            }
+            else if (current == 4)
+            {
+                ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster5);
+            }
+            else if (current == 5)
+            {
+                ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster6);
+            }
+            else if (current == 6)
+            {
+                ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster7);
+            }
+            else if (current == 7)
+            {
+                ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster8);
+            }
+            else if (current == 8)
+            {
+                ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster1);
+            }
+            
+
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") > 0f && CurrentSelected != null && !InventoryExtended)
+        {
+            int current = 0;
+            if (CurrentSelected.name == "Holder1")
+            {
+                current = 1;
+            }
+            else if (CurrentSelected.name == "Holder2")
+            {
+                current = 2;
+            }
+            else if (CurrentSelected.name == "Holder3")
+            {
+                current = 3;
+            }
+            else if (CurrentSelected.name == "Holder4")
+            {
+                current = 4;
+            }
+            else if (CurrentSelected.name == "Holder5")
+            {
+                current = 5;
+            }
+            else if (CurrentSelected.name == "Holder6")
+            {
+                current = 6;
+            }
+            else if (CurrentSelected.name == "Holder7")
+            {
+                current = 7;
+            }
+            else if (CurrentSelected.name == "Holder8")
+            {
+                current = 8;
+            }
+            if (current == 0)
+            {
+
+            }
+            else if (current == 1)
+            {
+                ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster8);
+            }
+            else if (current == 2)
+            {
+                ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster1);
+            }
+            else if (current == 3)
+            {
+                ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster2);
+            }
+            else if (current == 4)
+            {
+                ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster3);
+            }
+            else if (current == 5)
+            {
+                ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster4);
+            }
+            else if (current == 6)
+            {
+                ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster5);
+            }
+            else if (current == 7)
+            {
+                ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster6);
+            }
+            else if (current == 8)
+            {
+                ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster7);
+            }
+
+
+        }
         Crosshair.gameObject.GetComponent<RawImage>().enabled = !InventoryExtended;
         if (Input.GetKeyDown(KeyCode.Tab))
         {
