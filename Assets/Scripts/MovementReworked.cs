@@ -557,6 +557,8 @@ public class MovementReworked : MonoBehaviour
 		flashed = false;
 
 		
+
+
 	}
 	private void OnTriggerEnter(Collider other)
 	{
@@ -648,7 +650,136 @@ public class MovementReworked : MonoBehaviour
 			gravity = -20f;
 		}
 	}
-	
+    private void OnCollisionStay(Collision other)
+    {
+		foreach(ContactPoint point in other.contacts)
+        {
+
+
+			if (Mathf.Abs(gameObject.transform.position.y - point.point.y) < 0.5f)
+			{
+			if (point.point.x < gameObject.transform.position.x)
+			{
+					if (playerVelocity.x > 20f)
+					{
+						playerVelocity.x += 20f;
+
+					}
+					else if (playerVelocity.x > 0f && playerVelocity.x < 0f)
+					{
+						playerVelocity.x = 0f;
+
+					}
+					if (playerVelocity.x < 0f)
+					{
+
+					}
+				}
+			else if (point.point.x > gameObject.transform.position.x)
+			{
+				if (point.point.x - gameObject.transform.position.x > 0.5f)
+				{
+                        if (playerVelocity.x > 20f)
+                        {
+							playerVelocity.x -= 20f;
+
+						}
+						else if (playerVelocity.x>0f&& playerVelocity.x < 0f)
+                        {
+							playerVelocity.x = 0f;
+
+						}
+                        if (playerVelocity.x < 0f)
+                        {
+
+                        }
+				}
+
+			}
+			if (point.point.y < gameObject.transform.position.y)
+			{
+				if (gameObject.transform.position.y - point.point.y > 0.5f)
+				{
+						if (playerVelocity.y > 20f)
+						{
+							playerVelocity.y += 20f;
+
+						}
+						else if (playerVelocity.y > 0f && playerVelocity.y < 0f)
+						{
+							playerVelocity.y = 0f;
+
+						}
+						if (playerVelocity.y < 0f)
+						{
+
+						}
+					}
+
+			}
+			else if (point.point.y > gameObject.transform.position.y)
+			{
+					if (gameObject.transform.position.y - point.point.y > 0.5f)
+					{
+						if (playerVelocity.y > 20f)
+						{
+							playerVelocity.y -= 20f;
+
+						}
+						else if (playerVelocity.y > 0f && playerVelocity.y < 0f)
+						{
+							playerVelocity.y = 0f;
+
+						}
+						if (playerVelocity.y < 0f)
+						{
+
+						}
+					}
+				}
+			if (point.point.z < gameObject.transform.position.z)
+			{
+				if (gameObject.transform.position.z - point.point.z > 0.5f)
+				{
+						if (playerVelocity.z > 20f)
+						{
+							playerVelocity.z += 20f;
+
+						}
+						else if (playerVelocity.z > 0f && playerVelocity.z < 0f)
+						{
+							playerVelocity.z = 0f;
+
+						}
+						if (playerVelocity.z < 0f)
+						{
+
+						}
+					}
+			}
+			else if (point.point.z > gameObject.transform.position.z)
+			{
+				if (gameObject.transform.position.z - point.point.z > 0.5f)
+				{
+						if (playerVelocity.z > 20f)
+						{
+							playerVelocity.z -= 20f;
+
+						}
+						else if (playerVelocity.z > 0f && playerVelocity.z < 0f)
+						{
+							playerVelocity.z = 0f;
+
+						}
+						if (playerVelocity.z < 0f)
+						{
+
+						}
+					}
+			}
+		}
+	}
+	}
 	IEnumerator ExitLadderSequence()
 	{
 		DO_NOT_ENTER_LADDER = true;
