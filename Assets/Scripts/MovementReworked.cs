@@ -172,11 +172,16 @@ public class MovementReworked : MonoBehaviour
 			playerVelocity.z = 0f;
 			if (Input.GetKey(KeyCode.W))
 			{
-				playerVelocity.y += 0.008f;
+				playerVelocity.y = 7.5f;
 			}
 			else if (Input.GetKey(KeyCode.S))
 			{
-				playerVelocity.y += -0.01f;
+				playerVelocity.y = -7.5f;
+			}
+            else
+            {
+				playerVelocity.y = 0;
+
 			}
 		}
 			IsCameraInWater = Camera.GetComponent<Underwater>().CameraInWater;
@@ -800,7 +805,7 @@ public class MovementReworked : MonoBehaviour
 		{
 			if (xishigher)
 			{
-				playerVelocity.x += 4f;
+				playerVelocity.x += 7.5f;
 			}
 			
 				
@@ -810,7 +815,7 @@ public class MovementReworked : MonoBehaviour
 		{
 			if (xishigher)
 			{
-				playerVelocity.x -= 4f ;
+				playerVelocity.x -= 7.5f;
 			}
 			
 		}
@@ -818,7 +823,7 @@ public class MovementReworked : MonoBehaviour
 		{
 			if (zishigher)
 			{
-				playerVelocity.z += 4f;
+				playerVelocity.z += 7.5f;
 			}
 			
 		}
@@ -826,7 +831,7 @@ public class MovementReworked : MonoBehaviour
 		{
 			if (zishigher)
 			{
-				playerVelocity.z -= 4f;
+				playerVelocity.z -= 7.5f;
 			}
 			
 		}
