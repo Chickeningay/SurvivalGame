@@ -26,11 +26,16 @@ public class DisableInventory : MonoBehaviour
                 Cursor.visible = gameObject.GetComponent<RawImage>().enabled;
                 DisableRot1.GetComponent<Rotation>().enabled = !gameObject.GetComponent<RawImage>().enabled;
                 DisableRot2.GetComponent<Rotation>().enabled = !gameObject.GetComponent<RawImage>().enabled;
-                child.gameObject.GetComponent<RawImage>().enabled = !child.gameObject.GetComponent<RawImage>().enabled;
-                
+                if (child.gameObject.GetComponent<RawImage>() != null)
+                {
+                    child.gameObject.GetComponent<RawImage>().enabled = !child.gameObject.GetComponent<RawImage>().enabled;
+                }
+                if (child.gameObject.GetComponent<Image>() != null)
+                {
+                    child.gameObject.GetComponent<Image>().enabled = !child.gameObject.GetComponent<Image>().enabled;
 
+                }
             }
         }
-        
     }
 }
