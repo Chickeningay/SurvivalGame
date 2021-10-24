@@ -39,12 +39,8 @@ public class ExplodeOnImpact : MonoBehaviour
             gameObject.GetComponent<Rigidbody>().isKinematic = true;
             var normal = other.contacts[0].normal;
             GameObject spawn=Instantiate(ImpactPrefab, other.contacts[0].point, other.transform.rotation);
-            RaycastHit hit ;
-            var castPos = new Vector3(transform.position.x, transform.position.y - 0.25f, transform.position.z);
-            if (Physics.Raycast(castPos, -transform.up, out hit))
-            {
-                transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-            }
+           
+            
 
             StartCoroutine(StartDeletion());
         }
