@@ -37,11 +37,17 @@ public class ItemScript : MonoBehaviour
     {
         if (Door)
         {
-            gameObject.GetComponent<DoorRaycast>().enabled = true;
+            Selected = Inventory.GetComponent<InventorySelecter>().CurrentSelected;
+            if (Selected.gameObject != null)
+            {
+                Selected.GetComponent<IDHolder>().currentAmmo = Ammo;
+            }
+            AmmoCounter.GetComponent<Text>().text ="";
+              gameObject.GetComponent<DoorRaycast>().enabled = true;
         }
         else if (Hammer)
         {
-            
+            AmmoCounter.GetComponent<Text>().text = "";
             gameObject.GetComponent<HammerRaycaster>().enabled = true;
         }
         else if(ScaffHolding)
@@ -164,9 +170,14 @@ public class ItemScript : MonoBehaviour
     {
         GameObject Hit;
         ScaffPref.gameObject.active = true;
-
+        AmmoCounter.GetComponent<Text>().text = Ammo.ToString();
+        if (0 >= Ammo)
+        {
+            Selected.gameObject.GetComponent<IDHolder>().id = 0;
+        }
         if (AwaitingAction1)
         {
+            Ammo--;
             gameObject.transform.rotation = startrot;
             gameObject.transform.position = startpos;
             Hit = Player.GetComponent<Raycaster>().Hit.transform.gameObject;

@@ -598,10 +598,7 @@ public class MovementReworked : MonoBehaviour
 				}
 				
 			}
-			else if (other.gameObject.transform.position.y > gameObject.transform.position.y)
-			{
-				playerVelocity.y -= 5f / Mathf.Clamp(other.gameObject.transform.position.y - gameObject.transform.position.y, 2f, 100f);
-			}
+			
 			if (other.gameObject.transform.position.z < gameObject.transform.position.z)
 			{
 				if (gameObject.transform.position.z - other.gameObject.transform.position.z > 0.5f)

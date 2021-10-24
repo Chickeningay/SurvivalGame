@@ -24,6 +24,11 @@ public class DisableInventory : MonoBehaviour
             foreach (Transform child in gameObject.transform.GetComponentsInChildren<Transform>())
             {
                 Cursor.visible = gameObject.GetComponent<RawImage>().enabled;
+                if (Cursor.visible)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                }
+                else { Cursor.lockState = CursorLockMode.Locked; }
                 DisableRot1.GetComponent<Rotation>().enabled = !gameObject.GetComponent<RawImage>().enabled;
                 DisableRot2.GetComponent<Rotation>().enabled = !gameObject.GetComponent<RawImage>().enabled;
                 if (child.gameObject.GetComponent<RawImage>() != null)
