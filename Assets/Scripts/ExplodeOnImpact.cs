@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ExplodeOnImpact : MonoBehaviour
 {
+    public GameObject Player;
     GameObject Sphere;
     GameObject ChildGameObject1;
     GameObject ChildGameObject2;
@@ -38,9 +39,28 @@ public class ExplodeOnImpact : MonoBehaviour
             gameObject.GetComponent<AudioSource>().enabled = true;
             gameObject.GetComponent<Rigidbody>().isKinematic = true;
             var normal = other.contacts[0].normal;
-            GameObject spawn=Instantiate(ImpactPrefab, other.contacts[0].point, other.transform.rotation);
-           
+            float x=normal.x; float y=normal.y; float z=normal.z;
+            print(normal);
             
+            GameObject spawn = Instantiate(ImpactPrefab, other.contacts[0].point, new Quaternion(ImpactPrefab.transform.rotation.x, 45, ImpactPrefab.transform.rotation.z, ImpactPrefab.transform.rotation.w));
+            
+            if(Mathf.Max(Mathf.Abs(normal.x), Mathf.Abs(normal.y), Mathf.Abs(normal.z)) == Mathf.Abs(normal.x))
+            {
+                spawn.GetComponent<explosionManage>().x=true;
+            }
+            if (Mathf.Max(Mathf.Abs(normal.x), Mathf.Abs(normal.y), Mathf.Abs(normal.z)) == Mathf.Abs(normal.y))
+            {
+                spawn.GetComponent<explosionManage>().y = true;
+            }
+            if (Mathf.Max(Mathf.Abs(normal.x), Mathf.Abs(normal.y), Mathf.Abs(normal.z)) == Mathf.Abs(normal.z))
+            {
+                spawn.GetComponent<explosionManage>().z = true;
+
+            }
+
+
+
+
 
             StartCoroutine(StartDeletion());
         }

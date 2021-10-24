@@ -224,7 +224,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02882bfb83de2fd4a9333c22aecb77aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ImpactPrefab: {fileID: 8469333765278185394, guid: 3050628100a182445b1f55edde4a90f7,
+  Player: {fileID: 1127373547955553649, guid: 597440310fadd4b49850960d6ad396c2, type: 3}
+  ImpactPrefab: {fileID: 1027335374529953898, guid: 79311d68d71608c45a121733e78e0c44,
     type: 3}
 --- !u!82 &568099488482147925
 AudioSource:
