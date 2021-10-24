@@ -10698,6 +10698,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7122492268182125064, guid: 4da6476ebb35539429e9720d1722239a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7122492268515412080, guid: 4da6476ebb35539429e9720d1722239a,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -14550,6 +14555,12 @@ PrefabInstance:
       objectReference: {fileID: 1141442636}
     - target: {fileID: 8584902199541943831, guid: ef033577d86b9fd4a8e22a0fd2c67269,
         type: 3}
+      propertyPath: ImpactPrefab
+      value: 
+      objectReference: {fileID: 2872954502089973810, guid: f5c05042bc7f51b4384aa3dddd96af66,
+        type: 3}
+    - target: {fileID: 8584902199541943831, guid: ef033577d86b9fd4a8e22a0fd2c67269,
+        type: 3}
       propertyPath: Movement_Clip
       value: 
       objectReference: {fileID: 7400000, guid: 5b26c63c5b576c746bfb1bef0391b88d, type: 2}
@@ -14773,6 +14784,12 @@ PrefabInstance:
       propertyPath: GrenadeIcon
       value: 
       objectReference: {fileID: 1141442636}
+    - target: {fileID: 8584902199961324713, guid: ef033577d86b9fd4a8e22a0fd2c67269,
+        type: 3}
+      propertyPath: ImpactPrefab
+      value: 
+      objectReference: {fileID: 2872954502089973810, guid: f5c05042bc7f51b4384aa3dddd96af66,
+        type: 3}
     - target: {fileID: 8584902199961324713, guid: ef033577d86b9fd4a8e22a0fd2c67269,
         type: 3}
       propertyPath: Movement_Clip
@@ -15008,6 +15025,12 @@ PrefabInstance:
       propertyPath: GrenadeIcon
       value: 
       objectReference: {fileID: 1141442636}
+    - target: {fileID: 8926937934461928921, guid: ef033577d86b9fd4a8e22a0fd2c67269,
+        type: 3}
+      propertyPath: ImpactPrefab
+      value: 
+      objectReference: {fileID: 2872954502089973810, guid: f5c05042bc7f51b4384aa3dddd96af66,
+        type: 3}
     - target: {fileID: 8926937934461928921, guid: ef033577d86b9fd4a8e22a0fd2c67269,
         type: 3}
       propertyPath: Movement_Clip

@@ -42,7 +42,7 @@ public class ExplodeOnImpact : MonoBehaviour
             float x=normal.x; float y=normal.y; float z=normal.z;
             print(normal);
             
-            GameObject spawn = Instantiate(ImpactPrefab, other.contacts[0].point, new Quaternion(ImpactPrefab.transform.rotation.x, 45, ImpactPrefab.transform.rotation.z, ImpactPrefab.transform.rotation.w));
+            GameObject spawn = Instantiate(ImpactPrefab, other.contacts[0].point, new Quaternion(ImpactPrefab.transform.rotation.x, 0, ImpactPrefab.transform.rotation.z, ImpactPrefab.transform.rotation.w));
             
             if(Mathf.Max(Mathf.Abs(normal.x), Mathf.Abs(normal.y), Mathf.Abs(normal.z)) == Mathf.Abs(normal.x))
             {

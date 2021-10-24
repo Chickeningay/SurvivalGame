@@ -10,7 +10,7 @@ public class explosionManage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(Remove());
     }
 
     // Update is called once per frame
@@ -28,5 +28,10 @@ public class explosionManage : MonoBehaviour
         {
             gameObject.transform.eulerAngles = new Vector3(gameObject.transform.eulerAngles.x, gameObject.transform.eulerAngles.y, 90);
         }
+    }
+    IEnumerator Remove()
+    {
+        yield return new WaitForSeconds(5f);
+        Destroy(gameObject);
     }
 }

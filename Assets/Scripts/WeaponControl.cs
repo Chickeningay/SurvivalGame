@@ -49,6 +49,7 @@ public class WeaponControl : MonoBehaviour
     public Quaternion startrot;
     bool flashenabledagain;
     bool flashdisablerunning;
+    public GameObject ImpactPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -289,21 +290,53 @@ public class WeaponControl : MonoBehaviour
             }
             if (ShootingRay)
             {
-                Hit=Physics.RaycastAll(MainCamera.transform.position, MainCamera.transform.forward);
-                foreach(RaycastHit Shot in Hit)
+                RaycastHit Hit;
+                Physics.Raycast(MainCamera.transform.position, MainCamera.transform.forward,out Hit);
+                Vector3 normal = Hit.normal;
+                GameObject spawn = Instantiate(ImpactPrefab, Hit.point, new Quaternion(ImpactPrefab.transform.rotation.x, 0, ImpactPrefab.transform.rotation.z, ImpactPrefab.transform.rotation.w));
+
+                if (Mathf.Max(Mathf.Abs(normal.x), Mathf.Abs(normal.y), Mathf.Abs(normal.z)) == Mathf.Abs(normal.x))
+                {
+                    spawn.GetComponent<explosionManage>().x = true;
+                }
+                if (Mathf.Max(Mathf.Abs(normal.x), Mathf.Abs(normal.y), Mathf.Abs(normal.z)) == Mathf.Abs(normal.y))
+                {
+                    spawn.GetComponent<explosionManage>().y = true;
+                }
+                if (Mathf.Max(Mathf.Abs(normal.x), Mathf.Abs(normal.y), Mathf.Abs(normal.z)) == Mathf.Abs(normal.z))
+                {
+                    spawn.GetComponent<explosionManage>().z = true;
+
+                }
+                if (Hit.transform.gameObject.GetComponent<GotHit>() != null)
+                    {
+                    Hit.transform.gameObject.GetComponent<GotHit>().hit = true;
+                    }
+                    if(Hit.transform.gameObject.GetComponent<HitDetection>() != null)
+                    {
+                    Hit.transform.gameObject.GetComponent<HitDetection>().hit = true;
+                    }
+                
+                
+               
+            }
+            /*if (ShootingRay)
+            {
+                Hit = Physics.RaycastAll(MainCamera.transform.position, MainCamera.transform.forward);
+                foreach (RaycastHit Shot in Hit)
                 {
                     if (Shot.transform.gameObject.GetComponent<GotHit>() != null)
                     {
                         Shot.transform.gameObject.GetComponent<GotHit>().hit = true;
                     }
-                    if(Shot.transform.gameObject.GetComponent<HitDetection>() != null)
+                    if (Shot.transform.gameObject.GetComponent<HitDetection>() != null)
                     {
                         Shot.transform.gameObject.GetComponent<HitDetection>().hit = true;
                     }
                 }
-                
-               
-            }
+
+
+            }*/
 
             CurrentAmmo -= 1;
             if (RPGIcon)
