@@ -50,6 +50,7 @@ public class WeaponControl : MonoBehaviour
     bool flashenabledagain;
     bool flashdisablerunning;
     public GameObject ImpactPrefab;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -183,6 +184,8 @@ public class WeaponControl : MonoBehaviour
                     if (CurrentAmmo > 0)
                     {
                         Shoot();
+                        BulletFlash.transform.GetChild(0).transform.rotation = new Quaternion(BulletFlash.transform.GetChild(0).rotation.x, BulletFlash.transform.GetChild(0).rotation.y, BulletFlash.transform.GetChild(0).rotation.z+ 10f, BulletFlash.transform.GetChild(0).rotation.w);
+                        BulletFlash.transform.GetChild(1).transform.rotation = new Quaternion(BulletFlash.transform.GetChild(1).rotation.x, BulletFlash.transform.GetChild(1).rotation.y, BulletFlash.transform.GetChild(1).rotation.z + 10f, BulletFlash.transform.GetChild(1).rotation.w);
                         BulletFlash.active = true;
                         flashenabledagain = true;
                         if (!flashdisablerunning)
@@ -281,6 +284,7 @@ public class WeaponControl : MonoBehaviour
             gameObject.transform.rotation = startrot;
             if (BulletFlash != null&&!Automatic)
             {
+                BulletFlash.transform.eulerAngles = new Vector3(BulletFlash.transform.rotation.x, BulletFlash.transform.rotation.y, Random.Range(0f, 360f));
                 BulletFlash.active = true;
                 if (!flashdisablerunning)
                 {
@@ -290,6 +294,7 @@ public class WeaponControl : MonoBehaviour
             }
             if (ShootingRay)
             {
+
                 RaycastHit Hit;
                 Physics.Raycast(MainCamera.transform.position, MainCamera.transform.forward,out Hit);
                 Vector3 normal = Hit.normal;
