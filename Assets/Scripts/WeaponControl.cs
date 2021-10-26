@@ -140,7 +140,8 @@ public class WeaponControl : MonoBehaviour
 
                     if (CurrentAmmo > 0)
                     {
-                        BulletFlash.transform.Rotate(0, 90, BulletFlash.transform.eulerAngles.z + 10f, Space.World);
+                        //BulletFlash.transform.Rotate(0, 90, BulletFlash.transform.eulerAngles.z + 10f, Space.World);
+                        BulletFlash.transform.localEulerAngles = new Vector3(0, 180, BulletFlash.transform.localEulerAngles.z + 10f);
                         Instantiate(fakebullet, fakebulletspawn.transform);
                         Shoot();
                         Audio("Action1");
@@ -193,12 +194,10 @@ public class WeaponControl : MonoBehaviour
                     if (CurrentAmmo > 0)
                     {
                         Shoot();
-<<<<<<< Updated upstream
-                        BulletFlash.transform.GetChild(0).transform.rotation = new Quaternion(BulletFlash.transform.GetChild(0).rotation.x, BulletFlash.transform.GetChild(0).rotation.y, BulletFlash.transform.GetChild(0).rotation.z+ 10f, BulletFlash.transform.GetChild(0).rotation.w);
-                        BulletFlash.transform.GetChild(1).transform.rotation = new Quaternion(BulletFlash.transform.GetChild(1).rotation.x, BulletFlash.transform.GetChild(1).rotation.y, BulletFlash.transform.GetChild(1).rotation.z + 10f, BulletFlash.transform.GetChild(1).rotation.w);
-=======
+
+
                         BulletFlash.transform.Rotate(BulletFlash.transform.eulerAngles.x, BulletFlash.transform.eulerAngles.y, BulletFlash.transform.eulerAngles.z + 10f, Space.Self);
->>>>>>> Stashed changes
+
                         BulletFlash.active = true;
                         
                         flashenabledagain = true;
@@ -322,9 +321,9 @@ public class WeaponControl : MonoBehaviour
             }
             if (ShootingRay)
             {
-
+                bool successhit;
                 RaycastHit Hit;
-                Physics.Raycast(MainCamera.transform.position, MainCamera.transform.forward,out Hit);
+                successhit=Physics.Raycast(MainCamera.transform.position, MainCamera.transform.forward,out Hit);
                 Vector3 normal = Hit.normal;
                 GameObject spawn = Instantiate(ImpactPrefab, Hit.point, new Quaternion(ImpactPrefab.transform.rotation.x, 0, ImpactPrefab.transform.rotation.z, ImpactPrefab.transform.rotation.w));
 
@@ -341,14 +340,18 @@ public class WeaponControl : MonoBehaviour
                     spawn.GetComponent<explosionManage>().z = true;
 
                 }
-                if (Hit.transform.gameObject.GetComponent<GotHit>() != null)
+                if (successhit)
+                {
+                    if (Hit.transform.gameObject.GetComponent<GotHit>() != null)
                     {
-                    Hit.transform.gameObject.GetComponent<GotHit>().hit = true;
+                        Hit.transform.gameObject.GetComponent<GotHit>().hit = true;
                     }
-                    if(Hit.transform.gameObject.GetComponent<HitDetection>() != null)
+                    if (Hit.transform.gameObject.GetComponent<HitDetection>() != null)
                     {
-                    Hit.transform.gameObject.GetComponent<HitDetection>().hit = true;
+                        Hit.transform.gameObject.GetComponent<HitDetection>().hit = true;
                     }
+                }
+               
                 
                 
                
