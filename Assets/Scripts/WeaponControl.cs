@@ -50,6 +50,7 @@ public class WeaponControl : MonoBehaviour
     bool flashenabledagain;
     bool flashdisablerunning;
     public GameObject ImpactPrefab;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -139,6 +140,7 @@ public class WeaponControl : MonoBehaviour
 
                     if (CurrentAmmo > 0)
                     {
+                        Instantiate(fakebullet, fakebulletspawn.transform);
                         Shoot();
                         Audio("Action1");
                         Animate("Action1");
@@ -275,6 +277,7 @@ public class WeaponControl : MonoBehaviour
     {
         if (CurrentAmmo > 0)
         {
+            Instantiate(fakebullet, fakebulletspawn.transform);
             StopCoroutine(DisableFlash());
             
             gameObject.transform.position = startpos;
@@ -359,10 +362,7 @@ public class WeaponControl : MonoBehaviour
         else if (Action == "Action1")
         {
             Player.GetComponent<AudioSource>().PlayOneShot(Action1_Audio);
-            if (fakebullet != null)
-            {
-                Instantiate(fakebullet, fakebulletspawn.transform.position, fakebulletspawn.transform.rotation);
-            }
+            
             
         }
         else if (Action == "Action2")

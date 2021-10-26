@@ -8,6 +8,7 @@ public class InventorySelecter : MonoBehaviour
     public GameObject CurrentSelected;
     public GameObject Selectmark;
     public bool InventoryExtended;
+    public bool ConsoleExtended;
     public GameObject LastSelectedHolster;
     public GameObject Player;
     public GameObject Crosshair;
@@ -22,6 +23,10 @@ public class InventorySelecter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            ConsoleExtended = !ConsoleExtended;
+        }
         if (Input.GetAxis("Mouse ScrollWheel") < 0f&&CurrentSelected!=null&&!InventoryExtended)
         {
             int current=0;
@@ -209,6 +214,7 @@ public class InventorySelecter : MonoBehaviour
                     Selectmark.active = true;
                     Selectmark.transform.position = CurrentSelected.transform.position;
                 }
+                        if (!ConsoleExtended) { 
                 if (Input.GetKeyDown(KeyCode.Alpha1))
                 {
                     if (gameObject.GetComponent<InventoryManager>().InventorySlot1.GetComponent<RawImage>().enabled)
@@ -300,7 +306,8 @@ public class InventorySelecter : MonoBehaviour
                         CurrentSelected = gameObject.GetComponent<InventoryManager>().Holster8;
                     }
                 }
-            }
+                        }
+                    }
         }
             else if(Player.GetComponent<MovementReworked>().SecondaryCam.GetComponent<BetterWeaponSwitchForInventory>().CurrentWeaponObject.gameObject.GetComponent<grenadeScript>() != null)
             {
@@ -332,97 +339,100 @@ public class InventorySelecter : MonoBehaviour
                     Selectmark.active = true;
                     Selectmark.transform.position = CurrentSelected.transform.position;
                 }
-                if (Input.GetKeyDown(KeyCode.Alpha1))
-                {
-                    if (gameObject.GetComponent<InventoryManager>().InventorySlot1.GetComponent<RawImage>().enabled)
-                    {
-                        ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster1);
-                    }
-                    else
-                    {
-                        CurrentSelected = gameObject.GetComponent<InventoryManager>().Holster1;
-                    }
-                }
+                        if (!ConsoleExtended)
+                        {
+                            if (Input.GetKeyDown(KeyCode.Alpha1))
+                            {
+                                if (gameObject.GetComponent<InventoryManager>().InventorySlot1.GetComponent<RawImage>().enabled)
+                                {
+                                    ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster1);
+                                }
+                                else
+                                {
+                                    CurrentSelected = gameObject.GetComponent<InventoryManager>().Holster1;
+                                }
+                            }
 
 
-                else if (Input.GetKeyDown(KeyCode.Alpha2))
-                {
-                    if (gameObject.GetComponent<InventoryManager>().InventorySlot1.GetComponent<RawImage>().enabled)
-                    {
-                        ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster2);
-                    }
-                    else
-                    {
-                        CurrentSelected = gameObject.GetComponent<InventoryManager>().Holster2;
-                    }
-                }
-                else if (Input.GetKeyDown(KeyCode.Alpha3))
-                {
-                    if (gameObject.GetComponent<InventoryManager>().InventorySlot1.GetComponent<RawImage>().enabled)
-                    {
-                        ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster3);
-                    }
-                    else
-                    {
-                        CurrentSelected = gameObject.GetComponent<InventoryManager>().Holster3;
-                    }
-                }
-                else if (Input.GetKeyDown(KeyCode.Alpha4))
-                {
-                    if (gameObject.GetComponent<InventoryManager>().InventorySlot1.GetComponent<RawImage>().enabled)
-                    {
-                        ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster4);
-                    }
-                    else
-                    {
-                        CurrentSelected = gameObject.GetComponent<InventoryManager>().Holster4;
-                    }
-                }
-                else if (Input.GetKeyDown(KeyCode.Alpha5))
-                {
-                    if (gameObject.GetComponent<InventoryManager>().InventorySlot1.GetComponent<RawImage>().enabled)
-                    {
-                        ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster5);
-                    }
-                    else
-                    {
-                        CurrentSelected = gameObject.GetComponent<InventoryManager>().Holster5;
-                    }
-                }
-                else if (Input.GetKeyDown(KeyCode.Alpha6))
-                {
-                    if (gameObject.GetComponent<InventoryManager>().InventorySlot1.GetComponent<RawImage>().enabled)
-                    {
-                        ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster6);
-                    }
-                    else
-                    {
-                        CurrentSelected = gameObject.GetComponent<InventoryManager>().Holster6;
-                    }
-                }
-                else if (Input.GetKeyDown(KeyCode.Alpha7))
-                {
-                    if (gameObject.GetComponent<InventoryManager>().InventorySlot1.GetComponent<RawImage>().enabled)
-                    {
+                            else if (Input.GetKeyDown(KeyCode.Alpha2))
+                            {
+                                if (gameObject.GetComponent<InventoryManager>().InventorySlot1.GetComponent<RawImage>().enabled)
+                                {
+                                    ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster2);
+                                }
+                                else
+                                {
+                                    CurrentSelected = gameObject.GetComponent<InventoryManager>().Holster2;
+                                }
+                            }
+                            else if (Input.GetKeyDown(KeyCode.Alpha3))
+                            {
+                                if (gameObject.GetComponent<InventoryManager>().InventorySlot1.GetComponent<RawImage>().enabled)
+                                {
+                                    ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster3);
+                                }
+                                else
+                                {
+                                    CurrentSelected = gameObject.GetComponent<InventoryManager>().Holster3;
+                                }
+                            }
+                            else if (Input.GetKeyDown(KeyCode.Alpha4))
+                            {
+                                if (gameObject.GetComponent<InventoryManager>().InventorySlot1.GetComponent<RawImage>().enabled)
+                                {
+                                    ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster4);
+                                }
+                                else
+                                {
+                                    CurrentSelected = gameObject.GetComponent<InventoryManager>().Holster4;
+                                }
+                            }
+                            else if (Input.GetKeyDown(KeyCode.Alpha5))
+                            {
+                                if (gameObject.GetComponent<InventoryManager>().InventorySlot1.GetComponent<RawImage>().enabled)
+                                {
+                                    ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster5);
+                                }
+                                else
+                                {
+                                    CurrentSelected = gameObject.GetComponent<InventoryManager>().Holster5;
+                                }
+                            }
+                            else if (Input.GetKeyDown(KeyCode.Alpha6))
+                            {
+                                if (gameObject.GetComponent<InventoryManager>().InventorySlot1.GetComponent<RawImage>().enabled)
+                                {
+                                    ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster6);
+                                }
+                                else
+                                {
+                                    CurrentSelected = gameObject.GetComponent<InventoryManager>().Holster6;
+                                }
+                            }
+                            else if (Input.GetKeyDown(KeyCode.Alpha7))
+                            {
+                                if (gameObject.GetComponent<InventoryManager>().InventorySlot1.GetComponent<RawImage>().enabled)
+                                {
 
-                        ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster7);
-                    }
-                    else
-                    {
-                        CurrentSelected = gameObject.GetComponent<InventoryManager>().Holster7;
-                    }
-                }
-                else if (Input.GetKeyDown(KeyCode.Alpha8))
-                {
-                    if (gameObject.GetComponent<InventoryManager>().InventorySlot1.GetComponent<RawImage>().enabled)
-                    {
-                        ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster8);
-                    }
-                    else
-                    {
-                        CurrentSelected = gameObject.GetComponent<InventoryManager>().Holster8;
-                    }
-                }
+                                    ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster7);
+                                }
+                                else
+                                {
+                                    CurrentSelected = gameObject.GetComponent<InventoryManager>().Holster7;
+                                }
+                            }
+                            else if (Input.GetKeyDown(KeyCode.Alpha8))
+                            {
+                                if (gameObject.GetComponent<InventoryManager>().InventorySlot1.GetComponent<RawImage>().enabled)
+                                {
+                                    ChangeSelected(gameObject.GetComponent<InventoryManager>().Holster8);
+                                }
+                                else
+                                {
+                                    CurrentSelected = gameObject.GetComponent<InventoryManager>().Holster8;
+                                }
+                            }
+                        }
             }
                 }
             else if (Player.GetComponent<MovementReworked>().SecondaryCam.GetComponent<BetterWeaponSwitchForInventory>().CurrentWeaponObject.gameObject.GetComponent<ItemScript>() != null)
@@ -456,7 +466,9 @@ public class InventorySelecter : MonoBehaviour
                             Selectmark.active = true;
                             Selectmark.transform.position = CurrentSelected.transform.position;
                         }
-                        if (Input.GetKeyDown(KeyCode.Alpha1))
+                        if (!ConsoleExtended)
+                        {
+                            if (Input.GetKeyDown(KeyCode.Alpha1))
                         {
                             if (gameObject.GetComponent<InventoryManager>().InventorySlot1.GetComponent<RawImage>().enabled)
                             {
@@ -547,6 +559,7 @@ public class InventorySelecter : MonoBehaviour
                                 CurrentSelected = gameObject.GetComponent<InventoryManager>().Holster8;
                             }
                         }
+                        }
                     }
                 }
             }
@@ -579,6 +592,7 @@ public class InventorySelecter : MonoBehaviour
                     Selectmark.active = true;
                     Selectmark.transform.position = CurrentSelected.transform.position;
                 }
+                if (!ConsoleExtended) {
                 if (Input.GetKeyDown(KeyCode.Alpha1))
                 {
                     if (gameObject.GetComponent<InventoryManager>().InventorySlot1.GetComponent<RawImage>().enabled)
@@ -669,6 +683,7 @@ public class InventorySelecter : MonoBehaviour
                     {
                         CurrentSelected = gameObject.GetComponent<InventoryManager>().Holster8;
                     }
+                }
                 }
             }
         }

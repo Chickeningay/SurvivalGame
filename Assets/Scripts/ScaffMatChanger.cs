@@ -8,6 +8,8 @@ public class ScaffMatChanger : MonoBehaviour
     public Material WoodMat;
     public Material GlassMat;
     bool stopprocess;
+    public AudioClip GlassBreakSound;
+    public AudioClip ScaffBreakSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,16 @@ public class ScaffMatChanger : MonoBehaviour
         if(!stopprocess) {
             if (gameObject.GetComponent<HitDetection>().hit)
             {
+                if (currentMat == "Wood"||currentMat=="")
+                {
+                    GameObject Player = GameObject.Find("Player");
+                    Player.GetComponent<AudioSource>().PlayOneShot(ScaffBreakSound);
+                }
+                else if (currentMat == "Glass")
+                {
+                    GameObject Player = GameObject.Find("Player");
+                    Player.GetComponent<AudioSource>().PlayOneShot(GlassBreakSound);
+                }
                 gameObject.GetComponent<HitDetection>().hit = false;
                 gameObject.GetComponent<HitDetection>().enabled = false;
                 gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
