@@ -50,7 +50,7 @@ public class WeaponControl : MonoBehaviour
     bool flashenabledagain;
     bool flashdisablerunning;
     public GameObject ImpactPrefab;
-    
+    bool emptymagaudiosent;
     // Start is called before the first frame update
     void Start()
     {
@@ -140,6 +140,7 @@ public class WeaponControl : MonoBehaviour
 
                     if (CurrentAmmo > 0)
                     {
+                        BulletFlash.transform.Rotate(0, 90, BulletFlash.transform.eulerAngles.z + 10f, Space.World);
                         Instantiate(fakebullet, fakebulletspawn.transform);
                         Shoot();
                         Audio("Action1");
@@ -147,7 +148,11 @@ public class WeaponControl : MonoBehaviour
                     }
                     else
                     {
-                        Audio("EmptyMag");
+                        if (!emptymagaudiosent)
+                        {
+                            StartCoroutine(EmptyMagSounder());
+                        }
+                        
                     }
 
 
@@ -164,12 +169,15 @@ public class WeaponControl : MonoBehaviour
                     }
                     else
                     {
-                        Audio("EmptyMag");
+                        if (!emptymagaudiosent)
+                        {
+                            StartCoroutine(EmptyMagSounder());
+                        }
                     }
 
 
                 }
-                if(Automatic&& Input.GetKeyUp(KeyCode.Mouse0))
+                if(Automatic&& Input.GetKeyUp(KeyCode.Mouse0)||Automatic&&CurrentAmmo<=0)
                 {
                     BulletFlash.active = false;
                 }
@@ -185,9 +193,14 @@ public class WeaponControl : MonoBehaviour
                     if (CurrentAmmo > 0)
                     {
                         Shoot();
+<<<<<<< Updated upstream
                         BulletFlash.transform.GetChild(0).transform.rotation = new Quaternion(BulletFlash.transform.GetChild(0).rotation.x, BulletFlash.transform.GetChild(0).rotation.y, BulletFlash.transform.GetChild(0).rotation.z+ 10f, BulletFlash.transform.GetChild(0).rotation.w);
                         BulletFlash.transform.GetChild(1).transform.rotation = new Quaternion(BulletFlash.transform.GetChild(1).rotation.x, BulletFlash.transform.GetChild(1).rotation.y, BulletFlash.transform.GetChild(1).rotation.z + 10f, BulletFlash.transform.GetChild(1).rotation.w);
+=======
+                        BulletFlash.transform.Rotate(BulletFlash.transform.eulerAngles.x, BulletFlash.transform.eulerAngles.y, BulletFlash.transform.eulerAngles.z + 10f, Space.Self);
+>>>>>>> Stashed changes
                         BulletFlash.active = true;
+                        
                         flashenabledagain = true;
                         if (!flashdisablerunning)
                         {
@@ -200,7 +213,10 @@ public class WeaponControl : MonoBehaviour
                     }
                     else
                     {
-                        Audio("EmptyMag");
+                        if (!emptymagaudiosent)
+                        {
+                            StartCoroutine(EmptyMagSounder());
+                        }
                     }
                 }
                 if (Input.GetKeyDown(KeyCode.R) && CurrentAmmo < MaxAmmo)
@@ -225,6 +241,16 @@ public class WeaponControl : MonoBehaviour
                 }
             }
         }
+    }
+    IEnumerator EmptyMagSounder()
+    {
+        if (!emptymagaudiosent)
+        {
+            emptymagaudiosent = true;
+            Audio("EmptyMag");
+        }
+        yield return new WaitForSeconds(0.3f);
+        emptymagaudiosent = false;
     }
     void AxeHandler()
     {
