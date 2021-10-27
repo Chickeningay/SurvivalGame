@@ -7,6 +7,7 @@ public class DestroyItself : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        transform.SetParent(null);
         StartCoroutine(destroy());
     }
 

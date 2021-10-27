@@ -142,7 +142,7 @@ public class WeaponControl : MonoBehaviour
                     {
                         //BulletFlash.transform.Rotate(0, 90, BulletFlash.transform.eulerAngles.z + 10f, Space.World);
                         BulletFlash.transform.localEulerAngles = new Vector3(0, 180, BulletFlash.transform.localEulerAngles.z + 10f);
-                        Instantiate(fakebullet, fakebulletspawn.transform);
+                        //Instantiate(fakebullet, fakebulletspawn.transform,true);
                         Shoot();
                         Audio("Action1");
                         Animate("Action1");
@@ -288,12 +288,12 @@ public class WeaponControl : MonoBehaviour
         }
         else if (!weaponScoped && hasScope&!inWater)
         {
-            if (gameObject.layer != 0)
+            if (gameObject.layer != 7)
             {
-                gameObject.layer = 0;
+                gameObject.layer = 7;
                 foreach (Transform g in gameObject.transform.GetComponentsInChildren<Transform>())
                 {
-                    g.gameObject.layer = 0;
+                    g.gameObject.layer = 7;
                 }
                 MainCamera.GetComponent<Camera>().fieldOfView = 60;
             }

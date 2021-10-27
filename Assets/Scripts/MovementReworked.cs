@@ -128,14 +128,14 @@ public class MovementReworked : MonoBehaviour
 				{
 					foreach (Transform gg in g.transform.GetComponentsInChildren<Transform>())
 					{
-						gg.gameObject.layer = 0;
+						gg.gameObject.layer = 7;
 					}
 				}
 				else if (g.gameObject.GetComponent<grenadeScript>() != null && g.gameObject.GetComponent<grenadeScript>().enabled)
 				{
 					foreach (Transform gg in g.transform.GetComponentsInChildren<Transform>())
 					{
-						gg.gameObject.layer = 0;
+						gg.gameObject.layer = 7;
 					}
 				}
 			}
@@ -223,21 +223,21 @@ public class MovementReworked : MonoBehaviour
 				{
 					foreach (Transform gg in g.transform.GetComponentsInChildren<Transform>())
 					{
-						gg.gameObject.layer = 0;
+						gg.gameObject.layer = 7;
 					}
 				}
 				else if (g.gameObject.GetComponent<grenadeScript>() != null && g.gameObject.GetComponent<grenadeScript>().enabled)
 				{
 					foreach (Transform gg in g.transform.GetComponentsInChildren<Transform>())
 					{
-						gg.gameObject.layer = 0;
+						gg.gameObject.layer = 7;
 					}
 				}
 				else if (g.gameObject.GetComponent<ItemScript>() != null && g.gameObject.GetComponent<ItemScript>().enabled)
 				{
 					foreach (Transform gg in g.transform.GetComponentsInChildren<Transform>())
 					{
-						gg.gameObject.layer = 0;
+						gg.gameObject.layer = 7;
 					}
 				}
 			}

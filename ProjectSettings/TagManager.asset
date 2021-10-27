@@ -25,11 +25,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - non-visble
+  - SecondCameraNonVisible
   - Water
   - UI
   - Water
-  - 
+  - SecondCameraVisible
   - Ground
   - 
   - 

@@ -38,7 +38,7 @@ public class removeifnoammo : MonoBehaviour
             {
                 foreach (Transform g in gameObject.transform.GetComponentsInChildren<Transform>())
                 {
-                    g.gameObject.layer = 0;
+                    g.gameObject.layer = 7;
                 }
             }
         }

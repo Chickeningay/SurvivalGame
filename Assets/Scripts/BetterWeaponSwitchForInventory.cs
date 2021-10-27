@@ -241,10 +241,10 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
 
             }
 
-                ChildList[0].layer = 0;
+                ChildList[0].layer = 7;
              foreach (Transform g in ChildList[0].transform.GetComponentsInChildren<Transform>())
              {
-                 g.gameObject.layer = 0;
+                 g.gameObject.layer = 7;
                     if(g.gameObject.GetComponent<WeaponControl>()!=null|| g.gameObject.GetComponent<grenadeScript>() != null || g.gameObject.GetComponent<ItemScript>() != null)
                     {
                         CurrentWeaponObject = g.gameObject;
@@ -300,10 +300,10 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
                 {
                     ChildList[1].GetComponent<ItemScript>().enabled = true;
                 }
-                ChildList[1].layer = 0;
+                ChildList[1].layer = 7;
              foreach (Transform g in ChildList[1].transform.GetComponentsInChildren<Transform>())
              {
-                 g.gameObject.layer = 0; 
+                 g.gameObject.layer = 7; 
                     if (g.gameObject.GetComponent<WeaponControl>() != null || g.gameObject.GetComponent<grenadeScript>() != null || g.gameObject.GetComponent<ItemScript>() != null)
                     {
                         CurrentWeaponObject = g.gameObject;
@@ -360,10 +360,10 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
                 {
                     ChildList[2].GetComponent<ItemScript>().enabled = true;
                 }
-                ChildList[2].layer = 0;
+                ChildList[2].layer = 7;
             foreach (Transform g in ChildList[2].transform.GetComponentsInChildren<Transform>())
             {
-                g.gameObject.layer = 0;
+                g.gameObject.layer = 7;
                     if (g.gameObject.GetComponent<WeaponControl>() != null || g.gameObject.GetComponent<grenadeScript>() != null || g.gameObject.GetComponent<ItemScript>() != null)
                     {
                         CurrentWeaponObject = g.gameObject;
@@ -419,14 +419,14 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
                 {
                     ChildList[3].GetComponent<ItemScript>().enabled = true;
                 }
-                ChildList[3].layer = 0;
+                ChildList[3].layer = 7;
             foreach (Transform g in ChildList[3].transform.GetComponentsInChildren<Transform>())
             {
                     if (g.gameObject.GetComponent<WeaponControl>() != null || g.gameObject.GetComponent<grenadeScript>() != null|| g.gameObject.GetComponent<ItemScript>() != null)
                     {
                         CurrentWeaponObject = g.gameObject;
                     }
-                    g.gameObject.layer = 0;
+                    g.gameObject.layer = 7;
             }
 
             Player.GetComponent<AudioSource>().PlayOneShot(Switch_Audio);
@@ -479,10 +479,10 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
                 {
                     ChildList[4].GetComponent<ItemScript>().enabled = true;
                 }
-                ChildList[4].layer = 0;
+                ChildList[4].layer = 7;
             foreach (Transform g in ChildList[4].transform.GetComponentsInChildren<Transform>())
             {
-                g.gameObject.layer = 0;
+                g.gameObject.layer = 7;
                     if (g.gameObject.GetComponent<WeaponControl>() != null || g.gameObject.GetComponent<grenadeScript>() != null || g.gameObject.GetComponent<ItemScript>() != null)
                     {
                         CurrentWeaponObject = g.gameObject;
@@ -538,10 +538,10 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
                 {
                     ChildList[5].GetComponent<ItemScript>().enabled = true;
                 }
-                ChildList[5].layer = 0;
+                ChildList[5].layer = 7;
             foreach (Transform g in ChildList[5].transform.GetComponentsInChildren<Transform>())
             {
-                g.gameObject.layer = 0;
+                g.gameObject.layer = 7;
                     if (g.gameObject.GetComponent<WeaponControl>() != null || g.gameObject.GetComponent<grenadeScript>() != null || g.gameObject.GetComponent<ItemScript>() != null)
                     {
                         CurrentWeaponObject = g.gameObject;
@@ -597,10 +597,10 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
                 {
                     ChildList[6].GetComponent<ItemScript>().enabled = true;
                 }
-                ChildList[6].layer = 0;
+                ChildList[6].layer = 7;
             foreach (Transform g in ChildList[6].transform.GetComponentsInChildren<Transform>())
             {
-                g.gameObject.layer = 0;
+                g.gameObject.layer = 7;
                     if (g.gameObject.GetComponent<WeaponControl>() != null || g.gameObject.GetComponent<grenadeScript>() != null || g.gameObject.GetComponent<ItemScript>() != null)
                     {
                         CurrentWeaponObject = g.gameObject;
@@ -656,10 +656,10 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
                     ChildList[7].GetComponent<ItemScript>().enabled = true;
                 }
 
-                ChildList[7].layer = 0;
+                ChildList[7].layer = 7;
             foreach (Transform g in ChildList[7].transform.GetComponentsInChildren<Transform>())
             {
-                g.gameObject.layer = 0;
+                g.gameObject.layer = 7;
                     if (g.gameObject.GetComponent<WeaponControl>() != null || g.gameObject.GetComponent<grenadeScript>() != null || g.gameObject.GetComponent<ItemScript>() != null)
                     {
                         CurrentWeaponObject = g.gameObject;
@@ -716,10 +716,10 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
                     ChildList[8].GetComponent<ItemScript>().enabled = true;
                 }
 
-                ChildList[8].layer = 0;
+                ChildList[8].layer = 7;
             foreach (Transform g in ChildList[8].transform.GetComponentsInChildren<Transform>())
             {
-                g.gameObject.layer = 0;
+                g.gameObject.layer = 7;
                     if (g.gameObject.GetComponent<WeaponControl>() != null || g.gameObject.GetComponent<grenadeScript>() != null || g.gameObject.GetComponent<ItemScript>() != null)
                     {
                         CurrentWeaponObject = g.gameObject;
@@ -776,10 +776,10 @@ public class BetterWeaponSwitchForInventory : MonoBehaviour
                     ChildList[9].GetComponent<ItemScript>().enabled = true;
                 }
 
-                ChildList[9].layer = 0;
+                ChildList[9].layer = 7;
                 foreach (Transform g in ChildList[9].transform.GetComponentsInChildren<Transform>())
                 {
-                    g.gameObject.layer = 0;
+                    g.gameObject.layer = 7;
                     if (g.gameObject.GetComponent<WeaponControl>() != null || g.gameObject.GetComponent<grenadeScript>() != null || g.gameObject.GetComponent<ItemScript>() != null)
                     {
                         CurrentWeaponObject = g.gameObject;
