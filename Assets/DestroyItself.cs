@@ -18,7 +18,14 @@ public class DestroyItself : MonoBehaviour
     }
     IEnumerator destroy()
     {
-        yield return new WaitForSeconds(1f);
+        if (gameObject.GetComponent<ExplodeOnImpact>() != null)
+        {
+            yield return new WaitForSeconds(10f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(1f);
+        }
         Destroy(gameObject);
     }
 }

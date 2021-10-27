@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 1395724791762459601}
   - component: {fileID: 1104828233044267374}
   - component: {fileID: 568099488482147925}
+  - component: {fileID: 5500392335469090482}
   m_Layer: 0
   m_Name: RPG-7_Ammo
   m_TagString: Untagged
@@ -113,7 +114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2974185611399653980}
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 2.7939, y: 1.29, z: -0.74246}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.06033457, y: 0.06033457, z: 0.06033457}
   m_Children:
   - {fileID: 4357807499394320384}
@@ -323,6 +324,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5500392335469090482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2974185611399653980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c00cd79ed5fbd804d9034cc614ee140c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6786187807901734811
 GameObject:
   m_ObjectHideFlags: 0

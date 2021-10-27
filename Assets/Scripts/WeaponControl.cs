@@ -308,10 +308,9 @@ public class WeaponControl : MonoBehaviour
     {
         if (CurrentAmmo > 0)
         {
-            if (!RPGIcon)
-            {
+           
                 Instantiate(fakebullet, fakebulletspawn.transform);
-            }
+            
             
             StopCoroutine(DisableFlash());
             
