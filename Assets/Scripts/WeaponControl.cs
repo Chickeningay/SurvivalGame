@@ -141,7 +141,11 @@ public class WeaponControl : MonoBehaviour
                     if (CurrentAmmo > 0)
                     {
                         //BulletFlash.transform.Rotate(0, 90, BulletFlash.transform.eulerAngles.z + 10f, Space.World);
-                        BulletFlash.transform.localEulerAngles = new Vector3(0, 180, BulletFlash.transform.localEulerAngles.z + 10f);
+                        if (BulletFlash != null)
+                        {
+                            BulletFlash.transform.localEulerAngles = new Vector3(0, 180, BulletFlash.transform.localEulerAngles.z + 10f);
+                        }
+                        
                         //Instantiate(fakebullet, fakebulletspawn.transform,true);
                         Shoot();
                         Audio("Action1");
@@ -304,7 +308,11 @@ public class WeaponControl : MonoBehaviour
     {
         if (CurrentAmmo > 0)
         {
-            Instantiate(fakebullet, fakebulletspawn.transform);
+            if (!RPGIcon)
+            {
+                Instantiate(fakebullet, fakebulletspawn.transform);
+            }
+            
             StopCoroutine(DisableFlash());
             
             gameObject.transform.position = startpos;
