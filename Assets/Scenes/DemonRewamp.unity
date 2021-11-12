@@ -15393,6 +15393,12 @@ PrefabInstance:
       objectReference: {fileID: 963194225}
     - target: {fileID: 8584902199541943831, guid: ef033577d86b9fd4a8e22a0fd2c67269,
         type: 3}
+      propertyPath: fakebullet
+      value: 
+      objectReference: {fileID: 7668171872736408112, guid: ab66be5b22cd1944385af537d53b4c78,
+        type: 3}
+    - target: {fileID: 8584902199541943831, guid: ef033577d86b9fd4a8e22a0fd2c67269,
+        type: 3}
       propertyPath: CurrentAmmo
       value: 5
       objectReference: {fileID: 0}
@@ -15417,6 +15423,11 @@ PrefabInstance:
       propertyPath: CurrentReserve
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 8584902199541943831, guid: ef033577d86b9fd4a8e22a0fd2c67269,
+        type: 3}
+      propertyPath: fakebulletspawn
+      value: 
+      objectReference: {fileID: 1936106568}
     - target: {fileID: 8584902199646664544, guid: ef033577d86b9fd4a8e22a0fd2c67269,
         type: 3}
       propertyPath: Player
