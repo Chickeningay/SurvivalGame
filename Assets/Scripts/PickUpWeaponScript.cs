@@ -15,7 +15,7 @@ public class PickUpWeaponScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Player = GameObject.Find("ItemCamera");
+        Player = GameObject.Find("PlayerView");
         Inventory= GameObject.Find("Inventory");
         childCount = Player.transform.childCount;
         for (int i = 0; i < childCount; i++)

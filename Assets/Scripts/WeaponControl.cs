@@ -54,8 +54,8 @@ public class WeaponControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startpos = gameObject.transform.position;
-        startrot = gameObject.transform.rotation;
+        startpos = gameObject.transform.localPosition;
+        startrot = gameObject.transform.localRotation;
         Player.GetComponent<AudioSource>().PlayOneShot(Switch_Audio);
         gameObject.GetComponent<Animator>().Play(Switch_Clip.name);
         if (BulletFlash != null)
@@ -92,16 +92,16 @@ public class WeaponControl : MonoBehaviour
             {
                 if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State"))
                 {
-                    gameObject.transform.rotation = startrot;
-                    gameObject.transform.position = startpos;
+                    gameObject.transform.localRotation = startrot;
+                    gameObject.transform.localPosition = startpos;
                     gameObject.GetComponent<Animator>().Play(Movement_Clip.name);
                 }
 
             }
             if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name) && !Player.GetComponent<MovementReworked>().moving)
             {
-                gameObject.transform.rotation = startrot;   
-                gameObject.transform.position = startpos;
+                                   gameObject.transform.localRotation = startrot;
+                    gameObject.transform.localPosition = startpos;
                 gameObject.GetComponent<Animator>().Play("New State");
             }
             whenScoped();
@@ -231,7 +231,8 @@ public class WeaponControl : MonoBehaviour
                 }
                 if (!weaponScoped && Input.GetKeyDown(KeyCode.Mouse1) && hasScope)
                 {
-                    gameObject.transform.position = startpos;
+                   
+                    gameObject.transform.localPosition = startpos;
                     Animate("Action2");
                     weaponScoped = true;
                     Audio("Action2");
@@ -313,9 +314,9 @@ public class WeaponControl : MonoBehaviour
             
             
             StopCoroutine(DisableFlash());
-            
-            gameObject.transform.position = startpos;
-            gameObject.transform.rotation = startrot;
+
+            gameObject.transform.localRotation = startrot;
+            gameObject.transform.localPosition = startpos;
             if (BulletFlash != null&&!Automatic)
             {
                 BulletFlash.transform.eulerAngles = new Vector3(BulletFlash.transform.rotation.x, BulletFlash.transform.rotation.y, Random.Range(0f, 360f));
