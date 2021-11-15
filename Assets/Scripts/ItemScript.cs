@@ -27,8 +27,8 @@ public class ItemScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startpos = gameObject.transform.position;
-        startrot = gameObject.transform.rotation;
+        startpos = gameObject.transform.localPosition;
+        startrot = gameObject.transform.localRotation;
         
     }
 
@@ -69,22 +69,22 @@ public class ItemScript : MonoBehaviour
         {
             if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State"))
             {
-                gameObject.transform.rotation = startrot;
-                gameObject.transform.position = startpos;
+                gameObject.transform.localRotation = startrot;
+                gameObject.transform.localPosition = startpos;
                 gameObject.GetComponent<Animator>().Play(WalkAnim.name);
             }
 
         }
         if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnim.name) && !Player.GetComponent<MovementReworked>().moving)
         {
-            gameObject.transform.rotation = startrot;
-            gameObject.transform.position = startpos;
+            gameObject.transform.localRotation = startrot;
+            gameObject.transform.localPosition = startpos;
             gameObject.GetComponent<Animator>().Play("New State");
         }
         if(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State") && Hammer)
         {
-            gameObject.transform.rotation = startrot;
-            gameObject.transform.position = startpos;
+            gameObject.transform.localRotation = startrot;
+            gameObject.transform.localPosition = startpos;
         }
         if (Input.GetKeyDown(KeyCode.Mouse0)&&!Inventory.gameObject.GetComponent<InventorySelecter>().InventoryExtended)
         {
@@ -118,8 +118,8 @@ public class ItemScript : MonoBehaviour
         if (AwaitingAction1)
         {
             Ammo--;
-            gameObject.transform.rotation = startrot;
-            gameObject.transform.position = startpos;
+            gameObject.transform.localRotation = startrot;
+            gameObject.transform.localPosition = startpos;
             Instantiate(ScaffSpawnPrefab, ScaffPref.gameObject.transform.position, ScaffSpawnPrefab.gameObject.transform.rotation);
             gameObject.GetComponent<Animator>().Play(Action1Anim.name);
             AwaitingAction1 = false;
@@ -131,9 +131,9 @@ public class ItemScript : MonoBehaviour
         
         if (AwaitingAction1)
         {
-            gameObject.transform.rotation = startrot;
-            gameObject.transform.position = startpos;
-            
+            gameObject.transform.localRotation = startrot;
+            gameObject.transform.localPosition = startpos;
+
             gameObject.GetComponent<Animator>().Play(Action1Anim.name);
             if (Player.GetComponent<Raycaster>().Hit.transform.position == ScaffPref.transform.position)
             {
@@ -154,8 +154,8 @@ public class ItemScript : MonoBehaviour
         }
         else if (AwaitingAction2)
         {
-            gameObject.transform.rotation = startrot;
-            gameObject.transform.position = startpos;
+            gameObject.transform.localRotation = startrot;
+            gameObject.transform.localPosition = startpos;
 
             gameObject.GetComponent<Animator>().Play(Action1Anim.name);
             if (Player.GetComponent<Raycaster>().Hit.transform.position == ScaffPref.transform.position)
@@ -178,8 +178,8 @@ public class ItemScript : MonoBehaviour
         if (AwaitingAction1)
         {
             Ammo--;
-            gameObject.transform.rotation = startrot;
-            gameObject.transform.position = startpos;
+            gameObject.transform.localRotation = startrot;
+            gameObject.transform.localPosition = startpos;
             Hit = Player.GetComponent<Raycaster>().Hit.transform.gameObject;
             if (Player.transform.position.x > Hit.transform.position.x)
             {
@@ -236,8 +236,8 @@ public class ItemScript : MonoBehaviour
         }
         else if (Door)
         {
-            gameObject.transform.rotation = startrot;
-            gameObject.transform.position = startpos;
+            gameObject.transform.localRotation = startrot;
+            gameObject.transform.localPosition = startpos;
             ScaffPref.gameObject.active = false;
         }
     }
