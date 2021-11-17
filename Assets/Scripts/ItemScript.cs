@@ -12,6 +12,7 @@ public class ItemScript : MonoBehaviour
     public GameObject SecondSpawnPrefab;
     public GameObject ScaffPref;
     public int Ammo;
+    public int MaxAmmo;
     public bool AwaitingAction1;
     public bool AwaitingAction2;
     public GameObject ScaffSpawnPrefab;

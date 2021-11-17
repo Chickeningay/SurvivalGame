@@ -62,6 +62,8 @@ public class MovementReworked : MonoBehaviour
 	public float z;
 
 	public bool IsGrounded;
+	public float wantedcontrollerheight;
+	public float wantedcolliderheight;
 
 	public Transform player;
 	Vector3 udp;
@@ -91,6 +93,8 @@ public class MovementReworked : MonoBehaviour
 		Cursor.visible = false;
 		//This is for UI, feel free to remove the Start() function.
 		lastPos = player.position;
+		wantedcolliderheight = gameObject.GetComponent<CapsuleCollider>().height;
+		wantedcontrollerheight = gameObject.GetComponent<CharacterController>().height;
 	}
 
 	// Update is called once per frame
@@ -308,24 +312,24 @@ public class MovementReworked : MonoBehaviour
 		{
 			if (Input.GetKeyDown(KeyCode.LeftControl))
 		{
-			gameObject.GetComponent<CapsuleCollider>().height = 1f;
-			gameObject.GetComponent<CharacterController>().height = 1f;
+			gameObject.GetComponent<CapsuleCollider>().height = 2;
+			gameObject.GetComponent<CharacterController>().height = 2;
 			gameObject.GetComponent<CharacterController>().radius = 0.8f;
 			gameObject.GetComponent<CapsuleCollider>().radius = 0.8f;
 		}
 		
 		else if (Input.GetKeyUp(KeyCode.LeftControl))
 		{
-			gameObject.GetComponent<CapsuleCollider>().height = 2f;
-			gameObject.GetComponent<CharacterController>().height = 2f;
+			gameObject.GetComponent<CapsuleCollider>().height = 3;
+			gameObject.GetComponent<CharacterController>().height = 3;
 			gameObject.GetComponent<CharacterController>().radius = 0.5f;
 			gameObject.GetComponent<CapsuleCollider>().radius = 0.5f;
 		}
 		}
         if (CommandListener.active)
         {
-			gameObject.GetComponent<CapsuleCollider>().height = 2f;
-			gameObject.GetComponent<CharacterController>().height = 2f;
+			gameObject.GetComponent<CapsuleCollider>().height = 3;
+			gameObject.GetComponent<CharacterController>().height = 3;
 			gameObject.GetComponent<CharacterController>().radius = 0.5f;
 			gameObject.GetComponent<CapsuleCollider>().radius = 0.5f;
 		}

@@ -27,6 +27,7 @@ public class InventorySelecter : MonoBehaviour
         {
             ConsoleExtended = !ConsoleExtended;
         }
+        if (!CommandTaker.active) { 
         if (Input.GetAxis("Mouse ScrollWheel") < 0f&&CurrentSelected!=null&&!InventoryExtended)
         {
             int current=0;
@@ -174,6 +175,7 @@ public class InventorySelecter : MonoBehaviour
             }
 
 
+        }
         }
         Crosshair.gameObject.GetComponent<RawImage>().enabled = !InventoryExtended;
         if (Input.GetKeyDown(KeyCode.Tab))

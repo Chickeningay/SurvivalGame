@@ -35,42 +35,62 @@ public class Rotation : MonoBehaviour
     public float maximumY = 60F;
 
     float rotationY = 0F;
+    public GameObject CommandTaker;
 
     void Update()
     {
         if (axes == RotationAxes.MouseXAndY)
         {
             float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
-
+            if (CommandTaker.active)
+            {
+                rotationX = 0;
+            }
             rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
             rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
-
+            if (CommandTaker.active)
+            {
+                rotationY = 0;
+            }
             transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
         }
         else if (axes == RotationAxes.MouseX)
         {
-            transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
+            float X = Input.GetAxis("Mouse X") * sensitivityX;
+            if (CommandTaker.active)
+            {
+                X = 0;
+            }
+            transform.Rotate(0,X , 0);
         }
         else
         {
             rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
             rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
-
+            if (CommandTaker.active)
+            {
+                rotationY = 0;
+            }
             transform.localEulerAngles = new Vector3(-rotationY, transform.localEulerAngles.y, 0);
         }
-        if (Input.GetKey(KeyCode.A))
+        if (!CommandTaker.active)
         {
-            currentDirection =5;
+            if (Input.GetKey(KeyCode.A))
+            {
+                currentDirection = 5;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                currentDirection = -5;
+            }
+            else
+            {
+                currentDirection = 0;
+            }
         }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            currentDirection = -5;
-        }
-        else
-        {
-            currentDirection = 0;
-        }
-        if (activatebounce) { increaseBounce();
+        else if (CommandTaker.active)
+        { currentDirection = 0; }
+            if (activatebounce) { increaseBounce();
             activatebounce = false;
         }
         gameObject.transform.eulerAngles=  new Vector3(gameObject.transform.eulerAngles.x,gameObject.transform.eulerAngles.y, Mathf.LerpAngle(transform.eulerAngles.z, currentDirection, Time.deltaTime));
