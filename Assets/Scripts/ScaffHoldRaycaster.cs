@@ -13,6 +13,7 @@ public class ScaffHoldRaycaster : MonoBehaviour
     float newy;
     float newz;
     public RaycastHit Hit;
+    public bool block;
     void Update()
     {
         Hit = MainCamera.transform.parent.gameObject.GetComponent<Raycaster>().Hit;    
@@ -54,7 +55,14 @@ public class ScaffHoldRaycaster : MonoBehaviour
             {
                 Scaff.transform.position = new Vector3(newx, newy + 2f, newz);
             }
-
+            if (Scaff.transform.position == Hit.transform.position)
+            {
+                block = true;
+            }
+            else
+            {
+                block = false;
+            }
         }
        
         else

@@ -18,7 +18,9 @@ using System.Collections;
 public class Rotation : MonoBehaviour
 {
     public float currentDirection;
-
+    public float currentWeaponBounce;
+    public bool stopgoingdown;
+    public bool activatebounce;
     public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
     public RotationAxes axes = RotationAxes.MouseXAndY;
     public float sensitivityX = 15F;
@@ -66,11 +68,30 @@ public class Rotation : MonoBehaviour
         {
             currentDirection = 0;
         }
+        if (activatebounce) { increaseBounce();
+            activatebounce = false;
+        }
+        gameObject.transform.eulerAngles=  new Vector3(gameObject.transform.eulerAngles.x,gameObject.transform.eulerAngles.y, Mathf.LerpAngle(transform.eulerAngles.z, currentDirection, Time.deltaTime));
         
-        gameObject.transform.eulerAngles=  new Vector3(gameObject.transform.eulerAngles.x, gameObject.transform.eulerAngles.y, Mathf.LerpAngle(transform.eulerAngles.z, currentDirection, Time.deltaTime));
         
+        if (!stopgoingdown)
+        {
+            float savedangle = gameObject.transform.eulerAngles.x;
+            gameObject.transform.eulerAngles = new Vector3(Mathf.LerpAngle(gameObject.transform.eulerAngles.x, gameObject.transform.eulerAngles.x + currentWeaponBounce, Time.deltaTime), gameObject.transform.eulerAngles.y, transform.eulerAngles.z);
+            currentWeaponBounce -= Mathf.Abs(gameObject.transform.eulerAngles.x-savedangle);
+        }
+        if (stopgoingdown)
+        {
+            
+        }
+        stopgoingdown = false;
     }
-
+    public void increaseBounce()
+    {
+        currentWeaponBounce += 100;
+        gameObject.transform.eulerAngles = new Vector3(Mathf.LerpAngle(gameObject.transform.eulerAngles.x, gameObject.transform.eulerAngles.x + 10, Time.deltaTime), gameObject.transform.eulerAngles.y, transform.eulerAngles.z);
+        stopgoingdown = true;
+    }
     void Start()
     {
         Cursor.visible = false;

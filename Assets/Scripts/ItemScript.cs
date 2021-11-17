@@ -24,6 +24,8 @@ public class ItemScript : MonoBehaviour
     public Quaternion startrot;
     public GameObject buildicon;
     public GameObject AmmoCounter;
+    public AudioClip WoodPlace;
+    public AudioClip GlassPlace;
     // Start is called before the first frame update
     void Start()
     {
@@ -117,11 +119,16 @@ public class ItemScript : MonoBehaviour
         }
         if (AwaitingAction1)
         {
-            Ammo--;
-            gameObject.transform.localRotation = startrot;
-            gameObject.transform.localPosition = startpos;
-            Instantiate(ScaffSpawnPrefab, ScaffPref.gameObject.transform.position, ScaffSpawnPrefab.gameObject.transform.rotation);
-            gameObject.GetComponent<Animator>().Play(Action1Anim.name);
+            if (!ScaffPref.GetComponent<blockplacement>().notplacable)
+            {
+                Ammo--;
+                gameObject.transform.localRotation = startrot;
+                gameObject.transform.localPosition = startpos;
+                Instantiate(ScaffSpawnPrefab, ScaffPref.gameObject.transform.position, ScaffSpawnPrefab.gameObject.transform.rotation);
+                gameObject.GetComponent<Animator>().Play(Action1Anim.name);
+                
+                Player.GetComponent<AudioSource>().PlayOneShot(WoodPlace);
+            }
             AwaitingAction1 = false;
         }
     }
@@ -141,10 +148,12 @@ public class ItemScript : MonoBehaviour
                 {
                     if(Player.GetComponent<Raycaster>().Hit.transform.gameObject.GetComponent<ScaffMatChanger>().currentMat == "Wood")
                     {
+                        Player.GetComponent<AudioSource>().PlayOneShot(GlassPlace);
                         Player.GetComponent<Raycaster>().Hit.transform.gameObject.GetComponent<ScaffMatChanger>().currentMat = "Glass";
                     }
                     else if(Player.GetComponent<Raycaster>().Hit.transform.gameObject.GetComponent<ScaffMatChanger>().currentMat == "Glass"|| Player.GetComponent<Raycaster>().Hit.transform.gameObject.GetComponent<ScaffMatChanger>().currentMat == "")
                     {
+                        Player.GetComponent<AudioSource>().PlayOneShot(WoodPlace);
                         Player.GetComponent<Raycaster>().Hit.transform.gameObject.GetComponent<ScaffMatChanger>().currentMat = "Wood";
                     }
                       
@@ -160,7 +169,7 @@ public class ItemScript : MonoBehaviour
             gameObject.GetComponent<Animator>().Play(Action1Anim.name);
             if (Player.GetComponent<Raycaster>().Hit.transform.position == ScaffPref.transform.position)
             {
-                Destroy(Player.GetComponent<Raycaster>().Hit.transform.gameObject);
+                Player.GetComponent<Raycaster>().Hit.transform.gameObject.GetComponent<HitDetection>().hit=true;
             }
             AwaitingAction2 = false;
         }
@@ -177,6 +186,7 @@ public class ItemScript : MonoBehaviour
         }
         if (AwaitingAction1)
         {
+            Player.GetComponent<AudioSource>().PlayOneShot(WoodPlace);
             Ammo--;
             gameObject.transform.localRotation = startrot;
             gameObject.transform.localPosition = startpos;

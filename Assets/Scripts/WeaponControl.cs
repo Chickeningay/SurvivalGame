@@ -313,7 +313,7 @@ public class WeaponControl : MonoBehaviour
     {
         if (CurrentAmmo > 0)
         {
-           
+            MainCamera.GetComponent<Rotation>().activatebounce = true;
                 Instantiate(fakebullet, fakebulletspawn.transform);
             
             
