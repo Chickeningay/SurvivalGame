@@ -98,22 +98,28 @@ public class Rotation : MonoBehaviour
         
         if (!stopgoingdown)
         {
+            print("x");
             float savedangle = gameObject.transform.eulerAngles.x;
             float savedangle2 = gameObject.transform.eulerAngles.y;
-            gameObject.transform.eulerAngles = new Vector3(Mathf.LerpAngle(gameObject.transform.eulerAngles.x, gameObject.transform.eulerAngles.x + currentWeaponBounce, Time.deltaTime), Mathf.LerpAngle(gameObject.transform.eulerAngles.y, gameObject.transform.eulerAngles.y + currentWeaponBounce2, Time.deltaTime), transform.eulerAngles.z);
-            currentWeaponBounce -= gameObject.transform.eulerAngles.x-savedangle;
-            currentWeaponBounce2 -= gameObject.transform.eulerAngles.y - savedangle2;
+            if (gameObject.transform.eulerAngles.x < 80&& -80 < gameObject.transform.eulerAngles.x)
+            {
+                gameObject.transform.eulerAngles = new Vector3(Mathf.Clamp(Mathf.LerpAngle(gameObject.transform.eulerAngles.x, gameObject.transform.eulerAngles.x + currentWeaponBounce, Time.deltaTime), minimumY, maximumY), Mathf.LerpAngle(gameObject.transform.eulerAngles.y, gameObject.transform.eulerAngles.y + currentWeaponBounce2, Time.deltaTime), transform.eulerAngles.z);
+            }
+            
+            currentWeaponBounce -= Mathf.Abs(gameObject.transform.eulerAngles.x-savedangle);
+            currentWeaponBounce2 -= Mathf.Abs(gameObject.transform.eulerAngles.y - savedangle2);
         }
         if (stopgoingdown)
         {
             
         }
+        
         stopgoingdown = false;
     }
     public void increaseBounce()
     {
         
-        currentWeaponBounce -= 50;
+        currentWeaponBounce -= 500;
         if (firstshot)
         {
             currentWeaponBounce2 -= 1;
@@ -130,7 +136,7 @@ public class Rotation : MonoBehaviour
             clock = !clock;
         }
         
-        gameObject.transform.eulerAngles = new Vector3(Mathf.LerpAngle(gameObject.transform.eulerAngles.x, gameObject.transform.eulerAngles.x + 10, Time.deltaTime), Mathf.LerpAngle(gameObject.transform.eulerAngles.y, gameObject.transform.eulerAngles.y + 1, Time.deltaTime), transform.eulerAngles.z);
+        gameObject.transform.eulerAngles = new Vector3(Mathf.LerpAngle(gameObject.transform.eulerAngles.x, gameObject.transform.eulerAngles.x + 100, Time.deltaTime), Mathf.LerpAngle(gameObject.transform.eulerAngles.y, gameObject.transform.eulerAngles.y + 10, Time.deltaTime), transform.eulerAngles.z);
 
         stopgoingdown = true;
     }
