@@ -23,6 +23,7 @@ public class Rotation : MonoBehaviour
     public bool stopgoingdown;
     public bool activatebounce; bool clock = false;
     bool firstshot = false;
+    public bool weaponbounce;
     public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
     public RotationAxes axes = RotationAxes.MouseXAndY;
     public float sensitivityX = 15F;
@@ -35,6 +36,9 @@ public class Rotation : MonoBehaviour
     public float maximumY = 60F;
 
     float rotationY = 0F;
+    public bool syncX;
+    public bool syncY;
+
     public GameObject CommandTaker;
 
     void Update()
@@ -90,54 +94,83 @@ public class Rotation : MonoBehaviour
         }
         else if (CommandTaker.active)
         { currentDirection = 0; }
-            if (activatebounce) { increaseBounce();
-            activatebounce = false;
-        }
-        gameObject.transform.eulerAngles=  new Vector3(gameObject.transform.eulerAngles.x,gameObject.transform.eulerAngles.y, Mathf.LerpAngle(transform.eulerAngles.z, currentDirection, Time.deltaTime));
-        
-        
-        if (!stopgoingdown)
+       
+        if (activatebounce) { increaseBounce();
+         activatebounce = false;
+     }
+
+
+        if (!syncX)
         {
-            print("x");
-            float savedangle = gameObject.transform.eulerAngles.x;
-            float savedangle2 = gameObject.transform.eulerAngles.y;
-            if (gameObject.transform.eulerAngles.x < 80&& -80 < gameObject.transform.eulerAngles.x)
+            if (!stopgoingdown && weaponbounce)
             {
-                gameObject.transform.eulerAngles = new Vector3(Mathf.Clamp(Mathf.LerpAngle(gameObject.transform.eulerAngles.x, gameObject.transform.eulerAngles.x + currentWeaponBounce, Time.deltaTime), minimumY, maximumY), Mathf.LerpAngle(gameObject.transform.eulerAngles.y, gameObject.transform.eulerAngles.y + currentWeaponBounce2, Time.deltaTime), transform.eulerAngles.z);
+
+                float savedangle = gameObject.transform.eulerAngles.x;
+
+
+                gameObject.transform.eulerAngles = new Vector3((Mathf.LerpAngle(gameObject.transform.eulerAngles.x, gameObject.transform.eulerAngles.x - currentWeaponBounce, Time.deltaTime)), gameObject.transform.eulerAngles.y, Mathf.LerpAngle(transform.eulerAngles.z, currentDirection, Time.deltaTime));
+
+                currentWeaponBounce = Mathf.Lerp(currentWeaponBounce, 0, Time.deltaTime);
+
+
+
+
             }
-            
-            currentWeaponBounce -= Mathf.Abs(gameObject.transform.eulerAngles.x-savedangle);
-            currentWeaponBounce2 -= Mathf.Abs(gameObject.transform.eulerAngles.y - savedangle2);
+            else if (!stopgoingdown && !weaponbounce)
+            {
+                float savedangle2 = gameObject.transform.eulerAngles.y;
+
+                gameObject.transform.eulerAngles = new Vector3(gameObject.transform.eulerAngles.x, (Mathf.LerpAngle(gameObject.transform.eulerAngles.y, gameObject.transform.eulerAngles.y - currentWeaponBounce2, Time.deltaTime)), Mathf.LerpAngle(transform.eulerAngles.z, currentDirection, Time.deltaTime));
+
+                currentWeaponBounce2 = Mathf.Lerp(currentWeaponBounce2, 0, Time.deltaTime);
+
+            }
         }
-        if (stopgoingdown)
+     
+     if (stopgoingdown)
+     {
+
+     }
+
+     stopgoingdown = false;
+        if (syncX)
         {
-            
+            gameObject.transform.localEulerAngles = new Vector3(gameObject.transform.localEulerAngles.x, 0, gameObject.transform.localEulerAngles.z);
         }
-        
-        stopgoingdown = false;
+      
     }
     public void increaseBounce()
     {
-        
-        currentWeaponBounce -= 500;
+
+
+        currentWeaponBounce += 20   ;
         if (firstshot)
         {
-            currentWeaponBounce2 -= 1;
+            currentWeaponBounce2 += 5;
+
             firstshot = false;
         }
         else if (clock)
         {
-            currentWeaponBounce2 -= 5;
+            currentWeaponBounce2 += 10;
             clock = !clock;
         }
         else if (!clock)
         {
-            currentWeaponBounce2 += 5;
+            currentWeaponBounce2 -= 10;
             clock = !clock;
         }
-        
-        gameObject.transform.eulerAngles = new Vector3(Mathf.LerpAngle(gameObject.transform.eulerAngles.x, gameObject.transform.eulerAngles.x + 100, Time.deltaTime), Mathf.LerpAngle(gameObject.transform.eulerAngles.y, gameObject.transform.eulerAngles.y + 10, Time.deltaTime), transform.eulerAngles.z);
-
+       if (!weaponbounce)
+        {
+            gameObject.transform.eulerAngles = new Vector3(gameObject.transform.eulerAngles.x, Mathf.LerpAngle(gameObject.transform.eulerAngles.y, gameObject.transform.eulerAngles.y + 10, Time.deltaTime), transform.eulerAngles.z);
+        }
+        if (weaponbounce)
+        {
+            gameObject.transform.eulerAngles = new Vector3(Mathf.LerpAngle(gameObject.transform.eulerAngles.x, gameObject.transform.eulerAngles.x + 100, Time.deltaTime), Mathf.LerpAngle(gameObject.transform.eulerAngles.y, gameObject.transform.eulerAngles.y + 10, Time.deltaTime), transform.eulerAngles.z);
+        }
+    
+    
+       
         stopgoingdown = true;
     }
     void Start()

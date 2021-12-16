@@ -21,6 +21,7 @@ TagManager:
   - Interactable
   - PlayerPart
   - PickUpAble
+  - Decal
   layers:
   - Default
   - TransparentFX
@@ -31,7 +32,7 @@ TagManager:
   - Water
   - SecondCameraVisible
   - Ground
-  - 
+  - Decal
   - 
   - 
   - 
