@@ -75,7 +75,7 @@ public class Rotation : MonoBehaviour
             {
                 rotationY = 0;
             }
-            transform.localEulerAngles = new Vector3(-rotationY, transform.localEulerAngles.y, 0);
+            
         }
         if (!CommandTaker.active)
         {
@@ -100,17 +100,17 @@ public class Rotation : MonoBehaviour
      }
 
 
-        if (!syncX)
-        {
-            if (!stopgoingdown && weaponbounce)
+        
+          /*  if (!stopgoingdown && weaponbounce)
             {
 
                 float savedangle = gameObject.transform.eulerAngles.x;
 
 
-                gameObject.transform.eulerAngles = new Vector3((Mathf.LerpAngle(gameObject.transform.eulerAngles.x, gameObject.transform.eulerAngles.x - currentWeaponBounce, Time.deltaTime)), gameObject.transform.eulerAngles.y, Mathf.LerpAngle(transform.eulerAngles.z, currentDirection, Time.deltaTime));
+                gameObject.transform.eulerAngles = new Vector3((Mathf.LerpAngle(gameObject.transform.eulerAngles.x, gameObject.transform.eulerAngles.x - currentWeaponBounce, Time.time)), gameObject.transform.eulerAngles.y, Mathf.LerpAngle(transform.eulerAngles.z, currentDirection, Time.deltaTime));
+                
+                currentWeaponBounce -= Mathf.Abs(savedangle-gameObject.transform.eulerAngles.x);
 
-                currentWeaponBounce = Mathf.Lerp(currentWeaponBounce, 0, Time.deltaTime);
 
 
 
@@ -121,20 +121,18 @@ public class Rotation : MonoBehaviour
                 float savedangle2 = gameObject.transform.eulerAngles.y;
 
                 gameObject.transform.eulerAngles = new Vector3(gameObject.transform.eulerAngles.x, (Mathf.LerpAngle(gameObject.transform.eulerAngles.y, gameObject.transform.eulerAngles.y - currentWeaponBounce2, Time.deltaTime)), Mathf.LerpAngle(transform.eulerAngles.z, currentDirection, Time.deltaTime));
-
+               
                 currentWeaponBounce2 = Mathf.Lerp(currentWeaponBounce2, 0, Time.deltaTime);
 
-            }
-        }
-     
-     if (stopgoingdown)
-     {
-
-     }
-
+            }*/
      stopgoingdown = false;
-        if (syncX)
+        if (!syncX)
         {
+            gameObject.transform.eulerAngles = new Vector3(0, gameObject.transform.eulerAngles.y, gameObject.transform.eulerAngles.z);
+        }
+        else if (syncX)
+        {
+            
             gameObject.transform.localEulerAngles = new Vector3(gameObject.transform.localEulerAngles.x, 0, gameObject.transform.localEulerAngles.z);
         }
       
@@ -143,32 +141,22 @@ public class Rotation : MonoBehaviour
     {
 
 
-        currentWeaponBounce += 20   ;
-        if (firstshot)
-        {
-            currentWeaponBounce2 += 5;
+        currentWeaponBounce += 2;
+         currentWeaponBounce2 += 2;
 
-            firstshot = false;
-        }
-        else if (clock)
-        {
-            currentWeaponBounce2 += 10;
-            clock = !clock;
-        }
-        else if (!clock)
-        {
-            currentWeaponBounce2 -= 10;
-            clock = !clock;
-        }
+           
+       
        if (!weaponbounce)
         {
-            gameObject.transform.eulerAngles = new Vector3(gameObject.transform.eulerAngles.x, Mathf.LerpAngle(gameObject.transform.eulerAngles.y, gameObject.transform.eulerAngles.y + 10, Time.deltaTime), transform.eulerAngles.z);
+            gameObject.transform.eulerAngles = new Vector3(gameObject.transform.eulerAngles.x, Mathf.LerpAngle(gameObject.transform.eulerAngles.y, gameObject.transform.eulerAngles.y + 20, Time.deltaTime), transform.eulerAngles.z);
+            
         }
         if (weaponbounce)
         {
-            gameObject.transform.eulerAngles = new Vector3(Mathf.LerpAngle(gameObject.transform.eulerAngles.x, gameObject.transform.eulerAngles.x + 100, Time.deltaTime), Mathf.LerpAngle(gameObject.transform.eulerAngles.y, gameObject.transform.eulerAngles.y + 10, Time.deltaTime), transform.eulerAngles.z);
+            gameObject.transform.eulerAngles = new Vector3(Mathf.LerpAngle(-rotationY, -rotationY + 20, Time.deltaTime),gameObject.transform.eulerAngles.y, transform.eulerAngles.z);
+           
         }
-    
+        
     
        
         stopgoingdown = true;

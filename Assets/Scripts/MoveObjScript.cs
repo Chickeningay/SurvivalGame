@@ -21,6 +21,7 @@ public class MoveObjScript : MonoBehaviour
         
         if (interacted)
         {
+            gameObject.GetComponent<Rigidbody>().freezeRotation = false;
             gameObject.GetComponent<Rigidbody>().isKinematic = false;
             gameObject.GetComponent<Rigidbody>().useGravity = false;
             gameObject.GetComponent<Rigidbody>().velocity = new Vector3((PreferredLocation.transform.position.x - gameObject.transform.position.x) * 6, (PreferredLocation.transform.position.y - gameObject.transform.position.y)*2 , (PreferredLocation.transform.position.z - gameObject.transform.position.z) * 6);
@@ -29,7 +30,7 @@ public class MoveObjScript : MonoBehaviour
         else if(!interacted)
         {
             gameObject.GetComponent<Rigidbody>().useGravity = true;
-
+            gameObject.GetComponent<Rigidbody>().freezeRotation = true;
 
 
         }
