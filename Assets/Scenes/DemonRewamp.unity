@@ -10476,6 +10476,11 @@ PrefabInstance:
       propertyPath: AmmoCounter
       value: 
       objectReference: {fileID: 869182649}
+    - target: {fileID: 4188316007458812354, guid: 1647a765cb180d14cbe017b405ff49c4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4188316007458812364, guid: 1647a765cb180d14cbe017b405ff49c4,
         type: 3}
       propertyPath: axes
@@ -10499,6 +10504,11 @@ PrefabInstance:
     - target: {fileID: 4188316007458812364, guid: 1647a765cb180d14cbe017b405ff49c4,
         type: 3}
       propertyPath: weaponbounce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188316007458812367, guid: 1647a765cb180d14cbe017b405ff49c4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4188316007458812367, guid: 1647a765cb180d14cbe017b405ff49c4,

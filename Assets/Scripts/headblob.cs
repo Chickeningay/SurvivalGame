@@ -20,8 +20,8 @@ public class headblob : MonoBehaviour
     {
         if (Player.GetComponent<MovementReworked>().moving&&!hittop&&hitbot)
         {
-            Mathf.Lerp(transform.position.y, +0.05f, Time.deltaTime);
-            if (gameObject.transform.position.y >= 63.25f)
+            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, Mathf.Lerp(transform.localPosition.y, transform.localPosition.y + 0.15f, Time.deltaTime * 3), gameObject.transform.localPosition.z);
+            if (gameObject.transform.localPosition.y >= 1.14f)
             {
                 hitbot = false;
                 hittop = true;
@@ -29,8 +29,8 @@ public class headblob : MonoBehaviour
         }
         else if (Player.GetComponent<MovementReworked>().moving && hittop && !hitbot)
         {
-            Mathf.Lerp(transform.position.y, -0.05f, Time.deltaTime);
-            if (gameObject.transform.position.y >= 63.15f)
+            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, Mathf.Lerp(transform.localPosition.y, transform.localPosition.y - 0.15f, Time.deltaTime * 3), gameObject.transform.localPosition.z);
+            if (gameObject.transform.localPosition.y <=0.86f)
             {
                 hitbot = true;
                 hittop = false;
@@ -38,7 +38,7 @@ public class headblob : MonoBehaviour
         }
         if (!Player.GetComponent<MovementReworked>().moving)
         {
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x, 63.2f, gameObject.transform.position.z);
+            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, Mathf.Lerp(transform.localPosition.y, 1f, Time.deltaTime), gameObject.transform.localPosition.z);
         }
     }
 }
