@@ -5318,6 +5318,16 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f0150d7f28c82b04b9942ce36ed01a24, type: 2}
     - target: {fileID: 5767461203681590504, guid: 26ec517d550387a4b813d6cf23babb43,
         type: 3}
+      propertyPath: TriggerModule.inside
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5767461203681590504, guid: 26ec517d550387a4b813d6cf23babb43,
+        type: 3}
+      propertyPath: TriggerModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5767461203681590504, guid: 26ec517d550387a4b813d6cf23babb43,
+        type: 3}
       propertyPath: CollisionModule.enabled
       value: 0
       objectReference: {fileID: 0}
@@ -5325,6 +5335,16 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.maxNumParticles
       value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 5767461203681590504, guid: 26ec517d550387a4b813d6cf23babb43,
+        type: 3}
+      propertyPath: CollisionModule.m_Planes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5882775772141145414, guid: 26ec517d550387a4b813d6cf23babb43,
+        type: 3}
+      propertyPath: TriggerModule.enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5882775772141145414, guid: 26ec517d550387a4b813d6cf23babb43,
         type: 3}
@@ -5351,6 +5371,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3da399bf1062ebc4c83daadf744af207, type: 2}
+    - target: {fileID: 8165151359587366181, guid: 26ec517d550387a4b813d6cf23babb43,
+        type: 3}
+      propertyPath: TriggerModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8165151359587366181, guid: 26ec517d550387a4b813d6cf23babb43,
         type: 3}
       propertyPath: CollisionModule.enabled

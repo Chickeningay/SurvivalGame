@@ -20,8 +20,8 @@ public class headblob : MonoBehaviour
     {
         if (Player.GetComponent<MovementReworked>().moving&&!hittop&&hitbot)
         {
-            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, Mathf.Lerp(transform.localPosition.y, transform.localPosition.y + 0.15f, Time.deltaTime * 3), gameObject.transform.localPosition.z);
-            if (gameObject.transform.localPosition.y >= 1.14f)
+            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, Mathf.Lerp(transform.localPosition.y, transform.localPosition.y + 0.08f, Time.deltaTime * 5), gameObject.transform.localPosition.z);
+            if (gameObject.transform.localPosition.y >= 1.07f)
             {
                 hitbot = false;
                 hittop = true;
@@ -29,8 +29,8 @@ public class headblob : MonoBehaviour
         }
         else if (Player.GetComponent<MovementReworked>().moving && hittop && !hitbot)
         {
-            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, Mathf.Lerp(transform.localPosition.y, transform.localPosition.y - 0.15f, Time.deltaTime * 3), gameObject.transform.localPosition.z);
-            if (gameObject.transform.localPosition.y <=0.86f)
+            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, Mathf.Lerp(transform.localPosition.y, transform.localPosition.y - 0.08f, Time.deltaTime * 10), gameObject.transform.localPosition.z);
+            if (gameObject.transform.localPosition.y <=0.93f)
             {
                 hitbot = true;
                 hittop = false;
