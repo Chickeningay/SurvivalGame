@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ItemScript : MonoBehaviour
 {
-   
+    public bool hammerbool;
     public bool ScaffHolding;
     public bool Hammer;
     public bool Door;
@@ -84,10 +84,15 @@ public class ItemScript : MonoBehaviour
             gameObject.transform.localPosition = startpos;
             gameObject.GetComponent<Animator>().Play("New State");
         }
-        if(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State") && Hammer)
+        if(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State") && Hammer&&hammerbool)
         {
             gameObject.transform.localRotation = startrot;
             gameObject.transform.localPosition = startpos;
+            hammerbool = false;
+        }
+        else if (!gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State") && Hammer)
+        {
+            hammerbool = true;
         }
         if (Input.GetKeyDown(KeyCode.Mouse0)&&!Inventory.gameObject.GetComponent<InventorySelecter>().InventoryExtended)
         {

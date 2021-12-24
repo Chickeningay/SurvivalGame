@@ -10,8 +10,24 @@ public class sway : MonoBehaviour
 
     private void Start()
     {
-        origin_rotation = gameObject.transform.localRotation;
+        if (gameObject.GetComponent<ItemScript>() != null)
+        {
+            if (gameObject.GetComponent<ItemScript>().ScaffHolding)
+            {
+                origin_rotation = gameObject.GetComponent<ItemScript>().startrot;
+            }
+            else
+            {
+                origin_rotation = gameObject.transform.localRotation;
+            }
+        }
+        else
+        {
+            origin_rotation = gameObject.transform.localRotation;
+        }
+        
     }
+    
     // Update is called once per frame
     void Update()
     {

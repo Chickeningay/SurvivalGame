@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class WeaponControl : MonoBehaviour
 {
+    bool axebool;
     public bool hasScope;
     public bool weaponScoped;
     public int BPM;
@@ -258,9 +259,15 @@ public class WeaponControl : MonoBehaviour
     }
     void AxeHandler()
     {
-        if(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State")){
+        if(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State")&&!axebool){
             gameObject.transform.localRotation = startrot;
             gameObject.transform.localPosition = startpos;
+            gameObject.GetComponent<sway>().enabled = true;
+            axebool = true;
+        }
+        else if(!gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State"))
+        {
+            axebool = false;
         }
         if(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State")|| gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Switch_Clip.name)) { MeleeCollider.GetComponent<BoxCollider>().enabled = false; }
         if(!gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Action2_Clip.name) && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Action1_Clip.name)) {
@@ -272,6 +279,7 @@ public class WeaponControl : MonoBehaviour
             }
             else if (!ShootingCooldown && Input.GetKeyDown(KeyCode.Mouse1))
             {
+                
                 Player.GetComponent<AudioSource>().PlayOneShot(Action2_Audio);
                 gameObject.GetComponent<Animator>().Play(Action2_Clip.name);
                 MeleeCollider.GetComponent<BoxCollider>().enabled = true;
