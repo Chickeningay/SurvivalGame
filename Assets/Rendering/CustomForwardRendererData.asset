@@ -1,5 +1,44 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8276246836935655718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
+  m_Name: RenderObjects
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  settings:
+    passTag: RenderObjects
+    Event: 250
+    filterSettings:
+      RenderQueueType: 0
+      LayerMask:
+        serializedVersion: 2
+        m_Bits: 256
+      PassNames: []
+    overrideMaterial: {fileID: 0}
+    overrideMaterialPassIndex: 0
+    overrideDepthState: 0
+    depthCompareFunction: 8
+    enableWrite: 0
+    stencilSettings:
+      overrideStencilState: 0
+      stencilReference: 0
+      stencilCompareFunction: 8
+      passOperation: 0
+      failOperation: 0
+      zFailOperation: 0
+    cameraSettings:
+      overrideCamera: 0
+      restoreCamera: 1
+      offset: {x: 0, y: 0, z: 0, w: 0}
+      cameraFieldOfView: 60
 --- !u!114 &-4389679458180895335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,7 +54,7 @@ MonoBehaviour:
   m_Active: 0
   settings:
     passTag: NewRenderObjects
-    Event: 1000
+    Event: 300
     filterSettings:
       RenderQueueType: 1
       LayerMask:
@@ -54,7 +93,7 @@ MonoBehaviour:
   m_Active: 0
   settings:
     passTag: NewRenderObjects
-    Event: 250
+    Event: 300
     filterSettings:
       RenderQueueType: 0
       LayerMask:
@@ -97,9 +136,10 @@ MonoBehaviour:
   - {fileID: 4077715693204497704}
   - {fileID: -4389679458180895335}
   - {fileID: -2790216286374183377}
-  m_RendererFeatureMap: 28657d7cd1f49638996d4c51cab914c32f3e281c122947d9
+  - {fileID: -8276246836935655718}
+  m_RendererFeatureMap: 28657d7cd1f49638996d4c51cab914c32f3e281c122947d9dafeffea59dd248d
   m_UseNativeRenderPass: 0
-  postProcessData: {fileID: 0}
+  postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
   shaders:
     blitPS: {fileID: 4800000, guid: c17132b1f77d20942aa75f8429c0f8bc, type: 3}
@@ -120,10 +160,10 @@ MonoBehaviour:
   m_AssetVersion: 1
   m_OpaqueLayerMask:
     serializedVersion: 2
-    m_Bits: 503
+    m_Bits: 1015
   m_TransparentLayerMask:
     serializedVersion: 2
-    m_Bits: 503
+    m_Bits: 1014
   m_DefaultStencilState:
     overrideStencilState: 0
     stencilReference: 15
@@ -133,11 +173,11 @@ MonoBehaviour:
     zFailOperation: 0
   m_ShadowTransparentReceive: 0
   m_RenderingMode: 0
-  m_DepthPrimingMode: 2
+  m_DepthPrimingMode: 1
   m_AccurateGbufferNormals: 0
   m_ClusteredRendering: 0
   m_TileSize: 32
-  m_IntermediateTextureMode: 0
+  m_IntermediateTextureMode: 1
 --- !u!114 &4077715693204497704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,7 +193,7 @@ MonoBehaviour:
   m_Active: 0
   settings:
     passTag: NewRenderObjects
-    Event: 1000
+    Event: 300
     filterSettings:
       RenderQueueType: 0
       LayerMask:
@@ -162,8 +202,8 @@ MonoBehaviour:
       PassNames: []
     overrideMaterial: {fileID: 0}
     overrideMaterialPassIndex: 0
-    overrideDepthState: 0
-    depthCompareFunction: 8
+    overrideDepthState: 1
+    depthCompareFunction: 0
     enableWrite: 0
     stencilSettings:
       overrideStencilState: 0
