@@ -29,8 +29,15 @@ public class DisableInventory : MonoBehaviour
                     Cursor.lockState = CursorLockMode.None;
                 }
                 else { Cursor.lockState = CursorLockMode.Locked; }
-                DisableRot1.GetComponent<Rotation>().enabled = !gameObject.GetComponent<RawImage>().enabled;
-                DisableRot2.GetComponent<Rotation>().enabled = !gameObject.GetComponent<RawImage>().enabled;
+                if (DisableRot1 != null)
+                {
+                    DisableRot1.GetComponent<Rotation>().enabled = !gameObject.GetComponent<RawImage>().enabled;
+                }
+                if (DisableRot2 != null)
+                {
+                    DisableRot2.GetComponent<Rotation>().enabled = !gameObject.GetComponent<RawImage>().enabled;
+                }
+                
                 if (child.gameObject.GetComponent<RawImage>() != null)
                 {
                     child.gameObject.GetComponent<RawImage>().enabled = !child.gameObject.GetComponent<RawImage>().enabled;
