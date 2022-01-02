@@ -63,11 +63,12 @@ public class Rotation : MonoBehaviour
            
             float X = Input.GetAxis("Mouse X") * sensitivityX;
 
-
-            float tempval=Random.Range(-0.2f,0.2f);
+            if (activatebounce)
+            {
+                float tempval = Random.Range(-0.2f, 0.2f);
                 currentWeaponBounce2 += tempval;
-            tempval -= 0.1f; stopgoingdown = true;
-                
+                X -= tempval; stopgoingdown = true; activatebounce = false;
+            }
            
            
             if (CommandTaker.active)
