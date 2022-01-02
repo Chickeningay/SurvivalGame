@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class MovementReworked : MonoBehaviour
 {
+	
+	public GameObject WalkAudioPlayer;
+	public AudioClip LandClip;
 	public CharacterController controller;
 	public Transform GroundCheck;
 	public LayerMask GroundMask;
@@ -88,6 +91,7 @@ public class MovementReworked : MonoBehaviour
 	bool receivedcommand;
 	Vector3 commandmovepos;
 	public GameObject CommandListener;
+	public bool jumpsound_ready=true;
 	private void Start()
 	{
 		Cursor.visible = false;
@@ -205,14 +209,14 @@ public class MovementReworked : MonoBehaviour
 			{
 				g.gameObject.layer = 3;
 			}
-			gravity = -1;
+			gravity = -3;
 			if (Input.GetKey(KeyCode.LeftShift))
 			{
-				playerVelocity.y += -4 * Time.deltaTime;
+				playerVelocity.y+= -4 * Time.deltaTime;
 			}
 			else if (Input.GetKey(KeyCode.Space))
 			{
-				playerVelocity.y += 6* Time.deltaTime;
+				playerVelocity.y = 1000* Time.deltaTime;
 			}
 			//playerVelocity.y = Mathf.Clamp(playerVelocity.y, 3f, -3f);
 		}
@@ -286,6 +290,7 @@ public class MovementReworked : MonoBehaviour
        
         if (!receivedcommand)
         {
+			playerVelocity = new Vector3(Mathf.Clamp(playerVelocity.x, -30, 30), playerVelocity.y, Mathf.Clamp(playerVelocity.z,-30, 30));
 			controller.Move(playerVelocity * Time.deltaTime);
 
 			
@@ -304,16 +309,42 @@ public class MovementReworked : MonoBehaviour
 			gameObject.GetComponent<CharacterController>().enabled = true;
 			
 		}
+        if (moving && IsGrounded)
+        {
+			StartCoroutine(WalkAudioWait());
+        }
+		else if (!moving || !IsGrounded)
+        {
+			StopCoroutine(WalkAudioWait());
+			WalkAudioPlayer.GetComponent<AudioSource>().enabled=false;
+		}
+        if (IsGrounded &&jumpsound_ready&& playerVelocity.y < -5)
+        {
+			StartCoroutine(LandSoundCooldown());
+			gameObject.GetComponent<AudioSource>().PlayOneShot(LandClip);
+			
+        }
 		
 	}
+	IEnumerator WalkAudioWait()
+    {
+		yield return new WaitForSeconds(1f);
+		WalkAudioPlayer.GetComponent<AudioSource>().enabled = true;
+	}
+	IEnumerator LandSoundCooldown()
+    {
+		jumpsound_ready = false;
+		yield return new WaitForSeconds(0.1f);
+		jumpsound_ready = true;
+    }
 	public void Crouch()
 	{
 		if (!CommandListener.active)
 		{
 			if (Input.GetKeyDown(KeyCode.LeftControl))
 		{
-			gameObject.GetComponent<CapsuleCollider>().height = 2;
-			gameObject.GetComponent<CharacterController>().height = 2;
+			gameObject.GetComponent<CapsuleCollider>().height = 1;
+			gameObject.GetComponent<CharacterController>().height = 1;
 			gameObject.GetComponent<CharacterController>().radius = 0.8f;
 			gameObject.GetComponent<CapsuleCollider>().radius = 0.8f;
 		}
@@ -394,6 +425,7 @@ public class MovementReworked : MonoBehaviour
 		if (accelspeed > addspeed)
 			accelspeed = addspeed;
 
+        
 		playerVelocity.x += accelspeed * wishdir.x;
 		playerVelocity.z += accelspeed * wishdir.z;
 	}
@@ -508,7 +540,7 @@ public class MovementReworked : MonoBehaviour
 
 		wishspeed = wishdir.magnitude;
 		wishspeed *= moveSpeed;
-
+       
 		Accelerate(wishdir, wishspeed, runAcceleration);
 
 		// Reset the gravity velocity
@@ -517,6 +549,9 @@ public class MovementReworked : MonoBehaviour
 		if (wishJump)
 		{
 			playerVelocity.y = jumpSpeed;
+			print("Jump");
+			playerVelocity.x += 1.5f * wishdir.x;
+			playerVelocity.z += 1.5f * wishdir.z;
 			wishJump = false;
 		}
 
