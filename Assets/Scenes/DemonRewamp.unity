@@ -7309,7 +7309,7 @@ PrefabInstance:
     - target: {fileID: 4188316008031882880, guid: 1647a765cb180d14cbe017b405ff49c4,
         type: 3}
       propertyPath: airControl
-      value: 2.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4188316008031882880, guid: 1647a765cb180d14cbe017b405ff49c4,
         type: 3}
@@ -7321,6 +7321,11 @@ PrefabInstance:
       propertyPath: WalkAudioPlayer
       value: 
       objectReference: {fileID: 301289317}
+    - target: {fileID: 4188316008031882880, guid: 1647a765cb180d14cbe017b405ff49c4,
+        type: 3}
+      propertyPath: jumpsound_ready
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4188316008031882880, guid: 1647a765cb180d14cbe017b405ff49c4,
         type: 3}
       propertyPath: runAcceleration

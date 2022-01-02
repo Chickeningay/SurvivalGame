@@ -321,6 +321,7 @@ public class MovementReworked : MonoBehaviour
         if (IsGrounded &&jumpsound_ready&& playerVelocity.y < -5)
         {
 			StartCoroutine(LandSoundCooldown());
+			
 			gameObject.GetComponent<AudioSource>().PlayOneShot(LandClip);
 			
         }
@@ -329,12 +330,18 @@ public class MovementReworked : MonoBehaviour
 	IEnumerator WalkAudioWait()
     {
 		yield return new WaitForSeconds(1f);
-		WalkAudioPlayer.GetComponent<AudioSource>().enabled = true;
+        if (IsGrounded)
+        {
+			WalkAudioPlayer.GetComponent<AudioSource>().enabled = true;
+		}
+		
 	}
 	IEnumerator LandSoundCooldown()
     {
+		
 		jumpsound_ready = false;
 		yield return new WaitForSeconds(0.1f);
+		
 		jumpsound_ready = true;
     }
 	public void Crouch()
@@ -549,7 +556,7 @@ public class MovementReworked : MonoBehaviour
 		if (wishJump)
 		{
 			playerVelocity.y = jumpSpeed;
-			print("Jump");
+			
 			playerVelocity.x += 1.5f * wishdir.x;
 			playerVelocity.z += 1.5f * wishdir.z;
 			wishJump = false;
