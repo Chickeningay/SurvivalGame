@@ -62,31 +62,14 @@ public class Rotation : MonoBehaviour
         {
            
             float X = Input.GetAxis("Mouse X") * sensitivityX;
-            if (!activatebounce)
-            {
-                firstshot = true;
-            }
-            if (activatebounce&&firstshot)
-            {
+
+
+            float tempval=Random.Range(-0.2f,0.2f);
+                currentWeaponBounce2 += tempval;
+            tempval -= 0.1f; stopgoingdown = true;
                 
-                currentWeaponBounce2 += 0.1f;
-                X -= 0.1f; stopgoingdown = true;
-                activatebounce = false;
-                firstshot = false;
-            }
-            else if (activatebounce && !firstshot&&clock)
-            {
-                currentWeaponBounce2 += 0.2f;
-                X -= 0.2f; stopgoingdown = true;
-                activatebounce = false;
-            }
-            else if (activatebounce && !firstshot&&!clock)
-            {
-                currentWeaponBounce2 += 0.2f;
-                X += 0.2f; stopgoingdown = true;
-                activatebounce = false;
-            }
-            clock = !clock;
+           
+           
             if (CommandTaker.active)
             {
                 X = 0;
@@ -99,9 +82,13 @@ public class Rotation : MonoBehaviour
             rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
             if (activatebounce)
             {
-                currentWeaponBounce += 0.2f;
-                rotationY += 0.1f; stopgoingdown = true;
+                currentWeaponBounce += 0.3f;
+                rotationY += 0.3f; stopgoingdown = true;
                 activatebounce = false;
+            }
+            if (!stopgoingdown && weaponbounce)
+            {
+                rotationY += (Mathf.LerpAngle(0, 0 - currentWeaponBounce, Time.deltaTime));
             }
             rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
             if (CommandTaker.active)
@@ -138,9 +125,9 @@ public class Rotation : MonoBehaviour
             {
 
                 float savedangle = gameObject.transform.eulerAngles.x;
+            //
 
-
-                gameObject.transform.eulerAngles = new Vector3((Mathf.LerpAngle(gameObject.transform.eulerAngles.x, gameObject.transform.eulerAngles.x - currentWeaponBounce, Time.time)), gameObject.transform.eulerAngles.y, Mathf.LerpAngle(transform.eulerAngles.z, currentDirection, Time.deltaTime));
+            gameObject.transform.eulerAngles = new Vector3(gameObject.transform.eulerAngles.x, gameObject.transform.eulerAngles.y, Mathf.LerpAngle(transform.eulerAngles.z, currentDirection, Time.deltaTime));
 
             currentWeaponBounce = Mathf.Lerp(currentWeaponBounce, 0, Time.deltaTime);
 
@@ -156,7 +143,6 @@ public class Rotation : MonoBehaviour
                 gameObject.transform.eulerAngles = new Vector3(gameObject.transform.eulerAngles.x, (Mathf.LerpAngle(gameObject.transform.eulerAngles.y, gameObject.transform.eulerAngles.y + currentWeaponBounce2, Time.deltaTime)), Mathf.LerpAngle(transform.eulerAngles.z, currentDirection, Time.deltaTime));
                
                 currentWeaponBounce2 =Mathf.Lerp(currentWeaponBounce2,0,Time.deltaTime);
-            // Mathf.Abs(savedangle2 - gameObject.transform.eulerAngles.y)
         }
         stopgoingdown = false;
         if (!syncX)
