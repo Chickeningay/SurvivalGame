@@ -194,8 +194,8 @@ public class InventorySelecter : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.I))
                     {
                         LastSelectedHolster = CurrentSelected;
-
-                    }
+                                CurrentSelected = null;
+                            }
                 }
                 else if (InventoryExtended)
                 {
@@ -319,7 +319,7 @@ public class InventorySelecter : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.I))
                     {
                         LastSelectedHolster = CurrentSelected;
-
+                                CurrentSelected = null;
                     }
                 }
                 else if (InventoryExtended)
@@ -446,7 +446,7 @@ public class InventorySelecter : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.I))
                             {
                                 LastSelectedHolster = CurrentSelected;
-
+                                CurrentSelected = null;
                             }
                         }
                         else if (InventoryExtended)
@@ -572,7 +572,7 @@ public class InventorySelecter : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.I))
                     {
                         LastSelectedHolster = CurrentSelected;
-
+                        CurrentSelected = null;
                     }
                 }
                 else if (InventoryExtended)

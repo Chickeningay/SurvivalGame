@@ -320,9 +320,10 @@ public class MovementReworked : MonoBehaviour
 		}
         if (IsGrounded &&jumpsound_ready&& playerVelocity.y < -5)
         {
+			StopCoroutine(LandSoundCooldown());
 			StartCoroutine(LandSoundCooldown());
 			
-			gameObject.GetComponent<AudioSource>().PlayOneShot(LandClip);
+			
 			
         }
 		
@@ -340,6 +341,7 @@ public class MovementReworked : MonoBehaviour
     {
 		
 		jumpsound_ready = false;
+		gameObject.GetComponent<AudioSource>().PlayOneShot(LandClip);
 		yield return new WaitForSeconds(0.1f);
 		
 		jumpsound_ready = true;
