@@ -76,12 +76,17 @@ public class WeaponControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-           
-               
-           
-        
-        
+
+
+
+
+
+        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f)
+        {
+            gameObject.GetComponent<Animator>().Play("New State");
+            gameObject.transform.localRotation = startrot;
+            gameObject.transform.localPosition = startpos;
+        }
         inWater = Player.GetComponent<MovementReworked>().InWater;
         if (ObeyInventory)
         {
