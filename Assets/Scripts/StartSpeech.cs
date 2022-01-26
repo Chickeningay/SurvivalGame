@@ -11,7 +11,10 @@ public class StartSpeech : MonoBehaviour
     public GameObject Player;
     public GameObject chicken_head;
     public GameObject feather;
+    float distance;
     public bool hit;
+    Vector3 interactpos;
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +24,11 @@ public class StartSpeech : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        distance = Mathf.Abs(Mathf.Sqrt(((gameObject.transform.position.x - Player.transform.position.x) * (gameObject.transform.position.x - Player.transform.position.x)) + ((gameObject.transform.position.y - Player.transform.position.y) * (gameObject.transform.position.y - Player.transform.position.y) + ((gameObject.transform.position.z - Player.transform.position.z) * (gameObject.transform.position.z - Player.transform.position.z))) ));
+        if (distance > 10)
+        {
+            interactor.GetComponent<InteractScript>().interacted = false;
+        }
         if (gameObject.GetComponent<HitDetection>().hit)
         {
             hit = true;
@@ -35,6 +43,8 @@ public class StartSpeech : MonoBehaviour
         interacted = gameObject.GetComponent<InteractDetector>().Interacted;
         if (interacted)
         {
+            interactpos = gameObject.transform.position;
+            
             gameObject.GetComponent<Animator>().Play("New State");
             SpeechText.GetComponent<Text>().text = "Bawk!";
             
@@ -45,7 +55,7 @@ public class StartSpeech : MonoBehaviour
             gameObject.GetComponent<Animator>().enabled = true;
             SpeechText.GetComponent<Text>().text = "";
         }
-        
+       
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -55,6 +65,7 @@ public class StartSpeech : MonoBehaviour
             
         }
     }
+   
     IEnumerator wait()
     {
         yield return new WaitForSeconds(0.1f);

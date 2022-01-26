@@ -81,12 +81,7 @@ public class WeaponControl : MonoBehaviour
 
 
 
-        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f)
-        {
-            gameObject.GetComponent<Animator>().Play("New State");
-            gameObject.transform.localRotation = startrot;
-            gameObject.transform.localPosition = startpos;
-        }
+        
         inWater = Player.GetComponent<MovementReworked>().InWater;
         if (ObeyInventory)
         {
@@ -98,6 +93,7 @@ public class WeaponControl : MonoBehaviour
             {
                 if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State"))
                 {
+                    gameObject.GetComponent<sway>().enabled = true;
                     gameObject.transform.localRotation = startrot;
                     gameObject.transform.localPosition = startpos;
                     gameObject.GetComponent<Animator>().Play(Movement_Clip.name);
@@ -467,6 +463,7 @@ public class WeaponControl : MonoBehaviour
             CurrentAmmo = MaxAmmo;
             CurrentReserve -= MaxAmmo;
             gameObject.GetComponent<Animator>().Play(Reload_Clip.name); Audio("Reload");
+            gameObject.GetComponent<sway>().enabled = false;
         }
         else if (CurrentReserve > 0 && CurrentReserve <= MaxAmmo)
         {
@@ -474,6 +471,7 @@ public class WeaponControl : MonoBehaviour
             CurrentAmmo = CurrentReserve;
             CurrentReserve = 0;
             gameObject.GetComponent<Animator>().Play(Reload_Clip.name); Audio("Reload");
+            gameObject.GetComponent<sway>().enabled = false;
         }
         else if (CurrentReserve==0)
         {
