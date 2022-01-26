@@ -45,7 +45,7 @@ public class StartSpeech : MonoBehaviour
         {
             interactpos = gameObject.transform.position;
             
-            gameObject.GetComponent<Animator>().Play("New State");
+            
             SpeechText.GetComponent<Text>().text = "Bawk!";
             
         }
