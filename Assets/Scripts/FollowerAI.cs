@@ -8,8 +8,10 @@ public class FollowerAI : MonoBehaviour
     bool AIenabled;
     public GameObject Player;
     public AnimationClip MovementClip;
+    public AnimationClip DeathClip;
     public GameObject Head;
     Vector3 startrot;
+    bool death_start;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,8 +22,9 @@ public class FollowerAI : MonoBehaviour
     void Update()
     {
         //Vector3 trans = gameObject.transform.GetChild(1).position;
+        
         AIenabled = gameObject.GetComponent<InteractDetector>().Interacted;
-        if (AIenabled)
+        if (AIenabled&&!death_start)
         {
             gameObject.GetComponent<NavMeshAgent>().destination = Player.transform.position;
             //Head.transform.LookAt(Player.transform);
@@ -36,5 +39,16 @@ public class FollowerAI : MonoBehaviour
             
 
         }
+        else if (!AIenabled && !death_start)
+        {
+            Head.GetComponent<Animator>().enabled = false;
+        }
+        if (gameObject.GetComponent<HitDetection>().hit)
+        {
+            death_start = true;
+            Head.GetComponent<Animator>().enabled = true;
+            Head.GetComponent<Animator>().Play(DeathClip.name);
+        }
+
     }
 }

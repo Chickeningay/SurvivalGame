@@ -21,7 +21,11 @@ public class StartSpeech : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (hit||gameObject.GetComponent<HitDetection>().hit)
+        if (gameObject.GetComponent<HitDetection>().hit)
+        {
+            hit = true;
+        }
+        if (hit)
         {
             Instantiate(feather, transform.position, feather.transform.rotation);
             gameObject.GetComponent<HitDetection>().hit = false;

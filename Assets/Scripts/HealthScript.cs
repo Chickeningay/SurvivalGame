@@ -9,8 +9,8 @@ public class HealthScript : MonoBehaviour
     int maxHealth = 100;
     public int Armour = 100;
     int maxArmour = 100;
-    public GameObject HealthText;
-    public GameObject ArmourText;
+    public GameObject HealthBar;
+    public GameObject ArmourBar;
     public bool Drowning;
     // Start is called before the first frame update
     void Start()
@@ -21,8 +21,10 @@ public class HealthScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HealthText.GetComponent<Text>().text = Health.ToString();
-        ArmourText.GetComponent<Text>().text = Armour.ToString();
+        HealthBar.transform.localScale = new Vector3(Health*0.03f,HealthBar.transform.localScale.y,HealthBar.transform.localScale.z);
+        ArmourBar.transform.localScale = new Vector3(Armour * 0.03f, ArmourBar.transform.localScale.y, ArmourBar.transform.localScale.z);
+        //HealthText.GetComponent<Text>().text = Health.ToString();
+        //ArmourText.GetComponent<Text>().text = Armour.ToString();
     }
     
     private void OnTriggerEnter(Collider other)

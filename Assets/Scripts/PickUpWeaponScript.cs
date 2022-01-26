@@ -12,6 +12,7 @@ public class PickUpWeaponScript : MonoBehaviour
      GameObject Inventory;
     public bool AddAmmo;
     public int AddingAmmoCount;
+    public bool calledPickup;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,10 +32,11 @@ public class PickUpWeaponScript : MonoBehaviour
     {
         
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player"&&Input.GetKey(KeyCode.E)&&!calledPickup)
         {
+            calledPickup = true;
             if (ObeyInventory)
             {
                 StartAddingToInventory();
