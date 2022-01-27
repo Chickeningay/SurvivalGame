@@ -1,278 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!95 &5812315693622844143
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 791950762744017799}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 52aad697a809b7e43ba12c41c9492b24, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1507443187239069127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 791950762744017799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 611221f00fb8ab741a8956817b67514c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  DoorHolder: {fileID: 0}
---- !u!114 &8168096491570403320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 791950762744017799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7ba8f92c24ebcd4fa584e3940e9827f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ScaffHolding: 0
-  Hammer: 0
-  Door: 1
-  Switch_Clip: {fileID: 7400000, guid: b2b7ef39098476b439d6e2e44fb0dec5, type: 2}
-  SecondSpawnPrefab: {fileID: 2367374529441376626, guid: a00def18fd1995849b9482c9091c465d,
-    type: 3}
-  ScaffPref: {fileID: 0}
-  AwaitingAction1: 0
-  AwaitingAction2: 0
-  ScaffSpawnPrefab: {fileID: 1803127801029328798, guid: 96d2453598ea60f4da7a8a32e552b096,
-    type: 3}
-  Action1Anim: {fileID: 7400000, guid: fba03f07c02d0f646a1101c2f2b33f50, type: 2}
-  WalkAnim: {fileID: 7400000, guid: 18a30014b79e4a147986cebe525003c7, type: 2}
-  Player: {fileID: 0}
-  startpos: {x: 0, y: 0, z: 0}
-  startrot: {x: 0, y: 0, z: 0, w: 0}
---- !u!95 &8584902199961324726
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 969030483259092381}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9b82e55fd6a9a7640917e0b0ab5bbde0, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8584902199961324713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 969030483259092381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0149e7293e63f542a5e4e3374535686, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasScope: 0
-  weaponScoped: 0
-  BPM: 0
-  Automatic: 0
-  CurrentAmmo: 8
-  MaxAmmo: 8
-  CurrentReserve: 100
-  MaxReserve: 100
-  Player: {fileID: 0}
-  MainCamera: {fileID: 0}
-  ShootingRay: 1
-  BulletFlash: {fileID: 8584902198945522092}
-  AmmoText: {fileID: 0}
-  fakebullet: {fileID: 0}
-  fakebulletspawn: {fileID: 0}
-  Reload_Audio: {fileID: 8300000, guid: 999fa7ff6ba165e41a8b77ee8b14be54, type: 3}
-  Action1_Audio: {fileID: 8300000, guid: 7318e4bc5e6743b4aa6b5cdc8921c99a, type: 3}
-  Action2_Audio: {fileID: 0}
-  Switch_Audio: {fileID: 8300000, guid: f0b73caf0fcfd1a49a86303e42f16bcc, type: 3}
-  EmptyMagazine_Audio: {fileID: 8300000, guid: 152eb3c182cba4847ab5f28427e1b588, type: 3}
-  Reload_Clip: {fileID: 7400000, guid: aa9e4c0c4ff91d0449161c5ad2fff33a, type: 2}
-  Action1_Clip: {fileID: 7400000, guid: 203332fd2c02a3645a2d504f1c08ebb4, type: 2}
-  Action2_Clip: {fileID: 0}
-  Switch_Clip: {fileID: 7400000, guid: 1e80804a766c5f64ebd5d1acc119fdfd, type: 2}
-  Movement_Clip: {fileID: 0}
-  ShootingCooldown: 0
-  RPGIcon: 0
-  AmmoIcon: 1
-  MeleeIcon: {fileID: 0}
-  GrenadeIcon: {fileID: 0}
-  RpgImage: {fileID: 0}
-  AmmoImage: {fileID: 0}
-  startpos: {x: 0, y: 0, z: 0}
-  Melee: 0
-  MeleeCollider: {fileID: 0}
-  Inventory: {fileID: 0}
-  InventoryExtended: 0
-  ObeyInventory: 0
-  startrot: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &3245891210417897677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1054360502737616123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bd22369643b48d48a5d52c217bce03b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AmmoHoldingParent: {fileID: 321532998475991682}
---- !u!95 &5629114558042491637
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3645016993486560578}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2eea5c09e4f8ab84ba7fffe70b01dc5d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2187103895647898424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3645016993486560578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0149e7293e63f542a5e4e3374535686, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasScope: 0
-  weaponScoped: 0
-  BPM: 0
-  Automatic: 0
-  CurrentAmmo: 0
-  MaxAmmo: 0
-  CurrentReserve: 0
-  MaxReserve: 0
-  Player: {fileID: 0}
-  MainCamera: {fileID: 0}
-  ShootingRay: 0
-  BulletFlash: {fileID: 0}
-  AmmoText: {fileID: 0}
-  fakebullet: {fileID: 0}
-  fakebulletspawn: {fileID: 0}
-  Reload_Audio: {fileID: 0}
-  Action1_Audio: {fileID: 0}
-  Action2_Audio: {fileID: 0}
-  Switch_Audio: {fileID: 0}
-  EmptyMagazine_Audio: {fileID: 0}
-  Reload_Clip: {fileID: 0}
-  Action1_Clip: {fileID: 7400000, guid: 7bfbecaf1d39db24597c0a20c7994f71, type: 2}
-  Action2_Clip: {fileID: 7400000, guid: f7ccb7e27c73c1d4bbe63bf3798ef909, type: 2}
-  Switch_Clip: {fileID: 0}
-  Movement_Clip: {fileID: 0}
-  ShootingCooldown: 0
-  RPGIcon: 0
-  AmmoIcon: 0
-  MeleeIcon: {fileID: 0}
-  GrenadeIcon: {fileID: 0}
-  RpgImage: {fileID: 0}
-  AmmoImage: {fileID: 0}
-  startpos: {x: 0, y: 0, z: 0}
-  Melee: 0
-  MeleeCollider: {fileID: 0}
-  Inventory: {fileID: 0}
-  InventoryExtended: 0
-  ObeyInventory: 0
-  startrot: {x: 0, y: 0, z: 0, w: 0}
---- !u!95 &5381494078728305605
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5907867372041461561}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 60798d75a281bea44bb1c5c09e2a7ce5, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1523538602909105299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5907867372041461561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7ba8f92c24ebcd4fa584e3940e9827f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ScaffHolding: 0
-  Hammer: 1
-  Door: 0
-  Switch_Clip: {fileID: 7400000, guid: e22befcab9dbf554ca76dc9e339fda8e, type: 2}
-  SecondSpawnPrefab: {fileID: 0}
-  ScaffPref: {fileID: 0}
-  AwaitingAction1: 0
-  AwaitingAction2: 0
-  ScaffSpawnPrefab: {fileID: 0}
-  Action1Anim: {fileID: 7400000, guid: 9a97175992e068a4586e22a7ec379463, type: 2}
-  WalkAnim: {fileID: 7400000, guid: da571fbc09bb6e246861dbd9fa0f7c8b, type: 2}
-  Player: {fileID: 0}
-  startpos: {x: 0, y: 0, z: 0}
-  startrot: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &3903558259643077981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5907867372041461561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a45409644edab844aaba57fc4f92d6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  HammerHolder: {fileID: 0}
 --- !u!1 &8584902198945522092
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,6 +27,7 @@ Transform:
   m_LocalRotation: {x: -0, y: 0.9727131, z: -0, w: 0.23201138}
   m_LocalPosition: {x: 4.0400004, y: 1.939996, z: 0.28000033}
   m_LocalScale: {x: 0.4862245, y: 0.4862246, z: 0.4862245}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6299724842682504403}
   m_RootOrder: 1
@@ -315,6 +43,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -367,6 +96,7 @@ GameObject:
   - component: {fileID: 8584902199646664559}
   - component: {fileID: 8584902199646664556}
   - component: {fileID: 8584902199646664544}
+  - component: {fileID: 4239272726859857047}
   m_Layer: 0
   m_Name: ItemCamera
   m_TagString: Untagged
@@ -384,6 +114,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 93.7, y: 81.19358, z: 48.285076}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4169879191601743864}
   - {fileID: 6299724842682504403}
@@ -468,6 +199,39 @@ MonoBehaviour:
   RenewAmmo: 0
   Grounded: 0
   currentWeapon: 1
+--- !u!114 &4239272726859857047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8584902199646664557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &8584902200153076613
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,6 +259,7 @@ Transform:
   m_LocalRotation: {x: 0.0047116657, y: -0.3585028, z: 0.008902535, w: 0.9334743}
   m_LocalPosition: {x: -2.26, y: 0.41, z: -0.3}
   m_LocalScale: {x: 0.21935216, y: 0.21935211, z: 0.2193522}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8118031269626081952}
   m_RootOrder: 8
@@ -510,6 +275,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -550,146 +316,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &8584902200205077451
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8926937934656120858}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5a787953453040f4ab78d22addf01e45, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8584902200205077448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8926937934656120858}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0149e7293e63f542a5e4e3374535686, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasScope: 0
-  weaponScoped: 0
-  BPM: 30
-  Automatic: 1
-  CurrentAmmo: 30
-  MaxAmmo: 30
-  CurrentReserve: 180
-  MaxReserve: 180
-  Player: {fileID: 0}
-  MainCamera: {fileID: 0}
-  ShootingRay: 1
-  BulletFlash: {fileID: 8584902200153076613}
-  AmmoText: {fileID: 0}
-  fakebullet: {fileID: 0}
-  fakebulletspawn: {fileID: 0}
-  Reload_Audio: {fileID: 8300000, guid: 622162f4d8313e543be1cce249bb7207, type: 3}
-  Action1_Audio: {fileID: 8300000, guid: b6ffd6adb662c67478ffacf3fd0cebd8, type: 3}
-  Action2_Audio: {fileID: 0}
-  Switch_Audio: {fileID: 8300000, guid: f0b73caf0fcfd1a49a86303e42f16bcc, type: 3}
-  EmptyMagazine_Audio: {fileID: 8300000, guid: 152eb3c182cba4847ab5f28427e1b588, type: 3}
-  Reload_Clip: {fileID: 7400000, guid: ed8bb9321bedc02419a216c54f06a6ab, type: 2}
-  Action1_Clip: {fileID: 7400000, guid: 27f20437262d624459a5ee7460582a4b, type: 2}
-  Action2_Clip: {fileID: 0}
-  Switch_Clip: {fileID: 7400000, guid: 33328a480094d2b4d9f352b706ceabfb, type: 2}
-  Movement_Clip: {fileID: 0}
-  ShootingCooldown: 0
-  RPGIcon: 0
-  AmmoIcon: 1
-  MeleeIcon: {fileID: 0}
-  GrenadeIcon: {fileID: 0}
-  RpgImage: {fileID: 0}
-  AmmoImage: {fileID: 0}
-  startpos: {x: 0, y: 0, z: 0}
-  Melee: 0
-  MeleeCollider: {fileID: 0}
-  Inventory: {fileID: 0}
-  InventoryExtended: 0
-  ObeyInventory: 0
-  startrot: {x: 0, y: 0, z: 0, w: 0}
---- !u!95 &8584902199541943828
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8926937934790652738}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0fe8a8eaedc44554784877745d26d817, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8584902199541943831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8926937934790652738}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0149e7293e63f542a5e4e3374535686, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasScope: 1
-  weaponScoped: 0
-  BPM: 0
-  Automatic: 0
-  CurrentAmmo: 10
-  MaxAmmo: 10
-  CurrentReserve: 25
-  MaxReserve: 25
-  Player: {fileID: 0}
-  MainCamera: {fileID: 0}
-  ShootingRay: 1
-  BulletFlash: {fileID: 0}
-  AmmoText: {fileID: 0}
-  fakebullet: {fileID: 0}
-  fakebulletspawn: {fileID: 0}
-  Reload_Audio: {fileID: 8300000, guid: f0120f074b9b492448256ad330de3f71, type: 3}
-  Action1_Audio: {fileID: 8300000, guid: fd62e13c560586d4f9aec9d4e8ed0a7d, type: 3}
-  Action2_Audio: {fileID: 8300000, guid: b59fe4569bbd5d4498f2e7c49eb437a8, type: 3}
-  Switch_Audio: {fileID: 8300000, guid: f0b73caf0fcfd1a49a86303e42f16bcc, type: 3}
-  EmptyMagazine_Audio: {fileID: 8300000, guid: 152eb3c182cba4847ab5f28427e1b588, type: 3}
-  Reload_Clip: {fileID: 7400000, guid: 46856998c80dc154db43ecca914839b1, type: 2}
-  Action1_Clip: {fileID: 7400000, guid: 40963ff7479d45644a48f59fb4894bfe, type: 2}
-  Action2_Clip: {fileID: 7400000, guid: 324a170f9ba40ec42b735fa0502eb7ba, type: 2}
-  Switch_Clip: {fileID: 7400000, guid: 030d73757fbaab541b4d3d3d17f77aab, type: 2}
-  Movement_Clip: {fileID: 0}
-  ShootingCooldown: 0
-  RPGIcon: 0
-  AmmoIcon: 1
-  MeleeIcon: {fileID: 0}
-  GrenadeIcon: {fileID: 0}
-  RpgImage: {fileID: 0}
-  AmmoImage: {fileID: 0}
-  startpos: {x: 0, y: 0, z: 0}
-  Melee: 0
-  MeleeCollider: {fileID: 0}
-  Inventory: {fileID: 0}
-  InventoryExtended: 0
-  ObeyInventory: 0
-  startrot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1001 &323478221531313760
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -839,18 +465,89 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d6429f1c5d6a614ab2c911f216b4025, type: 3}
---- !u!1 &791950762744017799 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9d6429f1c5d6a614ab2c911f216b4025,
-    type: 3}
-  m_PrefabInstance: {fileID: 449509852091895510}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &123360434240923965 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9d6429f1c5d6a614ab2c911f216b4025,
     type: 3}
   m_PrefabInstance: {fileID: 449509852091895510}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &791950762744017799 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9d6429f1c5d6a614ab2c911f216b4025,
+    type: 3}
+  m_PrefabInstance: {fileID: 449509852091895510}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5812315693622844143
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791950762744017799}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 52aad697a809b7e43ba12c41c9492b24, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1507443187239069127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791950762744017799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 611221f00fb8ab741a8956817b67514c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  DoorHolder: {fileID: 0}
+--- !u!114 &8168096491570403320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791950762744017799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ba8f92c24ebcd4fa584e3940e9827f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hammerbool: 0
+  ScaffHolding: 0
+  Hammer: 0
+  Door: 1
+  Switch_Clip: {fileID: 7400000, guid: b2b7ef39098476b439d6e2e44fb0dec5, type: 2}
+  SecondSpawnPrefab: {fileID: 2367374529441376626, guid: a00def18fd1995849b9482c9091c465d,
+    type: 3}
+  ScaffPref: {fileID: 0}
+  Ammo: 0
+  MaxAmmo: 0
+  AwaitingAction1: 0
+  AwaitingAction2: 0
+  ScaffSpawnPrefab: {fileID: 1803127801029328798, guid: 96d2453598ea60f4da7a8a32e552b096,
+    type: 3}
+  Action1Anim: {fileID: 7400000, guid: fba03f07c02d0f646a1101c2f2b33f50, type: 2}
+  WalkAnim: {fileID: 7400000, guid: 18a30014b79e4a147986cebe525003c7, type: 2}
+  Player: {fileID: 0}
+  Inventory: {fileID: 0}
+  Selected: {fileID: 0}
+  startpos: {x: 0, y: 0, z: 0}
+  startrot: {x: 0, y: 0, z: 0, w: 0}
+  buildicon: {fileID: 0}
+  AmmoCounter: {fileID: 0}
+  WoodPlace: {fileID: 0}
+  GlassPlace: {fileID: 0}
 --- !u!1001 &2856190100434101109
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2646,12 +2343,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f2ca3bb37756f14a87bbc4784ab518c, type: 3}
---- !u!4 &1098174769394225208 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3724454353552650239, guid: 2f2ca3bb37756f14a87bbc4784ab518c,
-    type: 3}
-  m_PrefabInstance: {fileID: 4364669332448591815}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &321532998475991682 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4099466625258485061, guid: 2f2ca3bb37756f14a87bbc4784ab518c,
@@ -2661,6 +2352,25 @@ GameObject:
 --- !u!1 &1054360502737616123 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3617442632411841340, guid: 2f2ca3bb37756f14a87bbc4784ab518c,
+    type: 3}
+  m_PrefabInstance: {fileID: 4364669332448591815}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3245891210417897677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1054360502737616123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bd22369643b48d48a5d52c217bce03b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AmmoHoldingParent: {fileID: 321532998475991682}
+--- !u!4 &1098174769394225208 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3724454353552650239, guid: 2f2ca3bb37756f14a87bbc4784ab518c,
     type: 3}
   m_PrefabInstance: {fileID: 4364669332448591815}
   m_PrefabAsset: {fileID: 0}
@@ -2754,6 +2464,78 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4491454926002216979}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &5629114558042491637
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3645016993486560578}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2eea5c09e4f8ab84ba7fffe70b01dc5d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2187103895647898424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3645016993486560578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0149e7293e63f542a5e4e3374535686, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasScope: 0
+  weaponScoped: 0
+  BPM: 0
+  Automatic: 0
+  CurrentAmmo: 0
+  MaxAmmo: 0
+  CurrentReserve: 0
+  MaxReserve: 0
+  Player: {fileID: 0}
+  MainCamera: {fileID: 0}
+  ShootingRay: 0
+  BulletFlash: {fileID: 0}
+  AmmoText: {fileID: 0}
+  fakebullet: {fileID: 0}
+  fakebulletspawn: {fileID: 0}
+  Reload_Audio: {fileID: 0}
+  Action1_Audio: {fileID: 0}
+  Action2_Audio: {fileID: 0}
+  Switch_Audio: {fileID: 0}
+  EmptyMagazine_Audio: {fileID: 0}
+  Reload_Clip: {fileID: 0}
+  Action1_Clip: {fileID: 7400000, guid: 7bfbecaf1d39db24597c0a20c7994f71, type: 2}
+  Action2_Clip: {fileID: 7400000, guid: f7ccb7e27c73c1d4bbe63bf3798ef909, type: 2}
+  Switch_Clip: {fileID: 0}
+  Movement_Clip: {fileID: 0}
+  ShootingCooldown: 0
+  RPGIcon: 0
+  AmmoIcon: 0
+  MeleeIcon: {fileID: 0}
+  GrenadeIcon: {fileID: 0}
+  RpgImage: {fileID: 0}
+  AmmoImage: {fileID: 0}
+  startpos: {x: 0, y: 0, z: 0}
+  Melee: 0
+  MeleeCollider: {fileID: 0}
+  Inventory: {fileID: 0}
+  InventoryExtended: 0
+  ObeyInventory: 0
+  startrot: {x: 0, y: 0, z: 0, w: 0}
+  ImpactPrefab: {fileID: 0}
 --- !u!4 &4169879191601743864 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 50fb9715bfbea5a44abfc12777b0ffea,
@@ -3474,6 +3256,75 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6718701880025539176}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &5381494078728305605
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5907867372041461561}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 60798d75a281bea44bb1c5c09e2a7ce5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1523538602909105299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5907867372041461561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ba8f92c24ebcd4fa584e3940e9827f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hammerbool: 0
+  ScaffHolding: 0
+  Hammer: 1
+  Door: 0
+  Switch_Clip: {fileID: 7400000, guid: e22befcab9dbf554ca76dc9e339fda8e, type: 2}
+  SecondSpawnPrefab: {fileID: 0}
+  ScaffPref: {fileID: 0}
+  Ammo: 0
+  MaxAmmo: 0
+  AwaitingAction1: 0
+  AwaitingAction2: 0
+  ScaffSpawnPrefab: {fileID: 0}
+  Action1Anim: {fileID: 7400000, guid: 9a97175992e068a4586e22a7ec379463, type: 2}
+  WalkAnim: {fileID: 7400000, guid: da571fbc09bb6e246861dbd9fa0f7c8b, type: 2}
+  Player: {fileID: 0}
+  Inventory: {fileID: 0}
+  Selected: {fileID: 0}
+  startpos: {x: 0, y: 0, z: 0}
+  startrot: {x: 0, y: 0, z: 0, w: 0}
+  buildicon: {fileID: 0}
+  AmmoCounter: {fileID: 0}
+  WoodPlace: {fileID: 0}
+  GlassPlace: {fileID: 0}
+--- !u!114 &3903558259643077981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5907867372041461561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a45409644edab844aaba57fc4f92d6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  HammerHolder: {fileID: 0}
 --- !u!4 &6536735982712423811 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c674299ba0bab1049a7d69b80de351e2,
@@ -6909,18 +6760,90 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20328d82910a02e43aafb6d09cdf9afc, type: 3}
---- !u!1 &8926937934656120858 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 20328d82910a02e43aafb6d09cdf9afc,
-    type: 3}
-  m_PrefabInstance: {fileID: 8584902199407940939}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8118031269626081952 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 20328d82910a02e43aafb6d09cdf9afc,
     type: 3}
   m_PrefabInstance: {fileID: 8584902199407940939}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8926937934656120858 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 20328d82910a02e43aafb6d09cdf9afc,
+    type: 3}
+  m_PrefabInstance: {fileID: 8584902199407940939}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8584902200205077451
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8926937934656120858}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5a787953453040f4ab78d22addf01e45, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8584902200205077448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8926937934656120858}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0149e7293e63f542a5e4e3374535686, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasScope: 0
+  weaponScoped: 0
+  BPM: 30
+  Automatic: 1
+  CurrentAmmo: 30
+  MaxAmmo: 30
+  CurrentReserve: 180
+  MaxReserve: 180
+  Player: {fileID: 0}
+  MainCamera: {fileID: 0}
+  ShootingRay: 1
+  BulletFlash: {fileID: 8584902200153076613}
+  AmmoText: {fileID: 0}
+  fakebullet: {fileID: 0}
+  fakebulletspawn: {fileID: 0}
+  Reload_Audio: {fileID: 8300000, guid: 622162f4d8313e543be1cce249bb7207, type: 3}
+  Action1_Audio: {fileID: 8300000, guid: b6ffd6adb662c67478ffacf3fd0cebd8, type: 3}
+  Action2_Audio: {fileID: 0}
+  Switch_Audio: {fileID: 8300000, guid: f0b73caf0fcfd1a49a86303e42f16bcc, type: 3}
+  EmptyMagazine_Audio: {fileID: 8300000, guid: 152eb3c182cba4847ab5f28427e1b588, type: 3}
+  Reload_Clip: {fileID: 7400000, guid: ed8bb9321bedc02419a216c54f06a6ab, type: 2}
+  Action1_Clip: {fileID: 7400000, guid: 27f20437262d624459a5ee7460582a4b, type: 2}
+  Action2_Clip: {fileID: 0}
+  Switch_Clip: {fileID: 7400000, guid: 33328a480094d2b4d9f352b706ceabfb, type: 2}
+  Movement_Clip: {fileID: 0}
+  ShootingCooldown: 0
+  RPGIcon: 0
+  AmmoIcon: 1
+  MeleeIcon: {fileID: 0}
+  GrenadeIcon: {fileID: 0}
+  RpgImage: {fileID: 0}
+  AmmoImage: {fileID: 0}
+  startpos: {x: 0, y: 0, z: 0}
+  Melee: 0
+  MeleeCollider: {fileID: 0}
+  Inventory: {fileID: 0}
+  InventoryExtended: 0
+  ObeyInventory: 0
+  startrot: {x: 0, y: 0, z: 0, w: 0}
+  ImpactPrefab: {fileID: 0}
 --- !u!1001 &8584902199541943827
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7112,6 +7035,78 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8584902199541943827}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &8584902199541943828
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8926937934790652738}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0fe8a8eaedc44554784877745d26d817, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8584902199541943831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8926937934790652738}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0149e7293e63f542a5e4e3374535686, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasScope: 1
+  weaponScoped: 0
+  BPM: 0
+  Automatic: 0
+  CurrentAmmo: 10
+  MaxAmmo: 10
+  CurrentReserve: 25
+  MaxReserve: 25
+  Player: {fileID: 0}
+  MainCamera: {fileID: 0}
+  ShootingRay: 1
+  BulletFlash: {fileID: 0}
+  AmmoText: {fileID: 0}
+  fakebullet: {fileID: 0}
+  fakebulletspawn: {fileID: 0}
+  Reload_Audio: {fileID: 8300000, guid: f0120f074b9b492448256ad330de3f71, type: 3}
+  Action1_Audio: {fileID: 8300000, guid: fd62e13c560586d4f9aec9d4e8ed0a7d, type: 3}
+  Action2_Audio: {fileID: 8300000, guid: b59fe4569bbd5d4498f2e7c49eb437a8, type: 3}
+  Switch_Audio: {fileID: 8300000, guid: f0b73caf0fcfd1a49a86303e42f16bcc, type: 3}
+  EmptyMagazine_Audio: {fileID: 8300000, guid: 152eb3c182cba4847ab5f28427e1b588, type: 3}
+  Reload_Clip: {fileID: 7400000, guid: 46856998c80dc154db43ecca914839b1, type: 2}
+  Action1_Clip: {fileID: 7400000, guid: 40963ff7479d45644a48f59fb4894bfe, type: 2}
+  Action2_Clip: {fileID: 7400000, guid: 324a170f9ba40ec42b735fa0502eb7ba, type: 2}
+  Switch_Clip: {fileID: 7400000, guid: 030d73757fbaab541b4d3d3d17f77aab, type: 2}
+  Movement_Clip: {fileID: 0}
+  ShootingCooldown: 0
+  RPGIcon: 0
+  AmmoIcon: 1
+  MeleeIcon: {fileID: 0}
+  GrenadeIcon: {fileID: 0}
+  RpgImage: {fileID: 0}
+  AmmoImage: {fileID: 0}
+  startpos: {x: 0, y: 0, z: 0}
+  Melee: 0
+  MeleeCollider: {fileID: 0}
+  Inventory: {fileID: 0}
+  InventoryExtended: 0
+  ObeyInventory: 0
+  startrot: {x: 0, y: 0, z: 0, w: 0}
+  ImpactPrefab: {fileID: 0}
 --- !u!1001 &8584902199798368334
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8389,15 +8384,87 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ddab6f118df5b4a84efc12ed5a62ea, type: 3}
---- !u!4 &6299724842682504403 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2327988604072188006, guid: 37ddab6f118df5b4a84efc12ed5a62ea,
-    type: 3}
-  m_PrefabInstance: {fileID: 8584902199961324725}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &969030483259092381 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8813829277813629224, guid: 37ddab6f118df5b4a84efc12ed5a62ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 8584902199961324725}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8584902199961324726
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969030483259092381}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9b82e55fd6a9a7640917e0b0ab5bbde0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8584902199961324713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969030483259092381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0149e7293e63f542a5e4e3374535686, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasScope: 0
+  weaponScoped: 0
+  BPM: 0
+  Automatic: 0
+  CurrentAmmo: 8
+  MaxAmmo: 8
+  CurrentReserve: 100
+  MaxReserve: 100
+  Player: {fileID: 0}
+  MainCamera: {fileID: 0}
+  ShootingRay: 1
+  BulletFlash: {fileID: 8584902198945522092}
+  AmmoText: {fileID: 0}
+  fakebullet: {fileID: 0}
+  fakebulletspawn: {fileID: 0}
+  Reload_Audio: {fileID: 8300000, guid: 999fa7ff6ba165e41a8b77ee8b14be54, type: 3}
+  Action1_Audio: {fileID: 8300000, guid: 7318e4bc5e6743b4aa6b5cdc8921c99a, type: 3}
+  Action2_Audio: {fileID: 0}
+  Switch_Audio: {fileID: 8300000, guid: f0b73caf0fcfd1a49a86303e42f16bcc, type: 3}
+  EmptyMagazine_Audio: {fileID: 8300000, guid: 152eb3c182cba4847ab5f28427e1b588, type: 3}
+  Reload_Clip: {fileID: 7400000, guid: aa9e4c0c4ff91d0449161c5ad2fff33a, type: 2}
+  Action1_Clip: {fileID: 7400000, guid: 203332fd2c02a3645a2d504f1c08ebb4, type: 2}
+  Action2_Clip: {fileID: 0}
+  Switch_Clip: {fileID: 7400000, guid: 1e80804a766c5f64ebd5d1acc119fdfd, type: 2}
+  Movement_Clip: {fileID: 0}
+  ShootingCooldown: 0
+  RPGIcon: 0
+  AmmoIcon: 1
+  MeleeIcon: {fileID: 0}
+  GrenadeIcon: {fileID: 0}
+  RpgImage: {fileID: 0}
+  AmmoImage: {fileID: 0}
+  startpos: {x: 0, y: 0, z: 0}
+  Melee: 0
+  MeleeCollider: {fileID: 0}
+  Inventory: {fileID: 0}
+  InventoryExtended: 0
+  ObeyInventory: 0
+  startrot: {x: 0, y: 0, z: 0, w: 0}
+  ImpactPrefab: {fileID: 0}
+--- !u!4 &6299724842682504403 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2327988604072188006, guid: 37ddab6f118df5b4a84efc12ed5a62ea,
     type: 3}
   m_PrefabInstance: {fileID: 8584902199961324725}
   m_PrefabAsset: {fileID: 0}
