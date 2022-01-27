@@ -139,7 +139,7 @@ public class Rotation : MonoBehaviour
     }
     void Start()
     {
-        Application.targetFrameRate = 120;
+        
         Cursor.visible = false;
         //if(!networkView.isMine)
         //enabled = false;
