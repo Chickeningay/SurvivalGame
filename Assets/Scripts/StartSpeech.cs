@@ -35,9 +35,11 @@ public class StartSpeech : MonoBehaviour
         }
         if (hit)
         {
-            Instantiate(feather, transform.position, feather.transform.rotation);
             gameObject.GetComponent<HitDetection>().hit = false;
             hit = false;
+            Instantiate(feather, transform.position, feather.transform.rotation);
+            gameObject.GetComponent<HitDetection>().hit = false;
+            
             StartCoroutine(wait());
         }
         interacted = gameObject.GetComponent<InteractDetector>().Interacted;

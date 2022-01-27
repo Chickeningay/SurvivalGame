@@ -197,11 +197,12 @@ public class ItemScript : MonoBehaviour
             gameObject.transform.localRotation = startrot;
             gameObject.transform.localPosition = startpos;
             Hit = Player.GetComponent<Raycaster>().Hit.transform.gameObject;
+            GameObject SpawnedDoor=null;
             if (Player.transform.position.x > Hit.transform.position.x)
             {
                 if (Mathf.Abs(Player.transform.position.x - Hit.transform.position.x) > Mathf.Abs(Player.transform.position.y - Hit.transform.position.y) && Mathf.Abs(Player.transform.position.x - Hit.transform.position.x) > Mathf.Abs(Player.transform.position.z - Hit.transform.position.z))
                 {
-                    Instantiate(SecondSpawnPrefab, ScaffPref.gameObject.transform.position, new Quaternion(SecondSpawnPrefab.gameObject.transform.rotation.x , SecondSpawnPrefab.gameObject.transform.rotation.y, SecondSpawnPrefab.gameObject.transform.rotation.z, SecondSpawnPrefab.gameObject.transform.rotation.w));
+                    SpawnedDoor=Instantiate(SecondSpawnPrefab, ScaffPref.gameObject.transform.position, new Quaternion(SecondSpawnPrefab.gameObject.transform.rotation.x , SecondSpawnPrefab.gameObject.transform.rotation.y, SecondSpawnPrefab.gameObject.transform.rotation.z, SecondSpawnPrefab.gameObject.transform.rotation.w));
                 }
 
             }
@@ -209,7 +210,7 @@ public class ItemScript : MonoBehaviour
             {
                 if (Mathf.Abs(Player.transform.position.x - Hit.transform.position.x) > Mathf.Abs(Player.transform.position.y - Hit.transform.position.y) && Mathf.Abs(Player.transform.position.x - Hit.transform.position.x) > Mathf.Abs(Player.transform.position.z - Hit.transform.position.z))
                 {
-                    Instantiate(SecondSpawnPrefab, ScaffPref.gameObject.transform.position, new Quaternion(SecondSpawnPrefab.gameObject.transform.rotation.x , SecondSpawnPrefab.gameObject.transform.rotation.y, SecondSpawnPrefab.gameObject.transform.rotation.z, SecondSpawnPrefab.gameObject.transform.rotation.w));
+                    SpawnedDoor = Instantiate(SecondSpawnPrefab, ScaffPref.gameObject.transform.position, new Quaternion(SecondSpawnPrefab.gameObject.transform.rotation.x , SecondSpawnPrefab.gameObject.transform.rotation.y, SecondSpawnPrefab.gameObject.transform.rotation.z, SecondSpawnPrefab.gameObject.transform.rotation.w));
                 }
             }
            
@@ -218,16 +219,17 @@ public class ItemScript : MonoBehaviour
             {
                 if (Mathf.Abs(Player.transform.position.z - Hit.transform.position.z) > Mathf.Abs(Player.transform.position.y - Hit.transform.position.y) && Mathf.Abs(Player.transform.position.z - Hit.transform.position.z) > Mathf.Abs(Player.transform.position.x - Hit.transform.position.x))
                 {
-                    Instantiate(ScaffSpawnPrefab, ScaffPref.gameObject.transform.position, new Quaternion(ScaffSpawnPrefab.gameObject.transform.rotation.x, ScaffSpawnPrefab.gameObject.transform.rotation.y, ScaffSpawnPrefab.gameObject.transform.rotation.z, ScaffSpawnPrefab.gameObject.transform.rotation.w));
+                    SpawnedDoor = Instantiate(ScaffSpawnPrefab, ScaffPref.gameObject.transform.position, new Quaternion(ScaffSpawnPrefab.gameObject.transform.rotation.x, ScaffSpawnPrefab.gameObject.transform.rotation.y, ScaffSpawnPrefab.gameObject.transform.rotation.z, ScaffSpawnPrefab.gameObject.transform.rotation.w));
                 }
             }
             if (Player.transform.position.z < Hit.transform.position.z)
             {
                 if (Mathf.Abs(Player.transform.position.z - Hit.transform.position.z) > Mathf.Abs(Player.transform.position.y - Hit.transform.position.y) && Mathf.Abs(Player.transform.position.z - Hit.transform.position.z) > Mathf.Abs(Player.transform.position.x - Hit.transform.position.x))
                 {
-                    Instantiate(ScaffSpawnPrefab, ScaffPref.gameObject.transform.position, new Quaternion(ScaffSpawnPrefab.gameObject.transform.rotation.x, ScaffSpawnPrefab.gameObject.transform.rotation.y, ScaffSpawnPrefab.gameObject.transform.rotation.z, ScaffSpawnPrefab.gameObject.transform.rotation.w));
+                    SpawnedDoor = Instantiate(ScaffSpawnPrefab, ScaffPref.gameObject.transform.position, new Quaternion(ScaffSpawnPrefab.gameObject.transform.rotation.x, ScaffSpawnPrefab.gameObject.transform.rotation.y, ScaffSpawnPrefab.gameObject.transform.rotation.z, ScaffSpawnPrefab.gameObject.transform.rotation.w));
                 }
             }
+            SpawnedDoor.GetComponent<DestroyDoor>().OwnerScaff = Hit;
             gameObject.GetComponent<Animator>().Play(Action1Anim.name);
             AwaitingAction1 = false;
         }
