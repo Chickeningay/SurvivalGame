@@ -247,6 +247,7 @@ public class WeaponControl : MonoBehaviour
                 }
             }
         }
+        
     }
     IEnumerator EmptyMagSounder()
     {
@@ -378,33 +379,27 @@ public class WeaponControl : MonoBehaviour
                 
                
             }
-            /*if (ShootingRay)
-            {
-                Hit = Physics.RaycastAll(MainCamera.transform.position, MainCamera.transform.forward);
-                foreach (RaycastHit Shot in Hit)
-                {
-                    if (Shot.transform.gameObject.GetComponent<GotHit>() != null)
-                    {
-                        Shot.transform.gameObject.GetComponent<GotHit>().hit = true;
-                    }
-                    if (Shot.transform.gameObject.GetComponent<HitDetection>() != null)
-                    {
-                        Shot.transform.gameObject.GetComponent<HitDetection>().hit = true;
-                    }
-                }
-
-
-            }*/
-
+           
             CurrentAmmo -= 1;
             if (RPGIcon)
             {
-                StartCoroutine(AwaitCommand(1f, true));
+                ShootingCooldown = true;
+                Invoke("awaitfunc", 1);
             }
 
             if (AmmoIcon)
             {
-                StartCoroutine(AwaitCommand(0.3f, true));
+                if (Automatic)
+                {
+                    ShootingCooldown = true;
+                    Invoke("awaitfunc", (30 * Time.deltaTime) / BPM);
+                }
+                else
+                {
+                    ShootingCooldown = true;
+                    Invoke("awaitfunc", 0.3f);
+                }
+               
             }
         }
     }
@@ -490,17 +485,21 @@ public class WeaponControl : MonoBehaviour
         
 
     }
-    
+    void awaitfunc()
+    {
+        ShootingCooldown = false;
+    }
     IEnumerator AwaitCommand(float time,bool DisableRay)
     {
         ShootingCooldown = true;
-        yield return new WaitForSeconds(0.025f);
+        //yield return new WaitForSeconds(0.025f);
         
         
             
         if (Automatic)
         {
-            yield return new WaitForSeconds(20 * Time.deltaTime/BPM);
+            yield return new WaitForSeconds((40 * Time.deltaTime) / BPM);
+            
         }
         else
         {

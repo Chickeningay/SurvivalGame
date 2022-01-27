@@ -16,7 +16,7 @@ public class IDHolder : MonoBehaviour
     }
     void Update()
     {
-        if (Inventory.GetComponent<InventorySelecter>().CurrentSelected == gameObject&&id!=0)
+        if (Inventory.GetComponent<InventorySelecter>().CurrentSelected == gameObject&&id!=0&&!Inventory.GetComponent<InventorySelecter>().InventoryExtended)
         {
             if(ItemCam.GetComponent<BetterWeaponSwitchForInventory>().ChildList[id - 1].GetComponent<WeaponControl>() != null)
             {

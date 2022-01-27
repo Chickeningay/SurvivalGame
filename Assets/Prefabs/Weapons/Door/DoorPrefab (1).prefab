@@ -108,7 +108,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 404f9699bb603cb4eb4da3f4655c77e2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -253,6 +253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Destroy_Particles: {fileID: 6664499627214451020}
   SecondRenderer: {fileID: 0}
+  OwnerScaff: {fileID: 0}
 --- !u!54 &1568248187215498718
 Rigidbody:
   m_ObjectHideFlags: 0

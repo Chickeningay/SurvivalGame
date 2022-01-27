@@ -24,6 +24,6 @@ public class ChickenAI : MonoBehaviour
         {
             transform.parent.gameObject.GetComponent<NavMeshAgent>().destination = new Vector3(startpos.x - Random.Range(0, 10), startpos.y, startpos.z - Random.Range(0, 10));
         }
-        print(transform.parent.gameObject.GetComponent<NavMeshAgent>().destination);
+       
     }
 }
