@@ -70,8 +70,15 @@ public class WeaponControl : MonoBehaviour
     {
         
             CurrentAmmo = Inventory.GetComponent<InventorySelecter>().CurrentSelected.gameObject.GetComponent<IDHolder>().currentAmmo;
-        
-       
+      
+
+
+    }
+    void MovementClipInvoke()
+    {
+        gameObject.transform.localRotation = startrot;
+        gameObject.transform.localPosition = startpos;
+        gameObject.GetComponent<Animator>().Play(Movement_Clip.name);
     }
     // Update is called once per frame
     void Update()
@@ -93,12 +100,56 @@ public class WeaponControl : MonoBehaviour
             {
                 if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State"))
                 {
-                    gameObject.GetComponent<sway>().enabled = true;
-                    gameObject.transform.localRotation = startrot;
-                    gameObject.transform.localPosition = startpos;
-                    gameObject.GetComponent<Animator>().Play(Movement_Clip.name);
+
+                    Invoke("MovementClipInvoke", 0.01f);
+                }
+                else
+                {
+                    if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State"))
+                    {
+                        float speedx;
+                        float speedy;
+                        float speedz;
+                        speedx = (gameObject.transform.localPosition.x - startpos.x) * 5;
+                        speedy = (gameObject.transform.localPosition.y - startpos.y) * 5;
+                        speedz = (gameObject.transform.localPosition.z - startpos.z) * 5;
+                        Vector3 NewPos;
+                        NewPos.x = Mathf.Lerp(gameObject.transform.localPosition.x, startpos.x, Time.deltaTime * speedx);
+                        NewPos.y = Mathf.Lerp(gameObject.transform.localPosition.y, startpos.y, Time.deltaTime * speedy);
+                        NewPos.z = Mathf.Lerp(gameObject.transform.localPosition.z, startpos.z, Time.deltaTime * speedz);
+                        gameObject.transform.localPosition = NewPos;
+                        Quaternion NewRot;
+                        NewRot.x = Mathf.LerpAngle(gameObject.transform.localRotation.x, startrot.x, Time.deltaTime * 5);
+                        NewRot.y = Mathf.LerpAngle(gameObject.transform.localRotation.y, startrot.y, Time.deltaTime * 5);
+                        NewRot.z = Mathf.LerpAngle(gameObject.transform.localRotation.z, startrot.z, Time.deltaTime * 5);
+                        NewRot.w = Mathf.LerpAngle(gameObject.transform.localRotation.w, startrot.w, Time.deltaTime * 5);
+                        gameObject.transform.localRotation = NewRot;
+                    }
                 }
 
+            }
+            else
+            {
+                if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State"))
+                {
+                    float speedx;
+                    float speedy;
+                    float speedz;
+                    speedx = (gameObject.transform.localPosition.x - startpos.x) * 5;
+                    speedy = (gameObject.transform.localPosition.y - startpos.y) * 5;
+                    speedz = (gameObject.transform.localPosition.z - startpos.z) * 5;
+                    Vector3 NewPos;
+                    NewPos.x = Mathf.Lerp(gameObject.transform.localPosition.x, startpos.x, Time.deltaTime * speedx);
+                    NewPos.y = Mathf.Lerp(gameObject.transform.localPosition.y, startpos.y, Time.deltaTime * speedy);
+                    NewPos.z = Mathf.Lerp(gameObject.transform.localPosition.z, startpos.z, Time.deltaTime * speedz);
+                    gameObject.transform.localPosition = NewPos;
+                    Quaternion NewRot;
+                    NewRot.x = Mathf.LerpAngle(gameObject.transform.localRotation.x, startrot.x, Time.deltaTime * 5);
+                    NewRot.y = Mathf.LerpAngle(gameObject.transform.localRotation.y, startrot.y, Time.deltaTime * 5);
+                    NewRot.z = Mathf.LerpAngle(gameObject.transform.localRotation.z, startrot.z, Time.deltaTime * 5);
+                    NewRot.w = Mathf.LerpAngle(gameObject.transform.localRotation.w, startrot.w, Time.deltaTime * 5);
+                    gameObject.transform.localRotation = NewRot;
+                }
             }
             if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name) && !Player.GetComponent<MovementReworked>().moving)
             {
@@ -458,7 +509,7 @@ public class WeaponControl : MonoBehaviour
             CurrentAmmo = MaxAmmo;
             CurrentReserve -= MaxAmmo;
             gameObject.GetComponent<Animator>().Play(Reload_Clip.name); Audio("Reload");
-            gameObject.GetComponent<sway>().enabled = false;
+           // gameObject.GetComponent<sway>().enabled = false;
         }
         else if (CurrentReserve > 0 && CurrentReserve <= MaxAmmo)
         {
@@ -466,7 +517,7 @@ public class WeaponControl : MonoBehaviour
             CurrentAmmo = CurrentReserve;
             CurrentReserve = 0;
             gameObject.GetComponent<Animator>().Play(Reload_Clip.name); Audio("Reload");
-            gameObject.GetComponent<sway>().enabled = false;
+            //gameObject.GetComponent<sway>().enabled = false;
         }
         else if (CurrentReserve==0)
         {
