@@ -292,16 +292,7 @@ public class WeaponControl : MonoBehaviour
                         Shoot();
 
 
-                        BulletFlash.transform.Rotate(BulletFlash.transform.eulerAngles.x, BulletFlash.transform.eulerAngles.y, BulletFlash.transform.eulerAngles.z + 10f, Space.Self);
-
-                        BulletFlash.active = true;
-                        
-                        flashenabledagain = true;
-                        if (!flashdisablerunning)
-                        {
-                            StartCoroutine(DisableFlash());
-
-                        }
+                       
                         
                         Audio("Action1");
                         Animate("Action1");
@@ -412,15 +403,18 @@ public class WeaponControl : MonoBehaviour
     void ShootInvoke()
     {
         normalization = false;
+        gameObject.GetComponent<Animator>().enabled = true;
     }
     void Shoot ()
     {
         if (CurrentAmmo > 0)
         {
-            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim"))
+            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont") && !normalization || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim")&&!normalization)
             {
                 normalization = true;
                 NormalizeWeapon();
+                gameObject.GetComponent<Animator>().Play("WaitingAnim");
+                gameObject.GetComponent<Animator>().enabled = false;
                 Invoke("ShootInvoke", 0.5f);
             }
 
@@ -494,6 +488,17 @@ public class WeaponControl : MonoBehaviour
                 {
                     if (Automatic)
                     {
+                        BulletFlash.transform.Rotate(BulletFlash.transform.eulerAngles.x, BulletFlash.transform.eulerAngles.y, BulletFlash.transform.eulerAngles.z + 10f, Space.Self);
+
+
+                        BulletFlash.active = true;
+
+                        flashenabledagain = true;
+                        if (!flashdisablerunning)
+                        {
+                            StartCoroutine(DisableFlash());
+
+                        }
                         ShootingCooldown = true;
                         Invoke("awaitfunc", (30 * Time.deltaTime) / BPM);
                     }

@@ -23,7 +23,7 @@ public class sway : MonoBehaviour
         }
         else
         {
-            origin_rotation = gameObject.GetComponent<WeaponControl>().startrot;
+            origin_rotation = gameObject.transform.localRotation;
         }
         
     }
