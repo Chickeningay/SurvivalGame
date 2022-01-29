@@ -52,6 +52,7 @@ public class WeaponControl : MonoBehaviour
     bool flashdisablerunning;
     public GameObject ImpactPrefab;
     bool emptymagaudiosent;
+    bool normalization;
     // Start is called before the first frame update
     void Start()
     {
@@ -74,21 +75,92 @@ public class WeaponControl : MonoBehaviour
 
 
     }
+    void NormalizeWeapon()
+    {
+        gameObject.GetComponent<Animator>().enabled = false;
+       // gameObject.GetComponent<sway>().enabled = false;
+        /* float speedx;
+        float speedy;
+        float speedz;
+        speedx = (gameObject.transform.localPosition.x - startpos.x) * 5;
+        speedy = (gameObject.transform.localPosition.y - startpos.y) * 5;
+        speedz = (gameObject.transform.localPosition.z - startpos.z) * 5;*/
+        Vector3 NewPos;
+        NewPos.x = Mathf.Lerp(gameObject.transform.localPosition.x, startpos.x, Time.deltaTime * 5);
+        NewPos.y = Mathf.Lerp(gameObject.transform.localPosition.y, startpos.y, Time.deltaTime * 5);
+        NewPos.z = Mathf.Lerp(gameObject.transform.localPosition.z, startpos.z, Time.deltaTime *5);
+        gameObject.transform.localPosition = NewPos;
+        Quaternion NewRot;
+        NewRot.x = Mathf.LerpAngle(gameObject.transform.localRotation.x, startrot.x, Time.deltaTime * 5);
+        NewRot.y = Mathf.LerpAngle(gameObject.transform.localRotation.y, startrot.y, Time.deltaTime * 5);
+        NewRot.z = Mathf.LerpAngle(gameObject.transform.localRotation.z, startrot.z, Time.deltaTime * 5);
+        NewRot.w = Mathf.LerpAngle(gameObject.transform.localRotation.w, startrot.w, Time.deltaTime * 5);
+        gameObject.transform.localRotation = NewRot;
+       // gameObject.GetComponent<sway>().enabled = true;
+        gameObject.GetComponent<Animator>().enabled = true;
+    }
+    void NormalizeWeapon(float speed)
+    {
+        Vector3 NewPos;
+        NewPos.x = Mathf.Lerp(gameObject.transform.localPosition.x, startpos.x, Time.deltaTime * speed);
+        NewPos.y = Mathf.Lerp(gameObject.transform.localPosition.y, startpos.y, Time.deltaTime * speed);
+        NewPos.z = Mathf.Lerp(gameObject.transform.localPosition.z, startpos.z, Time.deltaTime * speed);
+        gameObject.transform.localPosition = NewPos;
+        Quaternion NewRot;
+        NewRot.x = Mathf.LerpAngle(gameObject.transform.localRotation.x, startrot.x, Time.deltaTime * 5);
+        NewRot.y = Mathf.LerpAngle(gameObject.transform.localRotation.y, startrot.y, Time.deltaTime * 5);
+        NewRot.z = Mathf.LerpAngle(gameObject.transform.localRotation.z, startrot.z, Time.deltaTime * 5);
+        NewRot.w = Mathf.LerpAngle(gameObject.transform.localRotation.w, startrot.w, Time.deltaTime * 5);
+        gameObject.transform.localRotation = NewRot;
+    }
     void MovementClipInvoke()
     {
-        gameObject.transform.localRotation = startrot;
-        gameObject.transform.localPosition = startpos;
+        NormalizeWeapon();
         gameObject.GetComponent<Animator>().Play(Movement_Clip.name);
     }
     // Update is called once per frame
     void Update()
     {
-
-
-
-
-
         
+        if(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim")|| gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont"))
+        {
+            if (!Player.GetComponent<MovementReworked>().IsGrounded)
+            {
+                gameObject.GetComponent<Animator>().speed = 0;
+            }
+            else
+            {
+                gameObject.GetComponent<Animator>().speed = 1;
+            }
+        }
+        else
+        {
+            gameObject.GetComponent<Animator>().speed = 1;
+        }
+
+        if (gameObject.GetComponent<Animator>().IsInTransition(0))
+        {
+            if (!gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim"))
+            {
+                
+                NormalizeWeapon();
+                
+            }
+            
+        }
+
+        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State"))
+        {
+            NormalizeWeapon();
+        }
+        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State")|| gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4MovementToReloadAnim") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Action1_Clip.name))
+        {
+            gameObject.GetComponent<sway>().enabled = true;
+        }
+        else
+        {
+            gameObject.GetComponent<sway>().enabled = false;
+        }
         inWater = Player.GetComponent<MovementReworked>().InWater;
         if (ObeyInventory)
         {
@@ -107,23 +179,7 @@ public class WeaponControl : MonoBehaviour
                 {
                     if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State"))
                     {
-                        float speedx;
-                        float speedy;
-                        float speedz;
-                        speedx = (gameObject.transform.localPosition.x - startpos.x) * 5;
-                        speedy = (gameObject.transform.localPosition.y - startpos.y) * 5;
-                        speedz = (gameObject.transform.localPosition.z - startpos.z) * 5;
-                        Vector3 NewPos;
-                        NewPos.x = Mathf.Lerp(gameObject.transform.localPosition.x, startpos.x, Time.deltaTime * speedx);
-                        NewPos.y = Mathf.Lerp(gameObject.transform.localPosition.y, startpos.y, Time.deltaTime * speedy);
-                        NewPos.z = Mathf.Lerp(gameObject.transform.localPosition.z, startpos.z, Time.deltaTime * speedz);
-                        gameObject.transform.localPosition = NewPos;
-                        Quaternion NewRot;
-                        NewRot.x = Mathf.LerpAngle(gameObject.transform.localRotation.x, startrot.x, Time.deltaTime * 5);
-                        NewRot.y = Mathf.LerpAngle(gameObject.transform.localRotation.y, startrot.y, Time.deltaTime * 5);
-                        NewRot.z = Mathf.LerpAngle(gameObject.transform.localRotation.z, startrot.z, Time.deltaTime * 5);
-                        NewRot.w = Mathf.LerpAngle(gameObject.transform.localRotation.w, startrot.w, Time.deltaTime * 5);
-                        gameObject.transform.localRotation = NewRot;
+                        NormalizeWeapon();
                     }
                 }
 
@@ -132,29 +188,12 @@ public class WeaponControl : MonoBehaviour
             {
                 if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State"))
                 {
-                    float speedx;
-                    float speedy;
-                    float speedz;
-                    speedx = (gameObject.transform.localPosition.x - startpos.x) * 5;
-                    speedy = (gameObject.transform.localPosition.y - startpos.y) * 5;
-                    speedz = (gameObject.transform.localPosition.z - startpos.z) * 5;
-                    Vector3 NewPos;
-                    NewPos.x = Mathf.Lerp(gameObject.transform.localPosition.x, startpos.x, Time.deltaTime * speedx);
-                    NewPos.y = Mathf.Lerp(gameObject.transform.localPosition.y, startpos.y, Time.deltaTime * speedy);
-                    NewPos.z = Mathf.Lerp(gameObject.transform.localPosition.z, startpos.z, Time.deltaTime * speedz);
-                    gameObject.transform.localPosition = NewPos;
-                    Quaternion NewRot;
-                    NewRot.x = Mathf.LerpAngle(gameObject.transform.localRotation.x, startrot.x, Time.deltaTime * 5);
-                    NewRot.y = Mathf.LerpAngle(gameObject.transform.localRotation.y, startrot.y, Time.deltaTime * 5);
-                    NewRot.z = Mathf.LerpAngle(gameObject.transform.localRotation.z, startrot.z, Time.deltaTime * 5);
-                    NewRot.w = Mathf.LerpAngle(gameObject.transform.localRotation.w, startrot.w, Time.deltaTime * 5);
-                    gameObject.transform.localRotation = NewRot;
+                    NormalizeWeapon();
                 }
             }
-            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name) && !Player.GetComponent<MovementReworked>().moving)
+            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name) && !Player.GetComponent<MovementReworked>().moving|| gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont") && !Player.GetComponent<MovementReworked>().moving)
             {
-                                   gameObject.transform.localRotation = startrot;
-                    gameObject.transform.localPosition = startpos;
+                NormalizeWeapon();
                 gameObject.GetComponent<Animator>().Play("New State");
             }
             whenScoped();
@@ -187,7 +226,7 @@ public class WeaponControl : MonoBehaviour
             {
                 AmmoText.gameObject.GetComponent<Text>().text = CurrentAmmo + "/" + CurrentReserve;
 
-                if (!ShootingCooldown && Input.GetKeyDown(KeyCode.Mouse0) && !Automatic && !hasScope && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name))
+                if (!ShootingCooldown && Input.GetKeyDown(KeyCode.Mouse0) && !Automatic && !hasScope && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name) && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4MovementToReloadAnim"))
                 {
 
 
@@ -215,7 +254,7 @@ public class WeaponControl : MonoBehaviour
 
 
                 }
-                if (!ShootingCooldown && Input.GetKeyDown(KeyCode.Mouse0) && hasScope && !Automatic && weaponScoped && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name))
+                if (!ShootingCooldown && Input.GetKeyDown(KeyCode.Mouse0) && hasScope && !Automatic && weaponScoped && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name) && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4MovementToReloadAnim"))
                 {
 
 
@@ -244,7 +283,7 @@ public class WeaponControl : MonoBehaviour
                     
                 }
                
-                    if (!ShootingCooldown && Input.GetKey(KeyCode.Mouse0) && Automatic && !hasScope && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name))
+                    if (!ShootingCooldown && Input.GetKey(KeyCode.Mouse0) && Automatic && !hasScope && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name) && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4MovementToReloadAnim"))
                 {
 
 
@@ -370,102 +409,127 @@ public class WeaponControl : MonoBehaviour
                 
         }
     }
+    void ShootInvoke()
+    {
+        normalization = false;
+    }
     void Shoot ()
     {
         if (CurrentAmmo > 0)
         {
-            MainCamera.GetComponent<Rotation>().activatebounce = true;
-            Player.GetComponent<Rotation>().activatebounce = true;
-            Instantiate(fakebullet, fakebulletspawn.transform);
-            
-            
-            StopCoroutine(DisableFlash());
-
-            gameObject.transform.localRotation = startrot;
-            gameObject.transform.localPosition = startpos;
-            if (BulletFlash != null&&!Automatic)
+            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim"))
             {
-                BulletFlash.transform.eulerAngles = new Vector3(BulletFlash.transform.rotation.x, BulletFlash.transform.rotation.y, Random.Range(0f, 360f));
-                BulletFlash.active = true;
-                if (!flashdisablerunning)
-                {
-                    StartCoroutine(DisableFlash());
-
-                }
+                normalization = true;
+                NormalizeWeapon();
+                Invoke("ShootInvoke", 0.5f);
             }
-            if (ShootingRay)
+
+
+            if (!normalization)
             {
-                bool successhit;
-                RaycastHit Hit;
-                successhit=Physics.Raycast(MainCamera.transform.position, MainCamera.transform.forward,out Hit);
-                Vector3 normal = Hit.normal;
-                GameObject spawn = Instantiate(ImpactPrefab, Hit.point, new Quaternion(ImpactPrefab.transform.rotation.x, 0, ImpactPrefab.transform.rotation.z, ImpactPrefab.transform.rotation.w));
+                MainCamera.GetComponent<Rotation>().activatebounce = true;
+                Player.GetComponent<Rotation>().activatebounce = true;
+                Instantiate(fakebullet, fakebulletspawn.transform);
 
-                if (Mathf.Max(Mathf.Abs(normal.x), Mathf.Abs(normal.y), Mathf.Abs(normal.z)) == Mathf.Abs(normal.x))
-                {
-                    spawn.GetComponent<explosionManage>().x = true;
-                }
-                if (Mathf.Max(Mathf.Abs(normal.x), Mathf.Abs(normal.y), Mathf.Abs(normal.z)) == Mathf.Abs(normal.y))
-                {
-                    spawn.GetComponent<explosionManage>().y = true;
-                }
-                if (Mathf.Max(Mathf.Abs(normal.x), Mathf.Abs(normal.y), Mathf.Abs(normal.z)) == Mathf.Abs(normal.z))
-                {
-                    spawn.GetComponent<explosionManage>().z = true;
 
-                }
-                if (successhit)
+                StopCoroutine(DisableFlash());
+
+
+                if (BulletFlash != null && !Automatic)
                 {
-                    if (Hit.transform.gameObject.GetComponent<GotHit>() != null)
+                    BulletFlash.transform.eulerAngles = new Vector3(BulletFlash.transform.rotation.x, BulletFlash.transform.rotation.y, Random.Range(0f, 360f));
+                    BulletFlash.active = true;
+                    if (!flashdisablerunning)
                     {
-                        Hit.transform.gameObject.GetComponent<GotHit>().hit = true;
-                    }
-                    if (Hit.transform.gameObject.GetComponent<HitDetection>() != null)
-                    {
-                        Hit.transform.gameObject.GetComponent<HitDetection>().hit = true;
+                        StartCoroutine(DisableFlash());
+
                     }
                 }
-               
-                
-                
-               
-            }
-           
-            CurrentAmmo -= 1;
-            if (RPGIcon)
-            {
-                ShootingCooldown = true;
-                Invoke("awaitfunc", 1);
-            }
+                if (ShootingRay)
+                {
+                    bool successhit;
+                    RaycastHit Hit;
+                    successhit = Physics.Raycast(MainCamera.transform.position, MainCamera.transform.forward, out Hit);
+                    Vector3 normal = Hit.normal;
+                    GameObject spawn = Instantiate(ImpactPrefab, Hit.point, new Quaternion(ImpactPrefab.transform.rotation.x, 0, ImpactPrefab.transform.rotation.z, ImpactPrefab.transform.rotation.w));
 
-            if (AmmoIcon)
-            {
-                if (Automatic)
+                    if (Mathf.Max(Mathf.Abs(normal.x), Mathf.Abs(normal.y), Mathf.Abs(normal.z)) == Mathf.Abs(normal.x))
+                    {
+                        spawn.GetComponent<explosionManage>().x = true;
+                    }
+                    if (Mathf.Max(Mathf.Abs(normal.x), Mathf.Abs(normal.y), Mathf.Abs(normal.z)) == Mathf.Abs(normal.y))
+                    {
+                        spawn.GetComponent<explosionManage>().y = true;
+                    }
+                    if (Mathf.Max(Mathf.Abs(normal.x), Mathf.Abs(normal.y), Mathf.Abs(normal.z)) == Mathf.Abs(normal.z))
+                    {
+                        spawn.GetComponent<explosionManage>().z = true;
+
+                    }
+                    if (successhit)
+                    {
+                        if (Hit.transform.gameObject.GetComponent<GotHit>() != null)
+                        {
+                            Hit.transform.gameObject.GetComponent<GotHit>().hit = true;
+                        }
+                        if (Hit.transform.gameObject.GetComponent<HitDetection>() != null)
+                        {
+                            Hit.transform.gameObject.GetComponent<HitDetection>().hit = true;
+                        }
+                    }
+
+
+
+
+                }
+
+                CurrentAmmo -= 1;
+                if (RPGIcon)
                 {
                     ShootingCooldown = true;
-                    Invoke("awaitfunc", (30 * Time.deltaTime) / BPM);
+                    Invoke("awaitfunc", 1);
                 }
-                else
+
+                if (AmmoIcon)
                 {
-                    ShootingCooldown = true;
-                    Invoke("awaitfunc", 0.3f);
+                    if (Automatic)
+                    {
+                        ShootingCooldown = true;
+                        Invoke("awaitfunc", (30 * Time.deltaTime) / BPM);
+                    }
+                    else
+                    {
+                        ShootingCooldown = true;
+                        Invoke("awaitfunc", 0.3f);
+                    }
+
                 }
-               
             }
+            
         }
     }
     void Audio (string Action)
     {
-        if(Action=="Reload")
+        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim"))
+        {
+            normalization = true;
+            NormalizeWeapon();
+            Invoke("ShootInvoke", 0.5f);
+        }
+
+
+        if (!normalization) {if (Action == "Action1")
+            {
+                Player.GetComponent<AudioSource>().PlayOneShot(Action1_Audio);
+
+
+            }
+        }
+            if (Action=="Reload")
         {
             Player.GetComponent<AudioSource>().PlayOneShot(Reload_Audio);
         }
-        else if (Action == "Action1")
-        {
-            Player.GetComponent<AudioSource>().PlayOneShot(Action1_Audio);
-            
-            
-        }
+        
         else if (Action == "Action2")
         {
             if (Action2_Audio != null)
@@ -485,13 +549,24 @@ public class WeaponControl : MonoBehaviour
     }
     void Animate(string Action)
     {
-        if (Action == "Action1")
+        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim"))
         {
-            gameObject.GetComponent<Animator>().Play(Action1_Clip.name);
+            normalization = true;
+            NormalizeWeapon();
+            Invoke("ShootInvoke", 0.5f);
         }
-        else if (Action == "Action2")
+
+
+        if (!normalization)
         {
-            gameObject.GetComponent<Animator>().Play(Action2_Clip.name);
+            if (Action == "Action1")
+            {
+                gameObject.GetComponent<Animator>().Play(Action1_Clip.name);
+            }
+            else if (Action == "Action2")
+            {
+                gameObject.GetComponent<Animator>().Play(Action2_Clip.name);
+            }
         }
     }
     void Reloading()
@@ -508,16 +583,43 @@ public class WeaponControl : MonoBehaviour
             ShootingCooldown = true;
             CurrentAmmo = MaxAmmo;
             CurrentReserve -= MaxAmmo;
-            gameObject.GetComponent<Animator>().Play(Reload_Clip.name); Audio("Reload");
-           // gameObject.GetComponent<sway>().enabled = false;
+            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont")|| gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim")){
+               
+                gameObject.GetComponent<sway>().enabled = false;
+                gameObject.GetComponent<Animator>().enabled = false;
+                
+                gameObject.GetComponent<Animator>().enabled = true;
+                gameObject.GetComponent<Animator>().Play("M4MovementToReloadAnim"); Audio("Reload");
+                gameObject.GetComponent<sway>().enabled = true;
+            }
+            else
+            {
+                ReloadInvoke();
+            }
+             
+           
         }
         else if (CurrentReserve > 0 && CurrentReserve <= MaxAmmo)
         {
             ShootingCooldown = true;
             CurrentAmmo = CurrentReserve;
+            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim"))
+            {
+              
+                gameObject.GetComponent<sway>().enabled = false;
+                gameObject.GetComponent<Animator>().enabled = false;
+                
+                gameObject.GetComponent<Animator>().enabled = true;
+                gameObject.GetComponent<Animator>().Play("M4MovementToReloadAnim"); Audio("Reload");
+                gameObject.GetComponent<sway>().enabled = true;
+            }
+
+            else
+            {
+                ReloadInvoke();
+            }
             CurrentReserve = 0;
-            gameObject.GetComponent<Animator>().Play(Reload_Clip.name); Audio("Reload");
-            //gameObject.GetComponent<sway>().enabled = false;
+            
         }
         else if (CurrentReserve==0)
         {
@@ -535,6 +637,11 @@ public class WeaponControl : MonoBehaviour
         
         
 
+    }
+    void ReloadInvoke()
+    {
+       
+        gameObject.GetComponent<Animator>().Play(Reload_Clip.name); Audio("Reload");
     }
     void awaitfunc()
     {
