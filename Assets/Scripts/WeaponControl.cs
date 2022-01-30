@@ -57,6 +57,7 @@ public class WeaponControl : MonoBehaviour
     public float jumpswaydebt;
     public AnimatorOverrideController BaseController;
     public AnimatorOverrideController BackwardsController;
+    bool runanimcooldown;
     // Start is called before the first frame update
     void Start()
     {
@@ -106,7 +107,10 @@ public class WeaponControl : MonoBehaviour
        // gameObject.GetComponent<sway>().enabled = true;
         gameObject.GetComponent<Animator>().enabled = true;
     }
-  
+    void runaniminvoke()
+    {
+        runanimcooldown = false;
+    }
     void MovementClipInvoke()
     {
         NormalizeWeapon();
@@ -124,33 +128,40 @@ public class WeaponControl : MonoBehaviour
         {
             gameObject.GetComponent<Animator>().runtimeAnimatorController = BaseController;
         }
-        if(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim")|| gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont"))
+        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont") && !Player.GetComponent<MovementReworked>().moving)
+        {
+            NormalizeWeapon();
+            gameObject.GetComponent<Animator>().Play("New State");
+            runanimcooldown = true;
+            Invoke("runaniminvoke", 0.2f);
+        }
+        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont")|| gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State"))
         {
             if (!Player.GetComponent<MovementReworked>().IsGrounded)
             {
                 gameObject.GetComponent<Animator>().speed = 0;
                 print(Player.GetComponent<MovementReworked>().PlayerVel.y);
-                if (!Player.GetComponent<MovementReworked>().OnLadder&&!Player.GetComponent<MovementReworked>().InWater)
+                if (!Player.GetComponent<MovementReworked>().OnLadder && !Player.GetComponent<MovementReworked>().InWater)
                 {
-                    if (Player.GetComponent<MovementReworked>().PlayerVel.y>0)
+                    if (Player.GetComponent<MovementReworked>().PlayerVel.y > 0)
                     {
-                        transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Clamp(Mathf.Lerp(transform.localPosition.y, transform.localPosition.y + (Player.GetComponent<MovementReworked>().PlayerVel.y * 2), Time.deltaTime), startpos.y - 0.35f, startpos.y + 0.15f), transform.localPosition.z);
-                       
+                        transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Clamp(Mathf.Lerp(transform.localPosition.y, transform.localPosition.y + (Player.GetComponent<MovementReworked>().PlayerVel.y / 3), Time.deltaTime), startpos.y - 0.35f, startpos.y + 0.15f), transform.localPosition.z);
+
                     }
                     else
                     {
                         transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Clamp(Mathf.Lerp(transform.localPosition.y, transform.localPosition.y + (Player.GetComponent<MovementReworked>().PlayerVel.y / 10), Time.deltaTime), startpos.y - 0.35f, startpos.y + 0.15f), transform.localPosition.z);
-                        
+
                     }
-                    
+
                 }
-                
+
             }
             else
             {
-                transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Lerp(transform.localPosition.y, -1.189999f, Time.deltaTime*15), transform.localPosition.z);
-               
-                
+                transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Lerp(transform.localPosition.y, -1.189999f, Time.deltaTime * 15), transform.localPosition.z);
+
+
                 gameObject.GetComponent<Animator>().speed = 1;
             }
         }
@@ -163,18 +174,18 @@ public class WeaponControl : MonoBehaviour
         {
             if (!gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim"))
             {
-                
+
                 NormalizeWeapon();
-                
+
             }
-            
+
         }
 
         if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State"))
         {
             NormalizeWeapon();
         }
-        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State")|| gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4MovementToReloadAnim") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Action1_Clip.name))
+        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4MovementToReloadAnim") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Action1_Clip.name))
         {
             gameObject.GetComponent<sway>().enabled = true;
         }
@@ -187,13 +198,13 @@ public class WeaponControl : MonoBehaviour
         {
             InventoryExtended = Inventory.GetComponent<InventorySelecter>().InventoryExtended;
         }
-        if (!Player.GetComponent<MovementReworked>().interacting&&!InventoryExtended)
+        if (!Player.GetComponent<MovementReworked>().interacting && !InventoryExtended)
         {
             if (Player.GetComponent<MovementReworked>().moving)
             {
-                if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State")&&!normalization&&!blockmovement&&!Input.GetKey(KeyCode.Mouse0))
+                if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State") && !runanimcooldown && !blockmovement && !Input.GetKey(KeyCode.Mouse0))
                 {
-                    
+
                     Invoke("MovementClipInvoke", 0.01f);
                 }
                 else
@@ -212,10 +223,9 @@ public class WeaponControl : MonoBehaviour
                     NormalizeWeapon();
                 }
             }
-            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name) && !Player.GetComponent<MovementReworked>().moving|| gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont") && !Player.GetComponent<MovementReworked>().moving)
+            if (Input.GetKeyDown(KeyCode.R) && CurrentAmmo < MaxAmmo && !normalization && !Input.GetKey(KeyCode.Mouse0)&&!gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim"))
             {
-                NormalizeWeapon();
-                gameObject.GetComponent<Animator>().Play("New State");
+                Reloading();
             }
             whenScoped();
 
@@ -242,6 +252,19 @@ public class WeaponControl : MonoBehaviour
                 AmmoText.gameObject.GetComponent<Text>().text = "";
 
             }
+            if (Automatic && Input.GetKeyUp(KeyCode.Mouse0) || Automatic && CurrentAmmo <= 0)
+            {
+                BulletFlash.active = false;
+            }
+        }
+    }
+        void FixedUpdate()
+        {
+       
+       
+      
+       
+            
 
             if (Player.GetComponent<MovementReworked>().InWater != true && !Melee)
             {
@@ -295,10 +318,7 @@ public class WeaponControl : MonoBehaviour
 
 
                 }
-                if(Automatic&& Input.GetKeyUp(KeyCode.Mouse0)||Automatic&&CurrentAmmo<=0)
-                {
-                    BulletFlash.active = false;
-                }
+                
                 if(!Input.GetKey(KeyCode.Mouse0) && Automatic)
                 {
                     
@@ -326,13 +346,7 @@ public class WeaponControl : MonoBehaviour
                         }
                     }
                 }
-                if (Input.GetKeyDown(KeyCode.R) && CurrentAmmo < MaxAmmo&&!normalization&&!Input.GetKey(KeyCode.Mouse0))
-                {
-                    Reloading();
-
-
-
-                }
+                
                 if (!weaponScoped && Input.GetKeyDown(KeyCode.Mouse1) && hasScope)
                 {
                    
@@ -350,7 +364,7 @@ public class WeaponControl : MonoBehaviour
             }
         }
         
-    }
+    
     IEnumerator EmptyMagSounder()
     {
         if (!emptymagaudiosent)
@@ -437,7 +451,7 @@ public class WeaponControl : MonoBehaviour
                 NormalizeWeapon();
                 gameObject.GetComponent<Animator>().Play("New State");
                 gameObject.GetComponent<Animator>().enabled = false;
-                Invoke("ShootInvoke", 0.2f);
+                Invoke("ShootInvoke", 0.4f);
             }
 
 
@@ -543,7 +557,7 @@ public class WeaponControl : MonoBehaviour
         {
             normalization = true;
             NormalizeWeapon();
-            Invoke("ShootInvoke", 0.2f);
+            Invoke("ShootInvoke", 0.4f);
         }
 
 
@@ -582,7 +596,7 @@ public class WeaponControl : MonoBehaviour
         {
             normalization = true;
             NormalizeWeapon();
-            Invoke("ShootInvoke", 0.2f);
+            Invoke("ShootInvoke", 0.4f);
         }
 
 
@@ -622,6 +636,7 @@ public class WeaponControl : MonoBehaviour
                 gameObject.GetComponent<Animator>().Play("M4MovementToReloadAnim"); Audio("Reload");
                 gameObject.GetComponent<sway>().enabled = true;
             }
+
             else
             {
                 ReloadInvoke();
