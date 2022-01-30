@@ -367,7 +367,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 497324715}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1efa794c13b13024d9b00539e7ce1207, type: 3}
   m_Name: 
@@ -813,7 +813,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 15ad056f3031dba4e8e1d6d8e59b8512,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 15ad056f3031dba4e8e1d6d8e59b8512,
         type: 3}
@@ -2165,7 +2165,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 65b19aac7b7b1164392a9638f325846b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 65b19aac7b7b1164392a9638f325846b,
         type: 3}
@@ -7072,7 +7072,7 @@ PrefabInstance:
     - target: {fileID: 3035527878549733141, guid: 1647a765cb180d14cbe017b405ff49c4,
         type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3037325806447371100, guid: 1647a765cb180d14cbe017b405ff49c4,
         type: 3}
@@ -7877,17 +7877,17 @@ PrefabInstance:
     - target: {fileID: 4188316007606242830, guid: 1647a765cb180d14cbe017b405ff49c4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.712
+      value: -0.74
       objectReference: {fileID: 0}
     - target: {fileID: 4188316007606242830, guid: 1647a765cb180d14cbe017b405ff49c4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.52
+      value: 0.58
       objectReference: {fileID: 0}
     - target: {fileID: 4188316007606242830, guid: 1647a765cb180d14cbe017b405ff49c4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.843
+      value: -0.99
       objectReference: {fileID: 0}
     - target: {fileID: 4188316007606242831, guid: 1647a765cb180d14cbe017b405ff49c4,
         type: 3}
@@ -7999,6 +7999,18 @@ PrefabInstance:
       propertyPath: GrenadeIcon
       value: 
       objectReference: {fileID: 1141442636}
+    - target: {fileID: 4188316008031229674, guid: 1647a765cb180d14cbe017b405ff49c4,
+        type: 3}
+      propertyPath: BaseController
+      value: 
+      objectReference: {fileID: 22100000, guid: 97875eee2a005214c809fdc519cb3b63,
+        type: 2}
+    - target: {fileID: 4188316008031229674, guid: 1647a765cb180d14cbe017b405ff49c4,
+        type: 3}
+      propertyPath: BackwardsController
+      value: 
+      objectReference: {fileID: 22100000, guid: 3c745eaa184366944aea81ff07de6cf2,
+        type: 2}
     - target: {fileID: 4188316008031882880, guid: 1647a765cb180d14cbe017b405ff49c4,
         type: 3}
       propertyPath: LandClip

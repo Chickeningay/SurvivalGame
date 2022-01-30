@@ -53,11 +53,17 @@ public class WeaponControl : MonoBehaviour
     public GameObject ImpactPrefab;
     bool emptymagaudiosent;
     bool normalization;
+    bool blockmovement;
+    public float jumpswaydebt;
+    public AnimatorOverrideController BaseController;
+    public AnimatorOverrideController BackwardsController;
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.GetComponent<sway>().enabled = false;
         startpos = gameObject.transform.localPosition;
         startrot = gameObject.transform.localRotation;
+        gameObject.GetComponent<sway>().enabled = true;
         Player.GetComponent<AudioSource>().PlayOneShot(Switch_Audio);
         gameObject.GetComponent<Animator>().Play(Switch_Clip.name);
         if (BulletFlash != null)
@@ -75,6 +81,7 @@ public class WeaponControl : MonoBehaviour
 
 
     }
+
     void NormalizeWeapon()
     {
         gameObject.GetComponent<Animator>().enabled = false;
@@ -99,37 +106,51 @@ public class WeaponControl : MonoBehaviour
        // gameObject.GetComponent<sway>().enabled = true;
         gameObject.GetComponent<Animator>().enabled = true;
     }
-    void NormalizeWeapon(float speed)
-    {
-        Vector3 NewPos;
-        NewPos.x = Mathf.Lerp(gameObject.transform.localPosition.x, startpos.x, Time.deltaTime * speed);
-        NewPos.y = Mathf.Lerp(gameObject.transform.localPosition.y, startpos.y, Time.deltaTime * speed);
-        NewPos.z = Mathf.Lerp(gameObject.transform.localPosition.z, startpos.z, Time.deltaTime * speed);
-        gameObject.transform.localPosition = NewPos;
-        Quaternion NewRot;
-        NewRot.x = Mathf.LerpAngle(gameObject.transform.localRotation.x, startrot.x, Time.deltaTime * 5);
-        NewRot.y = Mathf.LerpAngle(gameObject.transform.localRotation.y, startrot.y, Time.deltaTime * 5);
-        NewRot.z = Mathf.LerpAngle(gameObject.transform.localRotation.z, startrot.z, Time.deltaTime * 5);
-        NewRot.w = Mathf.LerpAngle(gameObject.transform.localRotation.w, startrot.w, Time.deltaTime * 5);
-        gameObject.transform.localRotation = NewRot;
-    }
+  
     void MovementClipInvoke()
     {
         NormalizeWeapon();
         gameObject.GetComponent<Animator>().Play(Movement_Clip.name);
+
     }
     // Update is called once per frame
     void Update()
     {
-        
+        if (Player.GetComponent<MovementReworked>().moving && Input.GetKey(KeyCode.S))
+        {
+            gameObject.GetComponent<Animator>().runtimeAnimatorController = BackwardsController;
+        }
+        else
+        {
+            gameObject.GetComponent<Animator>().runtimeAnimatorController = BaseController;
+        }
         if(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim")|| gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont"))
         {
             if (!Player.GetComponent<MovementReworked>().IsGrounded)
             {
                 gameObject.GetComponent<Animator>().speed = 0;
+                print(Player.GetComponent<MovementReworked>().PlayerVel.y);
+                if (!Player.GetComponent<MovementReworked>().OnLadder&&!Player.GetComponent<MovementReworked>().InWater)
+                {
+                    if (Player.GetComponent<MovementReworked>().PlayerVel.y>0)
+                    {
+                        transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Clamp(Mathf.Lerp(transform.localPosition.y, transform.localPosition.y + (Player.GetComponent<MovementReworked>().PlayerVel.y * 2), Time.deltaTime), startpos.y - 0.35f, startpos.y + 0.15f), transform.localPosition.z);
+                       
+                    }
+                    else
+                    {
+                        transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Clamp(Mathf.Lerp(transform.localPosition.y, transform.localPosition.y + (Player.GetComponent<MovementReworked>().PlayerVel.y / 10), Time.deltaTime), startpos.y - 0.35f, startpos.y + 0.15f), transform.localPosition.z);
+                        
+                    }
+                    
+                }
+                
             }
             else
             {
+                transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Lerp(transform.localPosition.y, -1.189999f, Time.deltaTime*15), transform.localPosition.z);
+               
+                
                 gameObject.GetComponent<Animator>().speed = 1;
             }
         }
@@ -170,9 +191,9 @@ public class WeaponControl : MonoBehaviour
         {
             if (Player.GetComponent<MovementReworked>().moving)
             {
-                if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State"))
+                if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State")&&!normalization&&!blockmovement&&!Input.GetKey(KeyCode.Mouse0))
                 {
-
+                    
                     Invoke("MovementClipInvoke", 0.01f);
                 }
                 else
@@ -305,7 +326,7 @@ public class WeaponControl : MonoBehaviour
                         }
                     }
                 }
-                if (Input.GetKeyDown(KeyCode.R) && CurrentAmmo < MaxAmmo)
+                if (Input.GetKeyDown(KeyCode.R) && CurrentAmmo < MaxAmmo&&!normalization&&!Input.GetKey(KeyCode.Mouse0))
                 {
                     Reloading();
 
@@ -409,18 +430,20 @@ public class WeaponControl : MonoBehaviour
     {
         if (CurrentAmmo > 0)
         {
+            blockmovement = true;
             if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont") && !normalization || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim")&&!normalization)
             {
                 normalization = true;
                 NormalizeWeapon();
-                gameObject.GetComponent<Animator>().Play("WaitingAnim");
+                gameObject.GetComponent<Animator>().Play("New State");
                 gameObject.GetComponent<Animator>().enabled = false;
-                Invoke("ShootInvoke", 0.5f);
+                Invoke("ShootInvoke", 0.2f);
             }
 
 
             if (!normalization)
             {
+               
                 MainCamera.GetComponent<Rotation>().activatebounce = true;
                 Player.GetComponent<Rotation>().activatebounce = true;
                 Instantiate(fakebullet, fakebulletspawn.transform);
@@ -512,6 +535,7 @@ public class WeaponControl : MonoBehaviour
             }
             
         }
+        blockmovement = false;
     }
     void Audio (string Action)
     {
@@ -519,7 +543,7 @@ public class WeaponControl : MonoBehaviour
         {
             normalization = true;
             NormalizeWeapon();
-            Invoke("ShootInvoke", 0.5f);
+            Invoke("ShootInvoke", 0.2f);
         }
 
 
@@ -558,7 +582,7 @@ public class WeaponControl : MonoBehaviour
         {
             normalization = true;
             NormalizeWeapon();
-            Invoke("ShootInvoke", 0.5f);
+            Invoke("ShootInvoke", 0.2f);
         }
 
 
@@ -585,6 +609,7 @@ public class WeaponControl : MonoBehaviour
         }
         if (MaxAmmo < CurrentReserve)
         {
+            transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Lerp(transform.localPosition.y, startpos.y, Time.deltaTime * 20), transform.localPosition.z);
             ShootingCooldown = true;
             CurrentAmmo = MaxAmmo;
             CurrentReserve -= MaxAmmo;
@@ -606,6 +631,7 @@ public class WeaponControl : MonoBehaviour
         }
         else if (CurrentReserve > 0 && CurrentReserve <= MaxAmmo)
         {
+            transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Lerp(transform.localPosition.y, startpos.y, Time.deltaTime * 20), transform.localPosition.z);
             ShootingCooldown = true;
             CurrentAmmo = CurrentReserve;
             if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim"))
