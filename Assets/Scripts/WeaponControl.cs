@@ -57,10 +57,9 @@ public class WeaponControl : MonoBehaviour
     bool normalization;
     bool blockmovement;
     public float jumpswaydebt;
-    public AnimatorOverrideController BaseController;
-    public AnimatorOverrideController BackwardsController;
     bool runanimcooldown;
     public float movementAnimBaseY;
+    public GameObject Cross;
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +74,7 @@ public class WeaponControl : MonoBehaviour
             BulletFlash.active = false;
         }
         Inventory = GameObject.Find("Inventory");
+        Cross = GameObject.Find("Crosshair");
     }
 
     private void OnEnable()
@@ -108,14 +108,7 @@ public class WeaponControl : MonoBehaviour
     }
     void Update()
     {
-        if (Player.GetComponent<MovementReworked>().moving && Input.GetKey(KeyCode.S))
-        {
-            gameObject.GetComponent<Animator>().runtimeAnimatorController = BackwardsController;
-        }
-        else
-        {
-            gameObject.GetComponent<Animator>().runtimeAnimatorController = BaseController;
-        }
+        
         if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name) && !Player.GetComponent<MovementReworked>().moving)
         {
             NormalizeWeapon();
@@ -133,12 +126,12 @@ public class WeaponControl : MonoBehaviour
                 {
                     if (Player.GetComponent<MovementReworked>().PlayerVel.y > 0)
                     {
-                        transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Clamp(Mathf.Lerp(transform.localPosition.y, transform.localPosition.y + (Player.GetComponent<MovementReworked>().PlayerVel.y / 3), Time.deltaTime), startpos.y - 0.35f, startpos.y + 0.15f), transform.localPosition.z);
+                        transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Clamp(Mathf.Lerp(transform.localPosition.y, transform.localPosition.y - (Player.GetComponent<MovementReworked>().PlayerVel.y / 10), Time.deltaTime), movementAnimBaseY - 0.35f, movementAnimBaseY + 0.35f), transform.localPosition.z);
 
                     }
                     else
                     {
-                        transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Clamp(Mathf.Lerp(transform.localPosition.y, transform.localPosition.y + (Player.GetComponent<MovementReworked>().PlayerVel.y / 10), Time.deltaTime), startpos.y - 0.35f, startpos.y + 0.15f), transform.localPosition.z);
+                        transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Clamp(Mathf.Lerp(transform.localPosition.y, transform.localPosition.y - (Player.GetComponent<MovementReworked>().PlayerVel.y / 10), Time.deltaTime), movementAnimBaseY - 0.35f, movementAnimBaseY + 0.35f), transform.localPosition.z);
 
                     }
 
@@ -446,7 +439,7 @@ public class WeaponControl : MonoBehaviour
 
             if (!normalization)
             {
-               
+               Cross.GetComponent<CrossAligner>().activatebounce = true;
                 MainCamera.GetComponent<Rotation>().activatebounce = true;
                 Player.GetComponent<Rotation>().activatebounce = true;
                 Instantiate(fakebullet, fakebulletspawn.transform);
