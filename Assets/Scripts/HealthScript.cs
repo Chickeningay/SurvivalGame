@@ -21,8 +21,10 @@ public class HealthScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HealthBar.transform.localScale = new Vector3(Health*0.03f,HealthBar.transform.localScale.y,HealthBar.transform.localScale.z);
-        ArmourBar.transform.localScale = new Vector3(Armour * 0.03f, ArmourBar.transform.localScale.y, ArmourBar.transform.localScale.z);
+        /*HealthBar.transform.localScale = new Vector3(Health*0.06f,HealthBar.transform.localScale.y,HealthBar.transform.localScale.z);
+        ArmourBar.transform.localScale = new Vector3(Armour * 0.06f, ArmourBar.transform.localScale.y, ArmourBar.transform.localScale.z);*/
+        HealthBar.transform.localPosition = new Vector3(-1451+Health * 5f, HealthBar.transform.localPosition.y, HealthBar.transform.localPosition.z);
+        ArmourBar.transform.localPosition = new Vector3(-1451 + Armour *5f, ArmourBar.transform.localPosition.y, ArmourBar.transform.localPosition.z);
         //HealthText.GetComponent<Text>().text = Health.ToString();
         //ArmourText.GetComponent<Text>().text = Armour.ToString();
     }

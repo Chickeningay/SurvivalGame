@@ -32,6 +32,8 @@ public class WeaponControl : MonoBehaviour
     public AnimationClip Action2_Clip;
     public AnimationClip Switch_Clip;
     public AnimationClip Movement_Clip;
+    public AnimationClip Movement_ContClip;
+    public AnimationClip MovementToReloadClip;
     public bool ShootingCooldown;
     public bool RPGIcon;
     public bool AmmoIcon;
@@ -58,6 +60,7 @@ public class WeaponControl : MonoBehaviour
     public AnimatorOverrideController BaseController;
     public AnimatorOverrideController BackwardsController;
     bool runanimcooldown;
+    public float movementAnimBaseY;
     // Start is called before the first frame update
     void Start()
     {
@@ -86,13 +89,6 @@ public class WeaponControl : MonoBehaviour
     void NormalizeWeapon()
     {
         gameObject.GetComponent<Animator>().enabled = false;
-       // gameObject.GetComponent<sway>().enabled = false;
-        /* float speedx;
-        float speedy;
-        float speedz;
-        speedx = (gameObject.transform.localPosition.x - startpos.x) * 5;
-        speedy = (gameObject.transform.localPosition.y - startpos.y) * 5;
-        speedz = (gameObject.transform.localPosition.z - startpos.z) * 5;*/
         Vector3 NewPos;
         NewPos.x = Mathf.Lerp(gameObject.transform.localPosition.x, startpos.x, Time.deltaTime * 5);
         NewPos.y = Mathf.Lerp(gameObject.transform.localPosition.y, startpos.y, Time.deltaTime * 5);
@@ -104,20 +100,12 @@ public class WeaponControl : MonoBehaviour
         NewRot.z = Mathf.LerpAngle(gameObject.transform.localRotation.z, startrot.z, Time.deltaTime * 5);
         NewRot.w = Mathf.LerpAngle(gameObject.transform.localRotation.w, startrot.w, Time.deltaTime * 5);
         gameObject.transform.localRotation = NewRot;
-       // gameObject.GetComponent<sway>().enabled = true;
         gameObject.GetComponent<Animator>().enabled = true;
     }
     void runaniminvoke()
     {
         runanimcooldown = false;
     }
-    void MovementClipInvoke()
-    {
-        NormalizeWeapon();
-        gameObject.GetComponent<Animator>().Play(Movement_Clip.name);
-
-    }
-    // Update is called once per frame
     void Update()
     {
         if (Player.GetComponent<MovementReworked>().moving && Input.GetKey(KeyCode.S))
@@ -128,14 +116,14 @@ public class WeaponControl : MonoBehaviour
         {
             gameObject.GetComponent<Animator>().runtimeAnimatorController = BaseController;
         }
-        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont") && !Player.GetComponent<MovementReworked>().moving)
+        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name) && !Player.GetComponent<MovementReworked>().moving)
         {
             NormalizeWeapon();
             gameObject.GetComponent<Animator>().Play("New State");
             runanimcooldown = true;
             Invoke("runaniminvoke", 0.2f);
         }
-        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont")|| gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State"))
+        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State"))
         {
             if (!Player.GetComponent<MovementReworked>().IsGrounded)
             {
@@ -159,7 +147,7 @@ public class WeaponControl : MonoBehaviour
             }
             else
             {
-                transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Lerp(transform.localPosition.y, -1.189999f, Time.deltaTime * 15), transform.localPosition.z);
+                transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Lerp(transform.localPosition.y, movementAnimBaseY, Time.deltaTime * 15), transform.localPosition.z);
 
 
                 gameObject.GetComponent<Animator>().speed = 1;
@@ -172,7 +160,7 @@ public class WeaponControl : MonoBehaviour
 
         if (gameObject.GetComponent<Animator>().IsInTransition(0))
         {
-            if (!gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim"))
+            if (!gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name))
             {
 
                 NormalizeWeapon();
@@ -185,7 +173,7 @@ public class WeaponControl : MonoBehaviour
         {
             NormalizeWeapon();
         }
-        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4MovementToReloadAnim") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Action1_Clip.name))
+        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(MovementToReloadClip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Action1_Clip.name))
         {
             gameObject.GetComponent<sway>().enabled = true;
         }
@@ -205,7 +193,8 @@ public class WeaponControl : MonoBehaviour
                 if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State") && !runanimcooldown && !blockmovement && !Input.GetKey(KeyCode.Mouse0))
                 {
 
-                    Invoke("MovementClipInvoke", 0.01f);
+                    NormalizeWeapon();
+                    gameObject.GetComponent<Animator>().Play(Movement_Clip.name);
                 }
                 else
                 {
@@ -223,7 +212,7 @@ public class WeaponControl : MonoBehaviour
                     NormalizeWeapon();
                 }
             }
-            if (Input.GetKeyDown(KeyCode.R) && CurrentAmmo < MaxAmmo && !normalization && !Input.GetKey(KeyCode.Mouse0)&&!gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim"))
+            if (Input.GetKeyDown(KeyCode.R) && CurrentAmmo < MaxAmmo && !normalization && !Input.GetKey(KeyCode.Mouse0)&&!gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name))
             {
                 Reloading();
             }
@@ -270,7 +259,7 @@ public class WeaponControl : MonoBehaviour
             {
                 AmmoText.gameObject.GetComponent<Text>().text = CurrentAmmo + "/" + CurrentReserve;
 
-                if (!ShootingCooldown && Input.GetKeyDown(KeyCode.Mouse0) && !Automatic && !hasScope && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name) && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4MovementToReloadAnim"))
+                if (!ShootingCooldown && Input.GetKeyDown(KeyCode.Mouse0) && !Automatic && !hasScope && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name) && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(MovementToReloadClip.name))
                 {
 
 
@@ -298,7 +287,7 @@ public class WeaponControl : MonoBehaviour
 
 
                 }
-                if (!ShootingCooldown && Input.GetKeyDown(KeyCode.Mouse0) && hasScope && !Automatic && weaponScoped && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name) && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4MovementToReloadAnim"))
+                if (!ShootingCooldown && Input.GetKeyDown(KeyCode.Mouse0) && hasScope && !Automatic && weaponScoped && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name) && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(MovementToReloadClip.name))
                 {
 
 
@@ -324,7 +313,7 @@ public class WeaponControl : MonoBehaviour
                     
                 }
                
-                    if (!ShootingCooldown && Input.GetKey(KeyCode.Mouse0) && Automatic && !hasScope && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name) && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4MovementToReloadAnim"))
+                    if (!ShootingCooldown && Input.GetKey(KeyCode.Mouse0) && Automatic && !hasScope && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name) && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(MovementToReloadClip.name))
                 {
 
 
@@ -445,7 +434,7 @@ public class WeaponControl : MonoBehaviour
         if (CurrentAmmo > 0)
         {
             blockmovement = true;
-            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont") && !normalization || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim")&&!normalization)
+            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name) && !normalization || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name)&&!normalization)
             {
                 normalization = true;
                 NormalizeWeapon();
@@ -553,7 +542,7 @@ public class WeaponControl : MonoBehaviour
     }
     void Audio (string Action)
     {
-        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim"))
+        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name))
         {
             normalization = true;
             NormalizeWeapon();
@@ -592,7 +581,7 @@ public class WeaponControl : MonoBehaviour
     }
     void Animate(string Action)
     {
-        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim"))
+        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name))
         {
             normalization = true;
             NormalizeWeapon();
@@ -627,13 +616,13 @@ public class WeaponControl : MonoBehaviour
             ShootingCooldown = true;
             CurrentAmmo = MaxAmmo;
             CurrentReserve -= MaxAmmo;
-            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont")|| gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim")){
+            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name)){
                
                 gameObject.GetComponent<sway>().enabled = false;
                 gameObject.GetComponent<Animator>().enabled = false;
                 
                 gameObject.GetComponent<Animator>().enabled = true;
-                gameObject.GetComponent<Animator>().Play("M4MovementToReloadAnim"); Audio("Reload");
+                gameObject.GetComponent<Animator>().Play(MovementToReloadClip.name); Audio("Reload");
                 gameObject.GetComponent<sway>().enabled = true;
             }
 
@@ -649,14 +638,14 @@ public class WeaponControl : MonoBehaviour
             transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Lerp(transform.localPosition.y, startpos.y, Time.deltaTime * 20), transform.localPosition.z);
             ShootingCooldown = true;
             CurrentAmmo = CurrentReserve;
-            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementCont") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("M4_MovementAnim"))
+            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name))
             {
               
                 gameObject.GetComponent<sway>().enabled = false;
                 gameObject.GetComponent<Animator>().enabled = false;
                 
                 gameObject.GetComponent<Animator>().enabled = true;
-                gameObject.GetComponent<Animator>().Play("M4MovementToReloadAnim"); Audio("Reload");
+                gameObject.GetComponent<Animator>().Play(MovementToReloadClip.name); Audio("Reload");
                 gameObject.GetComponent<sway>().enabled = true;
             }
 
