@@ -85,6 +85,12 @@ public class WeaponControl : MonoBehaviour
 
 
     }
+    private void OnDisable()
+    {
+        gameObject.GetComponent<Animator>().Play("New State");
+        gameObject.transform.localPosition = startpos;
+        gameObject.transform.localRotation = startrot;
+    }
 
     void NormalizeWeapon()
     {
@@ -108,8 +114,11 @@ public class WeaponControl : MonoBehaviour
     }
     void Update()
     {
-        
-        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name) && !Player.GetComponent<MovementReworked>().moving)
+        if(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name)&&!Input.GetKey(KeyCode.LeftShift)|| gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name) && !Player.gameObject.GetComponent<MovementReworked>().moving)
+        {
+            gameObject.GetComponent<Animator>().Play("New State");
+        }
+        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name) && !Player.GetComponent<MovementReworked>().moving && Input.GetKey(KeyCode.LeftShift))
         {
             NormalizeWeapon();
             gameObject.GetComponent<Animator>().Play("New State");
@@ -121,7 +130,7 @@ public class WeaponControl : MonoBehaviour
             if (!Player.GetComponent<MovementReworked>().IsGrounded)
             {
                 gameObject.GetComponent<Animator>().speed = 0;
-                print(Player.GetComponent<MovementReworked>().PlayerVel.y);
+               
                 if (!Player.GetComponent<MovementReworked>().OnLadder && !Player.GetComponent<MovementReworked>().InWater)
                 {
                     if (Player.GetComponent<MovementReworked>().PlayerVel.y > 0)
@@ -181,7 +190,7 @@ public class WeaponControl : MonoBehaviour
         }
         if (!Player.GetComponent<MovementReworked>().interacting && !InventoryExtended)
         {
-            if (Player.GetComponent<MovementReworked>().moving)
+            if (Player.GetComponent<MovementReworked>().moving && Input.GetKey(KeyCode.LeftShift))
             {
                 if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State") && !runanimcooldown && !blockmovement && !Input.GetKey(KeyCode.Mouse0))
                 {

@@ -17,7 +17,8 @@ public class MovementReworked : MonoBehaviour
 	float wishspeed;
 	public bool mwhlup;
 	public float GroundDistance = 0.4f;
-	public float moveSpeed = 9f;  // Ground move speed
+	public float moveSpeed = 7f;  // Ground move speed
+	public float startms = 7f;
 	public float runAcceleration = 20f;   // Ground accel
 	public float runDeacceleration = 10f;   // Deacceleration that occurs when running on the ground
 	public float airAcceleration = 2.0f;  // Air accel
@@ -67,7 +68,7 @@ public class MovementReworked : MonoBehaviour
 	public bool IsGrounded;
 	public float wantedcontrollerheight;
 	public float wantedcolliderheight;
-
+	float msmodifier;
 	public Transform player;
 	Vector3 udp;
 	public bool InWater;
@@ -104,20 +105,31 @@ public class MovementReworked : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		moveSpeed = startms;
+		msmodifier = 0;
         if (SecondaryCam.GetComponent<BetterWeaponSwitchForInventory>() != null)
         {
 			if(SecondaryCam.GetComponent<BetterWeaponSwitchForInventory>().currentID==0|| SecondaryCam.GetComponent<BetterWeaponSwitchForInventory>().currentID == 1)
             {
-				moveSpeed = 10.5f;
+				msmodifier += 2;
             }
         }
 		else if(SecondaryCam.GetComponent<BetterWeaponSwitch>() != null)
         {
 			if (SecondaryCam.GetComponent<BetterWeaponSwitch>().currentWeapon == 0 || SecondaryCam.GetComponent<BetterWeaponSwitch>().currentWeapon == 1)
 			{
-				moveSpeed = 10.5f;
+				msmodifier += 2;
 			}
 		}
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+			msmodifier -= 4;
+        }
+		else if (Input.GetKey(KeyCode.LeftShift))
+        {
+			msmodifier += 2;
+        }
+		moveSpeed += msmodifier;
         if (flashed)
         {
 			foreach (Transform g in SecondaryCam.transform.GetComponentsInChildren<Transform>())
