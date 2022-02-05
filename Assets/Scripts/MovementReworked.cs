@@ -160,11 +160,12 @@ public class MovementReworked : MonoBehaviour
 				}
 			}
 		}
-        if (playerVelocity.z != 0f || playerVelocity.x != 0f)
+        if (Mathf.Abs(playerVelocity.z) >= 0.1f || Mathf.Abs(playerVelocity.x) >= 0.1f)
         {
+			
 			moving = true;
         }
-		else if (playerVelocity.z == 0 && playerVelocity.x == 0)
+		else
         {
 			moving = false;
 		}
@@ -183,13 +184,92 @@ public class MovementReworked : MonoBehaviour
 		Crouch();
 		if (OnLadder)
 		{
+			print(currentLadder.transform.eulerAngles.y);
+			if (currentLadder.transform.eulerAngles.y<45&& currentLadder.transform.eulerAngles.y > -45)
+			{
+				print("x");
+					if (Input.GetKey(KeyCode.A))
+					{
+						
+						playerVelocity.z = -5f;
+					}
+					else if (Input.GetKey(KeyCode.D))
+					{
+						
+						playerVelocity.z = +5f;
+					}
+					else
+					{
+
+						playerVelocity.x = 0;
+						playerVelocity.z = 0;
+					}
+			}
+			else if (currentLadder.transform.eulerAngles.y>=135&&currentLadder.transform.eulerAngles.y<215)
+			{
+				print("y");
+					if (Input.GetKey(KeyCode.A))
+					{
+
+						playerVelocity.z = +5f;
+					}
+					else if (Input.GetKey(KeyCode.D))
+					{
+
+						playerVelocity.z = -5f;
+					}
+					else
+					{
+
+						playerVelocity.x = 0;
+						playerVelocity.z = 0;
+					}
+			}
+			else if (currentLadder.transform.eulerAngles.y>=225&&currentLadder.transform.eulerAngles.y<315)
+			{
+					if (Input.GetKey(KeyCode.A))
+					{
+
+						playerVelocity.x = 5f;
+					}
+					else if (Input.GetKey(KeyCode.D))
+					{
+
+						playerVelocity.x = -5f;
+					}
+					else
+					{
+
+						playerVelocity.x = 0;
+						playerVelocity.z = 0;
+					}
+			}
+			else if (currentLadder.transform.eulerAngles.y>=45&&currentLadder.transform.eulerAngles.y<135)
+			{
+					if (Input.GetKey(KeyCode.A))
+					{
+
+						playerVelocity.x = -5f;
+					}
+					else if (Input.GetKey(KeyCode.D))
+					{
+
+						playerVelocity.x = 5f;
+					}
+					else
+					{
+
+						playerVelocity.x = 0;
+						playerVelocity.z = 0;
+					}
+			}
+			
 			if (Input.GetKeyDown(KeyCode.Space))
 			{
 				StartCoroutine(ExitLadderSequence());
 			}
 			gravity = 0;
-			playerVelocity.x = 0f;
-			playerVelocity.z = 0f;
+		
 			if (Input.GetKey(KeyCode.W))
 			{
 				playerVelocity.y = 7.5f;
@@ -203,6 +283,7 @@ public class MovementReworked : MonoBehaviour
 				playerVelocity.y = 0;
 
 			}
+			
 		}
 			IsCameraInWater = Camera.GetComponent<Underwater>().CameraInWater;
 		
@@ -302,7 +383,7 @@ public class MovementReworked : MonoBehaviour
        
         if (!receivedcommand)
         {
-			playerVelocity = new Vector3(Mathf.Clamp(playerVelocity.x, -30, 30), playerVelocity.y, Mathf.Clamp(playerVelocity.z,-30, 30));
+			playerVelocity = new Vector3(Mathf.Clamp(playerVelocity.x, -20, 20), playerVelocity.y, Mathf.Clamp(playerVelocity.z,-20, 20));
 			controller.Move(playerVelocity * Time.deltaTime);
 
 			
@@ -571,8 +652,8 @@ public class MovementReworked : MonoBehaviour
 		{
 			playerVelocity.y = jumpSpeed;
 			
-			playerVelocity.x += 1.5f * wishdir.x;
-			playerVelocity.z += 1.5f * wishdir.z;
+			playerVelocity.x += 1f * wishdir.x;
+			playerVelocity.z += 1f * wishdir.z;
 			wishJump = false;
 		}
 
@@ -844,6 +925,8 @@ public class MovementReworked : MonoBehaviour
 	}
 	IEnumerator ExitLadderSequence()
 	{
+		xishigher = false;
+		zishigher = false;
 		DO_NOT_ENTER_LADDER = true;
 		OnLadder = false;
 		yield return new WaitForSeconds(0.1f);

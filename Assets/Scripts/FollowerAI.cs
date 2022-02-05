@@ -36,11 +36,12 @@ public class FollowerAI : MonoBehaviour
             gameObject.GetComponent<NavMeshAgent>().destination = Player.transform.position;
             //Head.transform.LookAt(Player.transform);
 
-            Destroy(transform.GetChild(0).gameObject);
+            
+            
             // gameObject.transform.GetChild(1).transform.eulerAngles = new Vector3(0, startrot.y+90, 0);
-            Vector3 lTargetDir = Player.transform.position - gameObject.transform.GetChild(1).transform.position;
+            Vector3 lTargetDir = gameObject.GetComponent<NavMeshAgent>().steeringTarget - gameObject.transform.GetChild(1).transform.position;
             lTargetDir.y = 0.0f;
-            gameObject.transform.GetChild(1).transform.rotation = Quaternion.RotateTowards(new Quaternion(gameObject.transform.GetChild(1).transform.rotation.x, gameObject.transform.GetChild(1).transform.rotation.y, gameObject.transform.GetChild(1).transform.rotation.z, gameObject.transform.GetChild(1).transform.rotation.w), Quaternion.LookRotation(new Vector3(lTargetDir.x, lTargetDir.y, lTargetDir.z )), Time.time * 2);
+            gameObject.transform.GetChild(1).transform.rotation = Quaternion.RotateTowards(new Quaternion(gameObject.transform.GetChild(1).transform.rotation.x, gameObject.transform.GetChild(1).transform.rotation.y, gameObject.transform.GetChild(1).transform.rotation.z, gameObject.transform.GetChild(1).transform.rotation.w), Quaternion.LookRotation(new Vector3(lTargetDir.x, lTargetDir.y, lTargetDir.z )), Time.time);
             Head.GetComponent<Animator>().enabled = true;
             Head.GetComponent<Animator>().Play(MovementClip.name);
             
