@@ -10,6 +10,7 @@ public class ExplodeOnImpact : MonoBehaviour
     GameObject ChildGameObject2;
     GameObject ChildGameObject3;
     GameObject Impact;
+    MeshRenderer Renderer;
     public GameObject ImpactPrefab;
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class ExplodeOnImpact : MonoBehaviour
         ChildGameObject2 = Sphere.transform.GetChild(1).gameObject;
         ChildGameObject3 = Sphere.transform.GetChild(2).gameObject;
         Impact = gameObject.transform.GetChild(2).gameObject;
+        Renderer = gameObject.transform.GetChild(3).gameObject.GetComponent<MeshRenderer>();
     }
 
     // Update is called once per frame
@@ -31,7 +33,7 @@ public class ExplodeOnImpact : MonoBehaviour
         if (other.gameObject.tag != "Player" && other.gameObject.tag != "MainCamera" && other.gameObject.tag != "Ray" && other.gameObject.tag != "MedBox" && other.gameObject.tag != "AmmoBox" && other.gameObject.tag != "Melee" && other.gameObject.tag != "Interacter" && other.gameObject.tag != "PlayerPart" && other.gameObject.tag != "Interactable")
         {
            
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            Renderer.enabled = false;
             Sphere.GetComponent<SphereCollider>().enabled = true;
             ChildGameObject1.GetComponent<ParticleSystem>().Play();
             ChildGameObject2.GetComponent<ParticleSystem>().Play();
@@ -40,7 +42,7 @@ public class ExplodeOnImpact : MonoBehaviour
             gameObject.GetComponent<Rigidbody>().isKinematic = true;
             var normal = other.contacts[0].normal;
             float x=normal.x; float y=normal.y; float z=normal.z;
-            print(normal);
+            
             
             GameObject spawn = Instantiate(ImpactPrefab, other.contacts[0].point, new Quaternion(ImpactPrefab.transform.rotation.x, 0, ImpactPrefab.transform.rotation.z, ImpactPrefab.transform.rotation.w));
             

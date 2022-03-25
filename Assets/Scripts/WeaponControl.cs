@@ -209,7 +209,7 @@ public class WeaponControl : MonoBehaviour
         {
             NormalizeWeapon();
         }
-        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name) &&gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime>0.2f || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(MovementToReloadClip.name) && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.1f || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Action1_Clip.name) && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.1f || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnim_Clip.name) && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.1f || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnimCont_Clip.name) && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.1f)
+        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name) &&!RPGIcon|| gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name) &&gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime>0.2f &&!RPGIcon|| gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(MovementToReloadClip.name) && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.1f || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Action1_Clip.name) && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.1f || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnim_Clip.name) && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.1f || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnimCont_Clip.name) && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.1f)
         {
             gameObject.GetComponent<sway>().enabled = true;
         }
@@ -547,7 +547,7 @@ public class WeaponControl : MonoBehaviour
                 if (RPGIcon)
                 {
                     ShootingCooldown = true;
-                    Invoke("awaitfunc", 1);
+                    Invoke("awaitfunc", 0.5f);
                 }
 
                 if (AmmoIcon)

@@ -64,7 +64,7 @@ public class MovementReworked : MonoBehaviour
 
 	public float x;
 	public float z;
-
+	public bool stopmovement;
 	public bool IsGrounded;
 	public float wantedcontrollerheight;
 	public float wantedcolliderheight;
@@ -76,6 +76,7 @@ public class MovementReworked : MonoBehaviour
 	public bool IsCameraInWater;
 	public GameObject watereffect;
 	public bool OnLadder;
+	public bool Climbable;
 	public bool DO_NOT_ENTER_LADDER;
 	public bool jump_forward_when_exiting_ladder;
 	public GameObject SecondaryCam;
@@ -184,18 +185,20 @@ public class MovementReworked : MonoBehaviour
 		Crouch();
 		if (OnLadder)
 		{
-			print(currentLadder.transform.eulerAngles.y);
+			
 			if (currentLadder.transform.eulerAngles.y<45&& currentLadder.transform.eulerAngles.y > -45)
 			{
-				print("x");
+
+				if (!Climbable)
+				{
 					if (Input.GetKey(KeyCode.A))
 					{
-						
+
 						playerVelocity.z = -5f;
 					}
 					else if (Input.GetKey(KeyCode.D))
 					{
-						
+
 						playerVelocity.z = +5f;
 					}
 					else
@@ -204,10 +207,19 @@ public class MovementReworked : MonoBehaviour
 						playerVelocity.x = 0;
 						playerVelocity.z = 0;
 					}
+				}
+				else
+				{
+
+					playerVelocity.x = 0;
+					playerVelocity.z = 0;
+				}
 			}
 			else if (currentLadder.transform.eulerAngles.y>=135&&currentLadder.transform.eulerAngles.y<215)
 			{
-				print("y");
+
+				if (!Climbable)
+				{
 					if (Input.GetKey(KeyCode.A))
 					{
 
@@ -224,9 +236,18 @@ public class MovementReworked : MonoBehaviour
 						playerVelocity.x = 0;
 						playerVelocity.z = 0;
 					}
+				}
+				else
+				{
+
+					playerVelocity.x = 0;
+					playerVelocity.z = 0;
+				}
 			}
 			else if (currentLadder.transform.eulerAngles.y>=225&&currentLadder.transform.eulerAngles.y<315)
 			{
+				if (!Climbable)
+				{
 					if (Input.GetKey(KeyCode.A))
 					{
 
@@ -243,9 +264,17 @@ public class MovementReworked : MonoBehaviour
 						playerVelocity.x = 0;
 						playerVelocity.z = 0;
 					}
+				}
+				else
+				{
+
+					playerVelocity.x = 0;
+					playerVelocity.z = 0;
+				}
 			}
 			else if (currentLadder.transform.eulerAngles.y>=45&&currentLadder.transform.eulerAngles.y<135)
 			{
+				if (!Climbable) {
 					if (Input.GetKey(KeyCode.A))
 					{
 
@@ -256,6 +285,13 @@ public class MovementReworked : MonoBehaviour
 
 						playerVelocity.x = 5f;
 					}
+					else
+					{
+
+						playerVelocity.x = 0;
+						playerVelocity.z = 0;
+					}
+				}
 					else
 					{
 
@@ -270,11 +306,11 @@ public class MovementReworked : MonoBehaviour
 			}
 			gravity = 0;
 		
-			if (Input.GetKey(KeyCode.W))
+			if (Input.GetKey(KeyCode.W) || Climbable)
 			{
 				playerVelocity.y = 7.5f;
 			}
-			else if (Input.GetKey(KeyCode.S))
+			else if (Input.GetKey(KeyCode.S) && !Climbable)
 			{
 				playerVelocity.y = -7.5f;
 			}
@@ -383,7 +419,14 @@ public class MovementReworked : MonoBehaviour
        
         if (!receivedcommand)
         {
-			playerVelocity = new Vector3(Mathf.Clamp(playerVelocity.x, -20, 20), playerVelocity.y, Mathf.Clamp(playerVelocity.z,-20, 20));
+            if (InWater)
+            {
+				playerVelocity = new Vector3(Mathf.Clamp(playerVelocity.x, -20, 20), Mathf.Clamp(playerVelocity.y, -20, 20), Mathf.Clamp(playerVelocity.z, -20, 20));
+			}
+            else
+            {
+				playerVelocity = new Vector3(Mathf.Clamp(playerVelocity.x, -20, 20), playerVelocity.y, Mathf.Clamp(playerVelocity.z, -20, 20));
+			}
 			controller.Move(playerVelocity * Time.deltaTime);
 
 			
@@ -401,6 +444,13 @@ public class MovementReworked : MonoBehaviour
 			commandmovepos= new Vector3(0, 0, 0);
 			gameObject.GetComponent<CharacterController>().enabled = true;
 			
+		}
+		else if (stopmovement)
+        {
+			gameObject.GetComponent<CharacterController>().enabled = false;
+			gameObject.GetComponent<CapsuleCollider>().enabled = false;
+			PlayerVel = new Vector3(0, 0, 0);
+			gravity = 0;
 		}
         if (moving && IsGrounded)
         {
@@ -770,16 +820,20 @@ public class MovementReworked : MonoBehaviour
 				SecondaryCam.GetComponent<BetterWeaponSwitchForInventory>().RenewAmmo = true;
 			}
 		}
-		if (col.gameObject.layer == 6)
+		
+			if (col.gameObject.layer == 6)
 		{
 			InWater = true;
 		}
-		else if (!DO_NOT_ENTER_LADDER&&col.gameObject.tag == "Ladder")
-		{
+		else if (!DO_NOT_ENTER_LADDER && col.gameObject.tag == "Ladder") { 
+			
 			OnLadder = true;
+			wishJump = false;
 			currentLadder = col.gameObject;
+			
 		}
 	}
+	
 	void OnTriggerExit(Collider col)
 	{
 		if (col.gameObject.layer == 6)
@@ -790,12 +844,155 @@ public class MovementReworked : MonoBehaviour
 		else if (col.gameObject.tag == "Ladder")
 		{
 			OnLadder = false;
+			Climbable = false;
+			gravity = -20f;
+		}
+		else if (col.gameObject.tag == "Climbable")
+        {
+			OnLadder = false;
+			Climbable = false;
 			gravity = -20f;
 		}
 	}
+    private void OnCollisionEnter(Collision other)
+    {
+		if (other.gameObject.tag != "NotClimbable" && other.gameObject.layer == 8 && other.gameObject.GetComponent<Renderer>().bounds.max.y > gameObject.GetComponent<Renderer>().bounds.min.y-0.2f&&other.gameObject.GetComponent<Renderer>().bounds.max.y-gameObject.GetComponent<Renderer>().bounds.max.y<1.5f)
+		{
+			print(other.gameObject.GetComponent<Renderer>().bounds.max.y); print(gameObject.GetComponent<Renderer>().bounds.min.y);
+			
+			playerVelocity = new Vector3(0, 0, 0);
+			float xdir = 0;
+			int xnorm = 0;
+			float zdir = 0;
+			int znorm = 0;
+
+			if (Mathf.Abs(other.gameObject.GetComponent<Renderer>().bounds.min.x) - Mathf.Abs(gameObject.transform.position.x) > Mathf.Abs(other.gameObject.GetComponent<Renderer>().bounds.max.x) - Mathf.Abs(gameObject.transform.position.x))
+			{
+				xdir = Mathf.Abs(other.gameObject.GetComponent<Renderer>().bounds.max.x) - Mathf.Abs(gameObject.transform.position.x);
+				xnorm = 1;
+			}
+			else
+			{
+				xnorm = -1;
+				xdir = Mathf.Abs(other.gameObject.GetComponent<Renderer>().bounds.min.x) - Mathf.Abs(gameObject.transform.position.x);
+			}
+			if (Mathf.Abs(other.gameObject.GetComponent<Renderer>().bounds.min.z) - Mathf.Abs(gameObject.transform.position.z) > Mathf.Abs(other.gameObject.GetComponent<Renderer>().bounds.max.z) - Mathf.Abs(gameObject.transform.position.z))
+			{
+				znorm = 1;
+				zdir = Mathf.Abs(other.gameObject.GetComponent<Renderer>().bounds.max.z) - Mathf.Abs(gameObject.transform.position.z);
+			}
+			else
+			{
+				znorm = -1;
+				zdir = Mathf.Abs(other.gameObject.GetComponent<Renderer>().bounds.min.z) - Mathf.Abs(gameObject.transform.position.z);
+			}
+			if ((Mathf.Abs(xdir) > Mathf.Abs(zdir)))
+			{
+				if (znorm == 1)
+				{
+					print(znorm);
+					if (gameObject.transform.position.y < other.gameObject.GetComponent<Renderer>().bounds.max.y + 5f)
+					{
+						stopmovement = true; gameObject.GetComponent<CharacterController>().enabled = false;
+						gameObject.transform.position = new Vector3(gameObject.transform.position.x, other.gameObject.GetComponent<Renderer>().bounds.max.y +2, other.gameObject.GetComponent<Renderer>().bounds.max.z - 1f);
+						gameObject.GetComponent<CharacterController>().enabled = true;
+					}
+					else
+					{
+						
+						gameObject.GetComponent<CharacterController>().enabled = true;
+						gameObject.GetComponent<CapsuleCollider>().enabled = true;
+						stopmovement = false;
+
+					}
+
+				}
+				else
+				{
+					print(znorm);
+					if (gameObject.transform.position.y < other.gameObject.GetComponent<Renderer>().bounds.max.y + 5f)
+					{
+						stopmovement = true; gameObject.GetComponent<CharacterController>().enabled = false;
+						gameObject.transform.position = new Vector3(gameObject.transform.position.x, other.gameObject.GetComponent<Renderer>().bounds.max.y + 2, other.gameObject.GetComponent<Renderer>().bounds.min.z + 1f);
+						gameObject.GetComponent<CharacterController>().enabled = true;
+					}
+					else
+					{
+						gameObject.GetComponent<Rotation>().enabled = true;
+						gameObject.GetComponent<CharacterController>().enabled = true;
+						gameObject.GetComponent<CapsuleCollider>().enabled = true;
+						gravity = -20;
+						stopmovement = false;
+
+					}
+
+
+				}
+
+			}
+			else if (Mathf.Abs(xdir) < Mathf.Abs(zdir))
+			{
+				print(xnorm);
+				if (xnorm == 1)
+				{
+					if (gameObject.transform.position.y < other.gameObject.GetComponent<Renderer>().bounds.max.y + 5f)
+					{
+						gameObject.GetComponent<CharacterController>().enabled = false;
+						stopmovement = true;
+						gameObject.transform.position = new Vector3(other.gameObject.GetComponent<Renderer>().bounds.max.x - 1f, other.gameObject.GetComponent<Renderer>().bounds.max.y + 2, gameObject.transform.position.z);
+						gameObject.GetComponent<CharacterController>().enabled = true;
+					}
+					else
+					{
+						gameObject.GetComponent<CharacterController>().enabled = true;
+						gameObject.GetComponent<CapsuleCollider>().enabled = true;
+						stopmovement = false;
+						gameObject.GetComponent<Rotation>().enabled = true;
+					}
+
+
+				}
+				else
+				{
+					if (gameObject.transform.position.y < other.gameObject.GetComponent<Renderer>().bounds.max.y + 5f)
+					{
+						gameObject.GetComponent<CharacterController>().enabled = false;
+						stopmovement = true;
+						gameObject.transform.position = new Vector3(other.gameObject.GetComponent<Renderer>().bounds.min.x + 1f, other.gameObject.GetComponent<Renderer>().bounds.max.y + 2, gameObject.transform.position.z);
+						gameObject.GetComponent<CharacterController>().enabled = true;
+					}
+					else
+					{
+						gameObject.GetComponent<Rotation>().enabled = true;
+						gameObject.GetComponent<CharacterController>().enabled = true;
+						gameObject.GetComponent<CapsuleCollider>().enabled = true;
+
+						stopmovement = false;
+
+					}
+
+
+				}
+
+			}
+
+
+
+		}
+		else if (stopmovement)
+		{
+			gameObject.GetComponent<Rotation>().enabled = true;
+			gameObject.GetComponent<CharacterController>().enabled = true;
+			gameObject.GetComponent<CapsuleCollider>().enabled = true;
+			stopmovement = false;
+		}
+
+	}
     private void OnCollisionStay(Collision other)
     {
-		foreach(ContactPoint point in other.contacts)
+		
+	
+		foreach (ContactPoint point in other.contacts)
         {
 
 
@@ -977,7 +1174,7 @@ public class MovementReworked : MonoBehaviour
 		}
 		xishigher = false;
 		zishigher = false;
-		yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(3f);
 		DO_NOT_ENTER_LADDER = false;
 		
 	}
