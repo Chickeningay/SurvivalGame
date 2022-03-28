@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MovementReworked : MonoBehaviour
 {
-	
+	bool lerpactive;
 	public GameObject WalkAudioPlayer;
 	public AudioClip LandClip;
 	public CharacterController controller;
@@ -64,7 +64,7 @@ public class MovementReworked : MonoBehaviour
 
 	public float x;
 	public float z;
-	public bool stopmovement;
+	public bool climbing;
 	public bool IsGrounded;
 	public float wantedcontrollerheight;
 	public float wantedcolliderheight;
@@ -94,6 +94,7 @@ public class MovementReworked : MonoBehaviour
 	Vector3 commandmovepos;
 	public GameObject CommandListener;
 	public bool jumpsound_ready=true;
+
 	private void Start()
 	{
 		Cursor.visible = false;
@@ -445,7 +446,7 @@ public class MovementReworked : MonoBehaviour
 			gameObject.GetComponent<CharacterController>().enabled = true;
 			
 		}
-		else if (stopmovement)
+		else if (climbing)
         {
 			gameObject.GetComponent<CharacterController>().enabled = false;
 			gameObject.GetComponent<CapsuleCollider>().enabled = false;
@@ -854,139 +855,15 @@ public class MovementReworked : MonoBehaviour
 			gravity = -20f;
 		}
 	}
+	
+	
     private void OnCollisionEnter(Collision other)
     {
-		if (other.gameObject.tag != "NotClimbable" && other.gameObject.layer == 8 && other.gameObject.GetComponent<Renderer>().bounds.max.y > gameObject.GetComponent<Renderer>().bounds.min.y-0.2f&&other.gameObject.GetComponent<Renderer>().bounds.max.y-gameObject.GetComponent<Renderer>().bounds.max.y<1.5f)
+		if (other.gameObject.layer == 8 && other.gameObject.GetComponent<Renderer>().bounds.max.y > gameObject.GetComponent<Renderer>().bounds.min.y+0.1f&&other.gameObject.GetComponent<Renderer>().bounds.max.y-gameObject.GetComponent<Renderer>().bounds.max.y<1.5f)
 		{
-			print(other.gameObject.GetComponent<Renderer>().bounds.max.y); print(gameObject.GetComponent<Renderer>().bounds.min.y);
-			
-			playerVelocity = new Vector3(0, 0, 0);
-			float xdir = 0;
-			int xnorm = 0;
-			float zdir = 0;
-			int znorm = 0;
 
-			if (Mathf.Abs(other.gameObject.GetComponent<Renderer>().bounds.min.x) - Mathf.Abs(gameObject.transform.position.x) > Mathf.Abs(other.gameObject.GetComponent<Renderer>().bounds.max.x) - Mathf.Abs(gameObject.transform.position.x))
-			{
-				xdir = Mathf.Abs(other.gameObject.GetComponent<Renderer>().bounds.max.x) - Mathf.Abs(gameObject.transform.position.x);
-				xnorm = 1;
-			}
-			else
-			{
-				xnorm = -1;
-				xdir = Mathf.Abs(other.gameObject.GetComponent<Renderer>().bounds.min.x) - Mathf.Abs(gameObject.transform.position.x);
-			}
-			if (Mathf.Abs(other.gameObject.GetComponent<Renderer>().bounds.min.z) - Mathf.Abs(gameObject.transform.position.z) > Mathf.Abs(other.gameObject.GetComponent<Renderer>().bounds.max.z) - Mathf.Abs(gameObject.transform.position.z))
-			{
-				znorm = 1;
-				zdir = Mathf.Abs(other.gameObject.GetComponent<Renderer>().bounds.max.z) - Mathf.Abs(gameObject.transform.position.z);
-			}
-			else
-			{
-				znorm = -1;
-				zdir = Mathf.Abs(other.gameObject.GetComponent<Renderer>().bounds.min.z) - Mathf.Abs(gameObject.transform.position.z);
-			}
-			if ((Mathf.Abs(xdir) > Mathf.Abs(zdir)))
-			{
-				if (znorm == 1)
-				{
-					print(znorm);
-					if (gameObject.transform.position.y < other.gameObject.GetComponent<Renderer>().bounds.max.y + 5f)
-					{
-						stopmovement = true; gameObject.GetComponent<CharacterController>().enabled = false;
-						gameObject.transform.position = new Vector3(gameObject.transform.position.x, other.gameObject.GetComponent<Renderer>().bounds.max.y +2, other.gameObject.GetComponent<Renderer>().bounds.max.z - 1f);
-						gameObject.GetComponent<CharacterController>().enabled = true;
-					}
-					else
-					{
-						
-						gameObject.GetComponent<CharacterController>().enabled = true;
-						gameObject.GetComponent<CapsuleCollider>().enabled = true;
-						stopmovement = false;
-
-					}
-
-				}
-				else
-				{
-					print(znorm);
-					if (gameObject.transform.position.y < other.gameObject.GetComponent<Renderer>().bounds.max.y + 5f)
-					{
-						stopmovement = true; gameObject.GetComponent<CharacterController>().enabled = false;
-						gameObject.transform.position = new Vector3(gameObject.transform.position.x, other.gameObject.GetComponent<Renderer>().bounds.max.y + 2, other.gameObject.GetComponent<Renderer>().bounds.min.z + 1f);
-						gameObject.GetComponent<CharacterController>().enabled = true;
-					}
-					else
-					{
-						gameObject.GetComponent<Rotation>().enabled = true;
-						gameObject.GetComponent<CharacterController>().enabled = true;
-						gameObject.GetComponent<CapsuleCollider>().enabled = true;
-						gravity = -20;
-						stopmovement = false;
-
-					}
-
-
-				}
-
-			}
-			else if (Mathf.Abs(xdir) < Mathf.Abs(zdir))
-			{
-				print(xnorm);
-				if (xnorm == 1)
-				{
-					if (gameObject.transform.position.y < other.gameObject.GetComponent<Renderer>().bounds.max.y + 5f)
-					{
-						gameObject.GetComponent<CharacterController>().enabled = false;
-						stopmovement = true;
-						gameObject.transform.position = new Vector3(other.gameObject.GetComponent<Renderer>().bounds.max.x - 1f, other.gameObject.GetComponent<Renderer>().bounds.max.y + 2, gameObject.transform.position.z);
-						gameObject.GetComponent<CharacterController>().enabled = true;
-					}
-					else
-					{
-						gameObject.GetComponent<CharacterController>().enabled = true;
-						gameObject.GetComponent<CapsuleCollider>().enabled = true;
-						stopmovement = false;
-						gameObject.GetComponent<Rotation>().enabled = true;
-					}
-
-
-				}
-				else
-				{
-					if (gameObject.transform.position.y < other.gameObject.GetComponent<Renderer>().bounds.max.y + 5f)
-					{
-						gameObject.GetComponent<CharacterController>().enabled = false;
-						stopmovement = true;
-						gameObject.transform.position = new Vector3(other.gameObject.GetComponent<Renderer>().bounds.min.x + 1f, other.gameObject.GetComponent<Renderer>().bounds.max.y + 2, gameObject.transform.position.z);
-						gameObject.GetComponent<CharacterController>().enabled = true;
-					}
-					else
-					{
-						gameObject.GetComponent<Rotation>().enabled = true;
-						gameObject.GetComponent<CharacterController>().enabled = true;
-						gameObject.GetComponent<CapsuleCollider>().enabled = true;
-
-						stopmovement = false;
-
-					}
-
-
-				}
-
-			}
-
-
-
+			playerVelocity = new Vector3(playerVelocity.x, playerVelocity.y + 1f, playerVelocity.z);
 		}
-		else if (stopmovement)
-		{
-			gameObject.GetComponent<Rotation>().enabled = true;
-			gameObject.GetComponent<CharacterController>().enabled = true;
-			gameObject.GetComponent<CapsuleCollider>().enabled = true;
-			stopmovement = false;
-		}
-
 	}
     private void OnCollisionStay(Collision other)
     {

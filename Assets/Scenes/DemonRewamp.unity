@@ -5295,7 +5295,7 @@ GameObject:
   - component: {fileID: 328180920443180354}
   - component: {fileID: 6920244764125337474}
   - component: {fileID: 4264843956393422633}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cylinder.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13622,7 +13622,7 @@ GameObject:
   - component: {fileID: 2116994267314594727}
   - component: {fileID: 1918673625526278564}
   - component: {fileID: 5409469657888204105}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13685,7 +13685,7 @@ GameObject:
   - component: {fileID: 6810743116933537913}
   - component: {fileID: 6810743116933537915}
   - component: {fileID: 6810743116933537914}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: RPG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14689,6 +14689,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7122492268884364177, guid: 4da6476ebb35539429e9720d1722239a,
         type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.0023572
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122492268884364177, guid: 4da6476ebb35539429e9720d1722239a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.2043
+      objectReference: {fileID: 0}
+    - target: {fileID: 7122492268884364177, guid: 4da6476ebb35539429e9720d1722239a,
+        type: 3}
       propertyPath: m_LocalPosition.z
       value: 79.19
       objectReference: {fileID: 0}
@@ -15041,7 +15051,7 @@ GameObject:
   - component: {fileID: 375085407474867618}
   - component: {fileID: 1402389877009792982}
   - component: {fileID: 4250760332598735180}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15074,7 +15084,7 @@ GameObject:
   - component: {fileID: 8576670656858394687}
   - component: {fileID: 2789013120576551784}
   - component: {fileID: 3822195530144619368}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cylinder.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
