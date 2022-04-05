@@ -16,6 +16,7 @@ namespace UnitySimpleLiquid
         void Update()
         {
             gameObject.GetComponent<LiquidContainer>().FillAmountPercent = copysubject.GetComponent<LiquidContainer>().FillAmountPercent;
+            gameObject.GetComponent<LiquidContainer>().LiquidColor = copysubject.GetComponent<LiquidContainer>().LiquidColor;
         }
     }
 }
