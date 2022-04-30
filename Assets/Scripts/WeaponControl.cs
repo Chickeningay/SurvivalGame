@@ -213,6 +213,10 @@ public class WeaponControl : MonoBehaviour
         {
             gameObject.GetComponent<sway>().enabled = true;
         }
+        else if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(MovementToReloadClip.name)&&RPGIcon)
+        {
+            gameObject.GetComponent<sway>().enabled = false;
+        }
         else
         {
             gameObject.GetComponent<sway>().enabled = false;

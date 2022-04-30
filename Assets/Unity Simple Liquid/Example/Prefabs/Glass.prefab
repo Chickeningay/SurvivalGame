@@ -166,6 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   liquidContainer: {fileID: 8296172667356064988}
   bottleneckRadius: 0.045
+  Endless: 0
   splitSpeed: 40
   maxEdgeDrops: 4
   particlesPrefab: {fileID: 5157395080114985353, guid: 6cbd7c4436dcf4a709ab46f353a9d3c3,

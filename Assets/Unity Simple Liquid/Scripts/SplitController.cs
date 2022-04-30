@@ -15,7 +15,8 @@ namespace UnitySimpleLiquid
         public LiquidContainer liquidContainer;
         [SerializeField]
         private float bottleneckRadius = 0.1f;
-        public float BottleneckRadiusWorld { get; private set; }
+		public bool Endless;
+		public float BottleneckRadiusWorld { get; private set; }
 		
         [Tooltip("How fast liquid split from container")]
         public float splitSpeed = 2f;
@@ -399,6 +400,10 @@ namespace UnitySimpleLiquid
 			// Now check spliting, starting from the top
 			currentDrop = 0;
             CheckSpliting();
+            if (Endless)
+            {
+				liquidContainer.FillAmountPercent = 1;
+            }
         }
     }
 }
