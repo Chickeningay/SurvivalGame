@@ -64,4 +64,11 @@ public class EnemyHealth : MonoBehaviour
         HealthBarEmpty.active = false;
         HealthBar.active = false;
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Explosion")
+        {
+            health -= 90;
+        }
+    }
 }

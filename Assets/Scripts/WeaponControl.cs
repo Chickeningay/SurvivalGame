@@ -183,8 +183,9 @@ public class WeaponControl : MonoBehaviour
             }
             else
             {
+                if(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name)) { 
                 transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Lerp(transform.localPosition.y, movementAnimBaseY, Time.deltaTime * 15), transform.localPosition.z);
-
+                }
 
                 gameObject.GetComponent<Animator>().speed = 1;
             }
@@ -234,8 +235,7 @@ public class WeaponControl : MonoBehaviour
                 {
 
                     NormalizeWeapon();
-                    NormalizeWeapon();
-                    NormalizeWeapon();
+                   
                     gameObject.GetComponent<Animator>().Play(Movement_Clip.name);
                 }
                 
