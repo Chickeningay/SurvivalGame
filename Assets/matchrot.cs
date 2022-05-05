@@ -60,7 +60,7 @@ public class matchrot : MonoBehaviour
         {
             duo.child.transform.position = duo.bone.transform.position;
             duo.child.transform.rotation = duo.bone.transform.rotation;
-            duo.child.transform.localScale = duo.bone.transform.localScale;
+            
         }
     }
 }
