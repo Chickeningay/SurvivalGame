@@ -15,7 +15,7 @@ public class InteractScript : MonoBehaviour
     public bool interacting_needs_continuation;
     public bool Collision_Not_Needed_To_Disable;
     public bool interactableonce;
-
+    bool outline;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +26,10 @@ public class InteractScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (gameObject.transform.parent.gameObject.GetComponent<Outline>() != null)
+        {
+            outline = true;
+        }
         InteractSubject.GetComponent<InteractDetector>().Interacted = interacted;
         if (interacting_needs_continuation)
         {
@@ -68,12 +71,21 @@ public class InteractScript : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Interacter")
-        { colliding = true; }
+        { colliding = true; 
+            if (outline){ 
+                            transform.parent.gameObject.GetComponent<Outline>().enabled = true; 
+            }
+        }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Interacter")
         {
+            if (outline)
+            {
+                transform.parent.gameObject.GetComponent<Outline>().enabled = false;
+            }
+            
             colliding = false;
             InteractText.GetComponent<Text>().text = "";
         }

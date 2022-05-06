@@ -49,8 +49,8 @@ public class headblob : MonoBehaviour
         {
             gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, Mathf.Lerp(transform.localPosition.y, 1f, Time.deltaTime), gameObject.transform.localPosition.z);
             headbone.transform.localPosition = new Vector3(headbone.transform.localPosition.x, Mathf.Lerp(headbone.transform.localPosition.y,1, Time.deltaTime * 5), headbone.transform.localPosition.z);
-            bone1.transform.localPosition = new Vector3(bone1.transform.localPosition.x, Mathf.Lerp(bone1.transform.localPosition.y, 1, Time.deltaTime * 5), bone1.transform.localPosition.z);
-            bone2.transform.localPosition = new Vector3(bone2.transform.localPosition.x, Mathf.Lerp(bone2.transform.localPosition.y, 1, Time.deltaTime * 5), bone2.transform.localPosition.z);
+           /* bone1.transform.localPosition = new Vector3(bone1.transform.localPosition.x, Mathf.Lerp(bone1.transform.localPosition.y, 1, Time.deltaTime * 5), bone1.transform.localPosition.z);
+            bone2.transform.localPosition = new Vector3(bone2.transform.localPosition.x, Mathf.Lerp(bone2.transform.localPosition.y, 1, Time.deltaTime * 5), bone2.transform.localPosition.z);*/
         }
     }
 }
