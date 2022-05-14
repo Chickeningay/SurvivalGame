@@ -63,13 +63,19 @@ public class WeaponControl : MonoBehaviour
     bool walkanimcooldown;
     public float movementAnimBaseY;
     public GameObject Cross;
+    public bool copyfromparent;
+    public bool decoy;
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.GetComponent<sway>().enabled = false;
+        if (!decoy)
+        {
+
+        
+        gameObject.transform.parent.GetComponent<sway>().enabled = false;
         startpos = gameObject.transform.localPosition;
         startrot = gameObject.transform.localRotation;
-        gameObject.GetComponent<sway>().enabled = true;
+        gameObject.transform.parent.GetComponent<sway>().enabled = true;
         Player.GetComponent<AudioSource>().PlayOneShot(Switch_Audio);
         gameObject.GetComponent<Animator>().Play(Switch_Clip.name);
         if (BulletFlash != null)
@@ -78,6 +84,7 @@ public class WeaponControl : MonoBehaviour
         }
         Inventory = GameObject.Find("Inventory");
         Cross = GameObject.Find("Crosshair");
+        }
     }
 
     private void OnEnable()
@@ -125,120 +132,137 @@ public class WeaponControl : MonoBehaviour
     }
     void Update()
     {
-        if(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name)&&!Input.GetKey(KeyCode.LeftShift)|| gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name) && !Player.gameObject.GetComponent<MovementReworked>().moving)
+        if (!decoy)
         {
-            gameObject.GetComponent<Animator>().Play("New State");
-            runanimcooldown = true;
-            Invoke("runaniminvoke", 0.2f);
-            walkanimcooldown = true;
-            Invoke("walkaniminvoke", 0.2f);
-        }
-        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name) && !Player.GetComponent<MovementReworked>().moving && Input.GetKey(KeyCode.LeftShift))
-        {
-            NormalizeWeapon();
-            NormalizeWeapon();
-            NormalizeWeapon();
-            gameObject.GetComponent<Animator>().Play("New State");
-            runanimcooldown = true;
-            Invoke("runaniminvoke", 0.2f);
-            walkanimcooldown = true;
-            Invoke("walkaniminvoke", 0.2f);
-        }
-        if(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnimCont_Clip.name) && !Player.GetComponent<MovementReworked>().moving|| gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnim_Clip.name) && !Player.GetComponent<MovementReworked>().moving)
-        {
-            NormalizeWeapon();
-            walkanimcooldown = true;
-            Invoke("walkaniminvoke", 0.2f);
-            runanimcooldown = true;
-            Invoke("runaniminvoke", 0.2f);
-            gameObject.GetComponent<Animator>().Play("New State");
-        }
-
-        if(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State")&&!walkanimcooldown&& Player.GetComponent<MovementReworked>().moving && !Input.GetKey(KeyCode.LeftShift))
-        {
-            NormalizeWeapon();
-            gameObject.GetComponent<Animator>().Play(WalkAnim_Clip.name);
-        }
-        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State")|| gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnim_Clip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnimCont_Clip.name))
-        {
-            if (!Player.GetComponent<MovementReworked>().IsGrounded)
+            if (copyfromparent)
             {
-                gameObject.GetComponent<Animator>().speed = 0;
-               
-                if (!Player.GetComponent<MovementReworked>().OnLadder && !Player.GetComponent<MovementReworked>().InWater)
-                {
-                    if (Player.GetComponent<MovementReworked>().PlayerVel.y > 0)
-                    {
-                        transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Clamp(Mathf.Lerp(transform.localPosition.y, transform.localPosition.y - (Player.GetComponent<MovementReworked>().PlayerVel.y / 10), Time.deltaTime), movementAnimBaseY - 0.35f, movementAnimBaseY + 0.35f), transform.localPosition.z);
+                this.enabled = gameObject.transform.parent.GetComponent<WeaponControl>().enabled;
+            }
+            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name) && !Input.GetKey(KeyCode.LeftShift) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name) && !Player.gameObject.GetComponent<MovementReworked>().moving)
+            {
+                gameObject.GetComponent<Animator>().Play("New State");
+                runanimcooldown = true;
+                Invoke("runaniminvoke", 0.2f);
+                walkanimcooldown = true;
+                Invoke("walkaniminvoke", 0.2f);
+            }
+            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name) && !Player.GetComponent<MovementReworked>().moving && Input.GetKey(KeyCode.LeftShift))
+            {
+                NormalizeWeapon();
+                NormalizeWeapon();
+                NormalizeWeapon();
+                gameObject.GetComponent<Animator>().Play("New State");
+                runanimcooldown = true;
+                Invoke("runaniminvoke", 0.2f);
+                walkanimcooldown = true;
+                Invoke("walkaniminvoke", 0.2f);
+            }
+            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnimCont_Clip.name) && !Player.GetComponent<MovementReworked>().moving || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnim_Clip.name) && !Player.GetComponent<MovementReworked>().moving)
+            {
+                NormalizeWeapon();
+                walkanimcooldown = true;
+                Invoke("walkaniminvoke", 0.2f);
+                runanimcooldown = true;
+                Invoke("runaniminvoke", 0.2f);
+                gameObject.GetComponent<Animator>().Play("New State");
+            }
 
-                    }
-                    else
+            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State") && !walkanimcooldown && Player.GetComponent<MovementReworked>().moving && !Input.GetKey(KeyCode.LeftShift))
+            {
+                NormalizeWeapon();
+                gameObject.GetComponent<Animator>().Play(WalkAnim_Clip.name);
+            }
+            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnim_Clip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnimCont_Clip.name))
+            {
+                if (!Player.GetComponent<MovementReworked>().IsGrounded)
+                {
+                    gameObject.GetComponent<Animator>().speed = 0;
+
+                    if (!Player.GetComponent<MovementReworked>().OnLadder && !Player.GetComponent<MovementReworked>().InWater)
                     {
-                        transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Clamp(Mathf.Lerp(transform.localPosition.y, transform.localPosition.y - (Player.GetComponent<MovementReworked>().PlayerVel.y / 10), Time.deltaTime), movementAnimBaseY - 0.35f, movementAnimBaseY + 0.35f), transform.localPosition.z);
+                        if (Player.GetComponent<MovementReworked>().PlayerVel.y > 0)
+                        {
+                            transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Clamp(Mathf.Lerp(transform.localPosition.y, transform.localPosition.y - (Player.GetComponent<MovementReworked>().PlayerVel.y / 10), Time.deltaTime), movementAnimBaseY - 0.35f, movementAnimBaseY + 0.35f), transform.localPosition.z);
+
+                        }
+                        else
+                        {
+                            transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Clamp(Mathf.Lerp(transform.localPosition.y, transform.localPosition.y - (Player.GetComponent<MovementReworked>().PlayerVel.y / 10), Time.deltaTime), movementAnimBaseY - 0.35f, movementAnimBaseY + 0.35f), transform.localPosition.z);
+
+                        }
 
                     }
 
                 }
+                else
+                {
+                    if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name))
+                    {
+                        transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Lerp(transform.localPosition.y, movementAnimBaseY, Time.deltaTime * 15), transform.localPosition.z);
+                    }
 
+                    gameObject.GetComponent<Animator>().speed = 1;
+                }
             }
             else
             {
-                if(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name)) { 
-                transform.localPosition = new Vector3(transform.localPosition.x, Mathf.Lerp(transform.localPosition.y, movementAnimBaseY, Time.deltaTime * 15), transform.localPosition.z);
-                }
-
                 gameObject.GetComponent<Animator>().speed = 1;
             }
-        }
-        else
-        {
-            gameObject.GetComponent<Animator>().speed = 1;
-        }
 
-        if (gameObject.GetComponent<Animator>().IsInTransition(0))
-        {
-            if (!gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name)|| !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnim_Clip.name) || !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnimCont_Clip.name))
+            if (gameObject.GetComponent<Animator>().IsInTransition(0))
             {
-
-                NormalizeWeapon();
-
-            }
-
-        }
-
-        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State"))
-        {
-            NormalizeWeapon();
-        }
-        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name) &&!RPGIcon|| gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name) &&gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime>0.2f &&!RPGIcon|| gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(MovementToReloadClip.name) && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.1f || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Action1_Clip.name) && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.1f || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnim_Clip.name) && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.1f || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnimCont_Clip.name) && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.1f)
-        {
-            gameObject.GetComponent<sway>().enabled = true;
-        }
-        else if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(MovementToReloadClip.name)&&RPGIcon)
-        {
-            gameObject.GetComponent<sway>().enabled = false;
-        }
-        else
-        {
-            gameObject.GetComponent<sway>().enabled = false;
-        }
-        inWater = Player.GetComponent<MovementReworked>().InWater;
-        if (ObeyInventory)
-        {
-            InventoryExtended = Inventory.GetComponent<InventorySelecter>().InventoryExtended;
-        }
-        if (!Player.GetComponent<MovementReworked>().interacting && !InventoryExtended)
-        {
-            if (Player.GetComponent<MovementReworked>().moving && Input.GetKey(KeyCode.LeftShift))
-            {
-                if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State") && !runanimcooldown && !blockmovement && !Input.GetKey(KeyCode.Mouse0)|| gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnimCont_Clip.name) && !runanimcooldown && !blockmovement && !Input.GetKey(KeyCode.Mouse0)||gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnim_Clip.name) && !runanimcooldown && !blockmovement && !Input.GetKey(KeyCode.Mouse0))
+                if (!gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name) || !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnim_Clip.name) || !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnimCont_Clip.name))
                 {
 
                     NormalizeWeapon();
-                   
-                    gameObject.GetComponent<Animator>().Play(Movement_Clip.name);
+
                 }
-                
+
+            }
+
+            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State"))
+            {
+                NormalizeWeapon();
+            }
+            if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State") || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name) && !RPGIcon || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Reload_Clip.name) && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.2f && !RPGIcon || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(MovementToReloadClip.name) && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.1f || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Action1_Clip.name) && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.1f || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnim_Clip.name) && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.1f || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnimCont_Clip.name) && gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.1f)
+            {
+                gameObject.transform.parent.GetComponent<sway>().enabled = true;
+            }
+            else if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(MovementToReloadClip.name) && RPGIcon)
+            {
+                gameObject.transform.parent.GetComponent<sway>().enabled = false;
+            }
+            else
+            {
+                gameObject.transform.parent.GetComponent<sway>().enabled = false;
+            }
+            inWater = Player.GetComponent<MovementReworked>().InWater;
+            if (ObeyInventory)
+            {
+                InventoryExtended = Inventory.GetComponent<InventorySelecter>().InventoryExtended;
+            }
+            if (!Player.GetComponent<MovementReworked>().interacting && !InventoryExtended)
+            {
+                if (Player.GetComponent<MovementReworked>().moving && Input.GetKey(KeyCode.LeftShift))
+                {
+                    if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State") && !runanimcooldown && !blockmovement && !Input.GetKey(KeyCode.Mouse0) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnimCont_Clip.name) && !runanimcooldown && !blockmovement && !Input.GetKey(KeyCode.Mouse0) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(WalkAnim_Clip.name) && !runanimcooldown && !blockmovement && !Input.GetKey(KeyCode.Mouse0))
+                    {
+
+                        NormalizeWeapon();
+
+                        gameObject.GetComponent<Animator>().Play(Movement_Clip.name);
+                    }
+
+                    else
+                    {
+                        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State"))
+                        {
+                            NormalizeWeapon();
+                        }
+                    }
+
+                }
+
                 else
                 {
                     if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State"))
@@ -246,59 +270,51 @@ public class WeaponControl : MonoBehaviour
                         NormalizeWeapon();
                     }
                 }
-
-            }
-        
-            else
-            {
-                if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State"))
+                if (Input.GetKeyDown(KeyCode.R) && CurrentAmmo < MaxAmmo && !normalization && !Input.GetKey(KeyCode.Mouse0) && !gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name))
                 {
-                    NormalizeWeapon();
+                    Reloading();
+                }
+                whenScoped();
+
+                if (RPGIcon)
+                {
+                    GrenadeIcon.active = false;
+                    RpgImage.active = true;
+                    AmmoImage.active = false;
+                    MeleeIcon.active = false;
+                }
+                if (AmmoIcon)
+                {
+                    GrenadeIcon.active = false;
+                    RpgImage.active = false;
+                    AmmoImage.active = true; MeleeIcon.active = false;
+                }
+                if (Melee)
+                {
+                    GrenadeIcon.active = false;
+                    RpgImage.active = false;
+                    AmmoImage.active = false;
+                    MeleeIcon.active = true;
+                    AxeHandler();
+                    AmmoText.gameObject.GetComponent<Text>().text = "";
+
+                }
+                if (Automatic && Input.GetKeyUp(KeyCode.Mouse0) || Automatic && CurrentAmmo <= 0)
+                {
+                    BulletFlash.active = false;
                 }
             }
-            if (Input.GetKeyDown(KeyCode.R) && CurrentAmmo < MaxAmmo && !normalization && !Input.GetKey(KeyCode.Mouse0)&&!gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name))
-            {
-                Reloading();
-            }
-            whenScoped();
-
-            if (RPGIcon)
-            {
-                GrenadeIcon.active = false;
-                RpgImage.active = true;
-                AmmoImage.active = false;
-                MeleeIcon.active = false;
-            }
-            if (AmmoIcon)
-            {
-                GrenadeIcon.active = false;
-                RpgImage.active = false;
-                AmmoImage.active = true; MeleeIcon.active = false;
-            }
-            if (Melee)
-            {
-                GrenadeIcon.active = false;
-                RpgImage.active = false;
-                AmmoImage.active = false;
-                MeleeIcon.active = true;
-                AxeHandler();
-                AmmoText.gameObject.GetComponent<Text>().text = "";
-
-            }
-            if (Automatic && Input.GetKeyUp(KeyCode.Mouse0) || Automatic && CurrentAmmo <= 0)
-            {
-                BulletFlash.active = false;
-            }
         }
+        
     }
         void FixedUpdate()
         {
-       
-       
-      
-       
-            
 
+
+
+
+
+        if (!decoy) {
             if (Player.GetComponent<MovementReworked>().InWater != true && !Melee)
             {
                 AmmoText.gameObject.GetComponent<Text>().text = CurrentAmmo + "/" + CurrentReserve;
@@ -396,8 +412,8 @@ public class WeaponControl : MonoBehaviour
                 }
             }
         }
-        
-    
+    }
+
     IEnumerator EmptyMagSounder()
     {
         if (!emptymagaudiosent)
@@ -413,7 +429,7 @@ public class WeaponControl : MonoBehaviour
         if(gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State")&&!axebool){
             gameObject.transform.localRotation = startrot;
             gameObject.transform.localPosition = startpos;
-            gameObject.GetComponent<sway>().enabled = true;
+            gameObject.transform.parent.GetComponent<sway>().enabled = true;
             axebool = true;
         }
         else if(!gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State"))
@@ -662,12 +678,12 @@ public class WeaponControl : MonoBehaviour
             CurrentReserve -= MaxAmmo;
             if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name)){
                
-                gameObject.GetComponent<sway>().enabled = false;
+                gameObject.transform.parent.GetComponent<sway>().enabled = false;
                 gameObject.GetComponent<Animator>().enabled = false;
                 
                 gameObject.GetComponent<Animator>().enabled = true;
                 gameObject.GetComponent<Animator>().Play(MovementToReloadClip.name); Audio("Reload");
-                gameObject.GetComponent<sway>().enabled = true;
+                gameObject.transform.parent.GetComponent<sway>().enabled = true;
             }
 
             else
@@ -685,12 +701,12 @@ public class WeaponControl : MonoBehaviour
             if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_Clip.name))
             {
               
-                gameObject.GetComponent<sway>().enabled = false;
+                gameObject.transform.parent.GetComponent<sway>().enabled = false;
                 gameObject.GetComponent<Animator>().enabled = false;
                 
                 gameObject.GetComponent<Animator>().enabled = true;
                 gameObject.GetComponent<Animator>().Play(MovementToReloadClip.name); Audio("Reload");
-                gameObject.GetComponent<sway>().enabled = true;
+                gameObject.transform.parent.GetComponent<sway>().enabled = true;
             }
 
             else
