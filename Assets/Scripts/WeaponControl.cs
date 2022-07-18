@@ -63,7 +63,6 @@ public class WeaponControl : MonoBehaviour
     bool walkanimcooldown;
     public float movementAnimBaseY;
     public GameObject Cross;
-    public bool copyfromparent;
     public bool decoy;
     // Start is called before the first frame update
     void Start()
@@ -134,10 +133,7 @@ public class WeaponControl : MonoBehaviour
     {
         if (!decoy)
         {
-            if (copyfromparent)
-            {
-                this.enabled = gameObject.transform.parent.GetComponent<WeaponControl>().enabled;
-            }
+           
             if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name) && !Input.GetKey(KeyCode.LeftShift) || gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(Movement_ContClip.name) && !Player.gameObject.GetComponent<MovementReworked>().moving)
             {
                 gameObject.GetComponent<Animator>().Play("New State");
@@ -313,8 +309,8 @@ public class WeaponControl : MonoBehaviour
 
 
 
-
-        if (!decoy) {
+        if (decoy) { gameObject.transform.GetChild(0).transform.gameObject.GetComponent<WeaponControl>().enabled = gameObject.GetComponent<WeaponControl>().enabled; }
+        else if (!decoy) {
             if (Player.GetComponent<MovementReworked>().InWater != true && !Melee)
             {
                 AmmoText.gameObject.GetComponent<Text>().text = CurrentAmmo + "/" + CurrentReserve;

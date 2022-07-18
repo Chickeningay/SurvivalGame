@@ -7,7 +7,7 @@ public class sway : MonoBehaviour
     public float intensity;
     public float smooth;
     public Quaternion origin_rotation;
-
+    public bool testvar;
 
     private void Start()
     {
@@ -32,6 +32,18 @@ public class sway : MonoBehaviour
    
     void Update()
     {
+        if (testvar)
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                gameObject.transform.GetChild(0).GetComponent<Animator>().Play("testanim");
+            }
+
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                gameObject.transform.GetChild(0).GetComponent<Animator>().Play("M4_ReloadAnim");
+            }
+        }
         float t_x_mouse = Input.GetAxis("Mouse X");
         float t_y_mouse = Input.GetAxis("Mouse Y");
         Quaternion t_x_adj = Quaternion.AngleAxis(-intensity * t_x_mouse, Vector3.up);
