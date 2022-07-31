@@ -90,15 +90,16 @@ public class WeaponControl : MonoBehaviour
     {
         
             CurrentAmmo = Inventory.GetComponent<InventorySelecter>().CurrentSelected.gameObject.GetComponent<IDHolder>().currentAmmo;
-      
+            gameObject.GetComponent<Animator>().Play("M4_SwitchAnim");
 
 
     }
     private void OnDisable()
     {
+        if (decoy) { gameObject.transform.GetChild(0).transform.gameObject.GetComponent<WeaponControl>().enabled = false; }
         gameObject.GetComponent<Animator>().Play("New State");
-        gameObject.transform.localPosition = startpos;
-        gameObject.transform.localRotation = startrot;
+        //gameObject.transform.localPosition = startpos;
+        //gameObject.transform.localRotation = startrot;
     }
 
     void NormalizeWeapon()
